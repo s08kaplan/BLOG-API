@@ -31,35 +31,25 @@ const BlogSchema = new Schema({
     title: {
         type: String,
         trim: true,
-        required: true,
-        index: true,
-        set: (email) => emailValidate(email) 
+        required: true
     },
 
-    password: {
+    description: {
         type: String,
         trim: true,
-        required: true,
-        unique: true,
-        index: true,
-        set: (password) => passwordEncrypt(password)
+        required: true
     },
 
-    biography: {
-        type: String,
+    like: {
+        type: Boolean,
         trim: true
     },
 
     image: [],
 
-    isActive: {
+    isPublish: {
         type: Boolean,
         default: true
-    },
-
-    isAdmin: {
-        type: Boolean,
-        default: false
     },
 
     isDeleted: {
@@ -68,7 +58,7 @@ const BlogSchema = new Schema({
     }
 
 }, {
-    collection: "users",
+    collection: "blogs",
     timestamps: true
 })
 
