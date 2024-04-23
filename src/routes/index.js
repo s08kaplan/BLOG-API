@@ -12,4 +12,7 @@ router.use("/users", require("./user"))
 //* category:
 router.use("/categories", require("./category"))
 
+//* comment:
+router.use("/comments", require("./comment"))
+
 module.exports = router
