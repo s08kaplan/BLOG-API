@@ -15,4 +15,7 @@ router.use("/categories", require("./category"))
 //* comment:
 router.use("/comments", require("./comment"))
 
+//* blog:
+router.use("/blogs", require("./blog"))
+
 module.exports = router
