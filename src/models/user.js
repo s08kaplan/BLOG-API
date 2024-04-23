@@ -1,6 +1,6 @@
 "use strict"
 
-const { mongoose: { Schema, model }} = require("../config/dbConnection")
+const { mongoose: { Schema, model }} = require("../configs/dbConnection")
 const { emailValidate, passwordEncrypt } = require("../helpers/validationHelpers")
 
 const UserSchema = new Schema({
@@ -9,6 +9,7 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
         required: true,
+        unique: true,
         index: true
     },
 
@@ -28,6 +29,7 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
         required: true,
+        unique: true,
         index: true,
         set: (email) => emailValidate(email) 
     },
@@ -36,6 +38,7 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
         required: true,
+        unique: true,
         index: true,
         set: (password) => passwordEncrypt(password)
     },

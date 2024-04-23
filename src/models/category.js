@@ -2,26 +2,25 @@
 
 const { mongoose: { Schema, model }} = require("../configs/dbConnection")
 
-const TokenSchema = new Schema({
+const CategorySchema = new Schema({
 
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
-        unique: true,
         index: true
     },
 
-    token: {
+    categoryName: {
         type: String,
         trim: true,
         required: true,
-        unique: true,
-        index: true
+        index: true,
+        set: (name) => name.toUpperCase()
     }
 }, {
-    collection: "tokens",
+    collection: "categories",
     timestamps: true
 })
 
-module.exports = model("Token", TokenSchema)
+module.exports = model("Category", CategorySchema)

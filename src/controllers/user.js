@@ -5,7 +5,7 @@ const User = require("../models/user")
 module.exports = {
     list: async (req, res) => {
         const data = await User.find()
-
+ 
         res.status(200).send({
             error: false,
             data
@@ -14,7 +14,7 @@ module.exports = {
 
     create: async (req, res) => {
         const data = await User.create(req.body)
-
+        
         res.status(201).send({
             error: false,
             data
@@ -23,7 +23,8 @@ module.exports = {
 
     read: async (req, res) => {
         const data = await User.findOne({ _id: req.params.userId})
-
+        // console.log(req.user);
+        // console.log(req.body);
         res.status(202).send({
             error: false,
             data

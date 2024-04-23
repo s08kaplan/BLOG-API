@@ -1,12 +1,12 @@
 "use strict"
 
 //* Encrypt 
-const { pbkdf2Sync } = require("node:crypto")
+const { pbkdf2Sync } = require("node:crypto"),
 
-keyCode = process.env.SECRET_KEY
-loopCount = 10_000
-charCount = 32
-encType = "sha512"
+ keyCode = process.env.SECRET_KEY,
+ loopCount = 10_000,
+ charCount = 32,
+ encType = "sha512";
 
 const encryptFunc = (password) => {
     return pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString("hex")

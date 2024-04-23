@@ -3,7 +3,7 @@
 const User = require("../models/user")
 const Token = require("../models/token")
 
-const encryptFunc = require("../helpers/validationHelpers")
+const { encryptFunc } = require("../helpers/validationHelpers")
 
 module.exports = {
     login: async (req, res) => {
@@ -27,7 +27,7 @@ module.exports = {
             throw new Error("Sorry, you are unauthorized to log in ")
         }
 
-        if(!user.isDeleted){
+        if(user.isDeleted){
             res.errorStatusCode = 403
             throw new Error("Sorry, there is no user with the provided credentials ")
         }
