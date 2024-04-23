@@ -42,7 +42,7 @@ const BlogSchema = new Schema({
 
     like: {
         type: Boolean,
-        trim: true
+        default: false
     },
 
     image: [],
