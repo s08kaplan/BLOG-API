@@ -5,7 +5,7 @@ const Blog = require("../models/blog")
 module.exports = {
     list: async (req, res) => {
       
-        const data = await Blog.find()
+        const data = await Blog.find({ isDeleted: false })
 
         res.status(200).send({
             error: false,
@@ -25,7 +25,7 @@ module.exports = {
 
     read: async (req, res) => {
       
-        const data = await Blog.findOne({ _id: req.params.blogId })
+        const data = await Blog.findOne({ _id: req.params.blogId, isDeleted: false })
 
         res.status(202).send({
             error: false,

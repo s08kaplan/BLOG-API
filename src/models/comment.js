@@ -16,6 +16,11 @@ const CommentSchema = new Schema({
         trim: true,
         required: true,
         index: true
+    },
+
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
     
 }, {

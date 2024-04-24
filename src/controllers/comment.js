@@ -5,7 +5,7 @@ const Comment = require("../models/comment")
 module.exports = {
     list: async (req, res) => {
       
-        const data = await Comment.find()
+        const data = await Comment.find({ isDeleted: false })
 
         res.status(200).send({
             error: false,
@@ -25,7 +25,7 @@ module.exports = {
 
     read: async (req, res) => {
       
-        const data = await Comment.findOne({ _id: req.params.commentId })
+        const data = await Comment.findOne({ _id: req.params.commentId, isDeleted: false })
 
         res.status(202).send({
             error: false,
@@ -35,7 +35,7 @@ module.exports = {
 
     update: async (req, res) => {
       
-        const data = await Comment.updateOne({ _id: req.params.commentId}, req.body, { runValidators: true })
+        const data = await Comment.updateOne({ _id: req.params.commentId, isDeleted: false }, req.body, { runValidators: true })
 
         res.status(202).send({
             error: false,
@@ -46,7 +46,7 @@ module.exports = {
 
     delete: async (req, res) => {
       
-        const { deletedCount } = await Comment.deleteOne({ _id: req.params.commentId })
+        const { deletedCount } = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true })
 
         res.status(deletedCount ? 204 : 404).send({
             error: !(!!deletedCount)

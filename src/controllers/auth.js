@@ -6,6 +6,7 @@ const Token = require("../models/token")
 const { encryptFunc } = require("../helpers/validationHelpers")
 
 module.exports = {
+
     login: async (req, res) => {
       
         const { username, email, password } = req.body
@@ -45,6 +46,8 @@ module.exports = {
             user
         })
     },
+
+
 
     logout: async (req, res) => {
          const token = req.headers?.authorization.split(" ")[1]

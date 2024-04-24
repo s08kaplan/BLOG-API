@@ -25,7 +25,8 @@ module.exports = async function () {
         "firstName": "admin",
         "lastName": "admin",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 1
         
 
     },
@@ -37,7 +38,8 @@ module.exports = async function () {
         "firstName": "Staff1",
         "lastName": "Staffz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 4
         
     },
     {
@@ -48,7 +50,8 @@ module.exports = async function () {
         "firstName": "Staff2",
         "lastName": "Staffz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 4
         
     },
     {
@@ -59,7 +62,8 @@ module.exports = async function () {
         "firstName": "Ali",
         "lastName": "Aliz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 2
         
     },
     {
@@ -70,7 +74,8 @@ module.exports = async function () {
         "firstName": "Veli",
         "lastName": "Veliz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 2
         
     },
     {
@@ -81,7 +86,8 @@ module.exports = async function () {
         "firstName": "Aydan",
         "lastName": "Aydanz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 4
         
     },
     {
@@ -92,7 +98,8 @@ module.exports = async function () {
         "firstName": "Canan",
         "lastName": "Cananz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 3
         
     },
     {
@@ -103,7 +110,8 @@ module.exports = async function () {
         "firstName": "Emel",
         "lastName": "Emelz",
         "isActive": true,
-        "isDeleted": false
+        "isDeleted": false,
+        "role": 4
         
     },
 ])

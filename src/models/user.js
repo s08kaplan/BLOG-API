@@ -55,10 +55,6 @@ const UserSchema = new Schema({
         default: true
     },
 
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
 
     isDeleted: {
         type: Boolean,
