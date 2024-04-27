@@ -1,11 +1,13 @@
 "use strict"
 
 const Blog = require("../models/blog")
+const User = require("../models/user")
 
 module.exports = {
     list: async (req, res) => {
-      
-        const data = await Blog.find({ isDeleted: false })
+        const { isAdmin, isStaff } = req.user
+        const customFilters = (isAdmin || isStaff) ? {} : { _id: req.user.id }
+        const data = await Blog.find({...customFilters, isDeleted: false })
 
         res.status(200).send({
             error: false,
@@ -14,8 +16,8 @@ module.exports = {
     },
 
     create: async (req, res) => {
-       
-           const data = await Blog.create(req.body)
+
+        const data = await Blog.create(req.body)
     
         res.status(201).send({
             error: false,
@@ -24,7 +26,10 @@ module.exports = {
     },
 
     read: async (req, res) => {
-      
+         
+        const blog = req.params.blogId
+         
+        //  const customFilters = (user.isAdmin || user.isStaff) ? {} : { _id: req.params.userId }
         const data = await Blog.findOne({ _id: req.params.blogId, isDeleted: false })
 
         res.status(202).send({

@@ -2,7 +2,7 @@
 
 const { mongoose: { Schema, model }} = require("../configs/dbConnection")
 
-const CommentSchema = new Schema({
+const LikeSchema = new Schema({
 
     userId: {
         type: Schema.Types.ObjectId,
@@ -18,21 +18,9 @@ const CommentSchema = new Schema({
         index: true
     },
 
-    content: {
-        type: String,
-        trim: true,
-        required: true,
-        index: true
-    },
-
-    isDeleted: {
-        type: Boolean,
-        default: false
-    }
-    
 }, {
-    collection: "comments",
+    collection: "likes",
     timestamps: true
 })
 
-module.exports = model("Comment",CommentSchema)
+module.exports = model("Like", LikeSchema)

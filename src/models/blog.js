@@ -40,16 +40,33 @@ const BlogSchema = new Schema({
         required: true
     },
 
-    like: {
-        type: Boolean,
-        default: false
-    },
-
     image: [],
 
     isPublish: {
         type: Boolean,
         default: true
+    },
+
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref: "Like",
+        index: true
+    }],
+
+    views: [{
+        type: Schema.Types.ObjectId,
+        ref: "View",
+        index: true
+    }],
+
+    countOfViews: {
+        type: Number,
+        default: 0
+    },
+
+    totalLikes: {
+        type: Number,
+        default: 0
     },
 
     isDeleted: {
@@ -61,5 +78,20 @@ const BlogSchema = new Schema({
     collection: "blogs",
     timestamps: true
 })
+
+BlogSchema.pre("save",function(next){
+    if(!this.likes.includes(this.userId)){
+        this.likes.push(this.userId)
+        this.likes.length
+        this.save()
+    }
+    if(!this.views.includes(this.userId)){
+        this.views.push(this.userId)
+        this.views.length
+        this.save()
+    }
+next()
+})
+
 
 module.exports = model("Blog", BlogSchema)

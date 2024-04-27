@@ -17,6 +17,7 @@ module.exports = {
     create: async (req, res) => {
 
         req.body.isAdmin = false //* if user sends isAdmin = true it would be accepted as false
+        req.body.isStaff = false //* if user sends isStaff = true it would be accepted as false
         const data = await User.create(req.body)
 
         //! AUTO LOGIN:
