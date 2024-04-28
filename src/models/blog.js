@@ -20,12 +20,18 @@ const BlogSchema = new Schema({
         index: true
     },
 
+    author: {
+     type: String,
+     trim: true,
+     required: true,
+    },
    
-    commentId: {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
-        required: true,
-        index: true
+    comments: [],
+
+    totalNumberOfComments: {
+        type: Number,
+        default: function() { return this.comments.length },
+        transform: function() { return this.comments.length}
     },
 
     title: {
@@ -34,7 +40,7 @@ const BlogSchema = new Schema({
         required: true
     },
 
-    description: {
+    content: {
         type: String,
         trim: true,
         required: true
@@ -47,11 +53,13 @@ const BlogSchema = new Schema({
         default: true
     },
 
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: "Like",
-        index: true
-    }],
+    likes: [],
+
+    totalNumberOfLikes: {
+        type: Number,
+        default: function() { return this.likes.length},
+        transform: function() { return this.likes.length}
+    },
 
     views: [{
         type: Schema.Types.ObjectId,
@@ -79,19 +87,6 @@ const BlogSchema = new Schema({
     timestamps: true
 })
 
-BlogSchema.pre("save",function(next){
-    if(!this.likes.includes(this.userId)){
-        this.likes.push(this.userId)
-        this.likes.length
-        this.save()
-    }
-    if(!this.views.includes(this.userId)){
-        this.views.push(this.userId)
-        this.views.length
-        this.save()
-    }
-next()
-})
 
 
 module.exports = model("Blog", BlogSchema)

@@ -5,8 +5,10 @@ const User = require("../models/user")
 
 module.exports = {
     list: async (req, res) => {
-        const { isAdmin, isStaff } = req.user
-        const customFilters = (isAdmin || isStaff) ? {} : { _id: req.user.id }
+        const isAdmin = req.user?.isAdmin 
+        const isStaff = req.user?.isStaff 
+
+        const customFilters = (isAdmin || isStaff) ? {} : { _id: req.user?.id }
         const data = await Blog.find({...customFilters, isDeleted: false })
 
         res.status(200).send({

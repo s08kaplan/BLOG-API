@@ -36,7 +36,8 @@ module.exports = {
 
     read: async (req, res) => {
 
-        const customFilters = req.user?.isAdmin ? { _id: req.params.userId } : { _id: req.user._id,  } //! if the user is not Admin only his/her own record he/she could see
+        // const customFilters = req.user?.isAdmin ? { _id: req.params.userId } : { _id: req.user._id,  } //! if the user is not Admin only his/her own record he/she could see
+        // const data = await User.findOne({$and:[{customFilters}, {isDeleted: false }]})
 
         const data = await User.findOne({ _id: req.params.userId, isDeleted: false })
        
@@ -52,6 +53,7 @@ module.exports = {
         if(!req.user?.isAdmin) { //! if the user is not Admin, he/she cannot change isActive and isAdmin 
             delete req.body.isActive
             delete req.body.isAdmin
+            delete req.body.isStaff
         }
         const data = await User.updateOne({ _id: req.params.userId, isDeleted: false}, req.body, { runValidators: true })
         
