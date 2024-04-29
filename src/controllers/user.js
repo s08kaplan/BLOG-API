@@ -20,26 +20,27 @@ module.exports = {
         req.body.isStaff = false //* if user sends isStaff = true it would be accepted as false
         const data = await User.create(req.body)
 
-        //! AUTO LOGIN:
+        // //! AUTO LOGIN:
 
-        const tokenData = await Token.create({
-            userId: data._id,
-            token: encryptFunc(data._id + Date.now())
-        })
+        // const tokenData = await Token.create({
+        //     userId: data._id,
+        //     token: encryptFunc(data._id + Date.now())
+        // })
         
         res.status(201).send({
             error: false,
-            token: tokenData.token,
+            // token: tokenData.token,
             data
         })
     },
 
     read: async (req, res) => {
 
-        // const customFilters = req.user?.isAdmin ? { _id: req.params.userId } : { _id: req.user._id,  } //! if the user is not Admin only his/her own record he/she could see
+         const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? { _id: req.user._id,  } : { _id: req.params.userId } //! if the user is not Admin only his/her own record he/she could see
         // const data = await User.findOne({$and:[{customFilters}, {isDeleted: false }]})
 
-        const data = await User.findOne({ _id: req.params.userId, isDeleted: false })
+        // const data = await User.findOne({ _id: req.params.userId, isDeleted: false })
+        const data = await User.findOne(customFilters,{ isDeleted: false })
        
         res.status(202).send({
             error: false,
@@ -50,7 +51,7 @@ module.exports = {
     update: async (req, res) => {
 
 
-        if(!req.user?.isAdmin) { //! if the user is not Admin, he/she cannot change isActive and isAdmin 
+        if(!req.user?.isAdmin) { //! if the user is not Admin, he/she cannot change isActive, isStaff and isAdmin status
             delete req.body.isActive
             delete req.body.isAdmin
             delete req.body.isStaff

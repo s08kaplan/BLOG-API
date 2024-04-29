@@ -5,11 +5,8 @@ const User = require("../models/user")
 
 module.exports = {
     list: async (req, res) => {
-        const isAdmin = req.user?.isAdmin 
-        const isStaff = req.user?.isStaff 
-
-        const customFilters = (isAdmin || isStaff) ? {} : { _id: req.user?.id }
-        const data = await Blog.find({...customFilters, isDeleted: false })
+       
+        const data = await Blog.find()
 
         res.status(200).send({
             error: false,
@@ -28,11 +25,8 @@ module.exports = {
     },
 
     read: async (req, res) => {
-         
-        const blog = req.params.blogId
-         
-        //  const customFilters = (user.isAdmin || user.isStaff) ? {} : { _id: req.params.userId }
-        const data = await Blog.findOne({ _id: req.params.blogId, isDeleted: false })
+        
+        const data = await Blog.findOne({ _id: req.params.blogId })
 
         res.status(202).send({
             error: false,

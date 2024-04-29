@@ -4,14 +4,8 @@ const { mongoose: { Schema, model }} = require("../configs/dbConnection")
 
 const CategorySchema = new Schema({
 
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-        index: true
-    },
-
-    categoryName: {
+   
+    name: {
         type: String,
         trim: true,
         required: true,

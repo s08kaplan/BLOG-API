@@ -19,6 +19,12 @@ const BlogSchema = new Schema({
         required: true,
         index: true
     },
+    
+    title: {
+        type: String,
+        trim: true,
+        required: true
+    },
 
     author: {
      type: String,
@@ -34,11 +40,7 @@ const BlogSchema = new Schema({
         transform: function() { return this.comments.length}
     },
 
-    title: {
-        type: String,
-        trim: true,
-        required: true
-    },
+    
 
     content: {
         type: String,
@@ -48,40 +50,40 @@ const BlogSchema = new Schema({
 
     image: [],
 
-    isPublish: {
-        type: Boolean,
-        default: true
-    },
-
-    likes: [],
-
-    totalNumberOfLikes: {
-        type: Number,
-        default: function() { return this.likes.length},
-        transform: function() { return this.likes.length}
-    },
-
-    views: [{
-        type: Schema.Types.ObjectId,
-        ref: "View",
-        index: true
-    }],
-
-    countOfViews: {
-        type: Number,
-        default: 0
+    likes: {
+        type: Array,
+        default: function(){ return likes},
+        transform: function() {
+            if(likes.includes(this.userId)){
+           return likes.filter(like => like !== this.userId)
+        }else {
+          return  likes.push(this.userId)
+        }
+        }
     },
 
     totalLikes: {
         type: Number,
-        default: 0
+        default: function() { return this.likes.length},
+        transform: function() { return new Set(this.likes).size}
     },
 
-    isDeleted: {
-        type: Boolean,
-        default: false
-    }
+    countOfViews: {
+        type: Number,
+        default: 0,
+        transform: function(userId){
+            if(userId !== this.userId) { return countOfViews++}
+            else { return countOfViews}
+        }
+    },
 
+
+    isPublish: {
+        type: Boolean,
+        default: true
+    }
+  
+   
 }, {
     collection: "blogs",
     timestamps: true
