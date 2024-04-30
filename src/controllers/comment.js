@@ -16,7 +16,9 @@ module.exports = {
     create: async (req, res) => {
      
            const data = await Comment.create(req.body)
-    
+           const comments = await Comment.find({blogId: data.blogId})
+           await Blog.updateOne({_id: data.blogId}, {comments})
+           
         res.status(201).send({
             error: false,
             data

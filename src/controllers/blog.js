@@ -6,10 +6,12 @@ const User = require("../models/user")
 module.exports = {
     list: async (req, res) => {
        
-        const data = await Blog.find()
+        // const data = await Blog.find()
+        const data = await res.getModelList(Blog)
 
         res.status(200).send({
             error: false,
+            details: await res.getModelListDetails(Blog),
             data
         })
     },

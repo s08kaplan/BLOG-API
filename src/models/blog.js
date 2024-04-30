@@ -65,7 +65,7 @@ const BlogSchema = new Schema({
     totalLikes: {
         type: Number,
         default: function() { return this.likes.length},
-        transform: function() { return new Set(this.likes).size}
+        transform: function() { return this.likes.length}
     },
 
     countOfViews: {
