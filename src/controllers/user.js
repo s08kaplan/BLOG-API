@@ -69,7 +69,8 @@ module.exports = {
 
     delete: async (req, res) => {
         // const data = await User.deleteOne({ _id: req.params.userId})
-        const data = await User.updateOne({ _id: req.params.userId}, { isDeleted: true })
+        const data = await User.updateOne({ _id: req.params.userId}, { isDeleted: true, isActive: false })
+         await Token.deleteOne({_id: req.params.userId })
 
         res.status(data.deletedCount ? 204 : 404).send({
             error: !(!!data.deletedCount),
