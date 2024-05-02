@@ -21,6 +21,9 @@
  app.use(express.urlencoded({extended:true}))
  app.use(cors())
 
+ // Check Authentication:
+app.use(require('./src/middlewares/authentication'))
+app.use(require("./src/middlewares/queryHandler"))
 
 app.all("/", (req, res) => {
   res.send({
@@ -34,7 +37,7 @@ app.all("/", (req, res) => {
 app.use(require("./src/routes"))
 
  //*error handler
- require("./src/middlewares/errorHandler")
+ app.use(require("./src/middlewares/errorHandler"))
 
  app.listen(PORT, () => console.log(`Server is running on http://${process.env.HOST}:${PORT}`))
 

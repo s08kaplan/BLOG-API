@@ -15,7 +15,16 @@ router.use("/categories", require("./category"))
 //* comment:
 router.use("/comments", require("./comment"))
 
+//*like:
+router.use("/blogs/:blogId",require("./like"))
+
 //* blog:
 router.use("/blogs", require("./blog"))
+
+
+
+
+
+
 
 module.exports = router

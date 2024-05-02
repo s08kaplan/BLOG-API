@@ -2,17 +2,20 @@
 
 const { encryptFunc } = require("../helpers/validationHelpers")
 const User = require("../models/user")
+const Token = require("../models/token")
 
 module.exports = {
     list: async (req, res) => {
 
-        const data = await User.find({isDeleted: false})
- 
+   const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : {isDeleted: false}
+          const data = await User.find(customFilters)  
+
+          
         res.status(200).send({
             error: false,
             data
         })
-    },
+        },
 
     create: async (req, res) => {
 
@@ -36,16 +39,21 @@ module.exports = {
 
     read: async (req, res) => {
 
-         const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? { _id: req.user._id,  } : { _id: req.params.userId } //! if the user is not Admin only his/her own record he/she could see
-        // const data = await User.findOne({$and:[{customFilters}, {isDeleted: false }]})
+  /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Get Single User"
+        */
 
-        // const data = await User.findOne({ _id: req.params.userId, isDeleted: false })
-        const data = await User.findOne(customFilters,{ isDeleted: false })
+         const customFilters = (req.user?.isAdmin || req.user?.isStaff) ?  { _id: req.params.userId } : { _id: req.user._id  } //! if the user is not Admin only his/her own record he/she could see
+        
+       
+        const data = await User.findOne({...customFilters, isDeleted: false})
        
         res.status(202).send({
             error: false,
             data
         })
+
     },
 
     update: async (req, res) => {
@@ -70,8 +78,8 @@ module.exports = {
     delete: async (req, res) => {
         // const data = await User.deleteOne({ _id: req.params.userId})
         const data = await User.updateOne({ _id: req.params.userId}, { isDeleted: true, isActive: false })
-         await Token.deleteOne({_id: req.params.userId })
-
+        const hey = await Token.deleteOne({userId: req.params.userId })
+console.log(hey);
         res.status(data.deletedCount ? 204 : 404).send({
             error: !(!!data.deletedCount),
             data
