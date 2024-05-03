@@ -27,7 +27,7 @@ module.exports = {
     },
 
     read: async (req, res) => {
-        
+       
         const data = await Blog.findOne({ _id: req.params.blogId })
 
         res.status(202).send({

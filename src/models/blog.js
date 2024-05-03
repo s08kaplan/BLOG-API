@@ -35,7 +35,10 @@ const BlogSchema = new Schema({
         transform: function() { return this.comments.length}
     },
 
-    likes: [],
+    likes: {
+        type: Array,
+        default: []
+    },
 
     totalLikes: {
         type: Number,
@@ -54,8 +57,8 @@ const BlogSchema = new Schema({
     countOfViews: {
         type: Number,
         default: 0,
-        transform: function(){
-            if(this.userId !== this.userId) { return this.countOfViews++}
+        transform: function(userId){
+            if(userId !== this.userId) { return this.countOfViews++}
             else { return this.countOfViews}
         }
     },
