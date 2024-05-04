@@ -57,14 +57,17 @@ module.exports = {
     },
 
     update: async (req, res) => {
-
+console.log("Admin status",req.user.isAdmin);
+console.log("Staff status",req.user.isStaff);
+console.log("Active status",req.user.isActive);
 
         if(!req.user?.isAdmin) { //! if the user is not Admin, he/she cannot change isActive, isStaff and isAdmin status
             delete req.body.isActive
             delete req.body.isAdmin
             delete req.body.isStaff
         }
-        const data = await User.updateOne({ _id: req.params.userId, isDeleted: false}, req.body, { runValidators: true })
+        const customFilter = !(req.user.isAdmin || req.user.isStaff) ? {_id: req.user._id}  : {_id: req.params.userId}
+        const data = await User.updateOne({ ...customFilter, isDeleted: false}, req.body, { runValidators: true })
         
 
         res.status(202).send({
