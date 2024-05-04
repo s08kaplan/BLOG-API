@@ -24,9 +24,8 @@ router.use("/blogs/:blogId",require("./like"))
 //* blog:
 router.use("/blogs", require("./blog"))
 
-
-
-
+// document:
+router.use('/documents', require('./document'))
 
 
 

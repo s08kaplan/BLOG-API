@@ -21,15 +21,26 @@
  app.use(express.urlencoded({extended:true}))
  app.use(cors())
 
+ // Call static uploadFile:
+app.use('/upload', express.static('./upload'))
+
+// Run Logger:
+app.use(require('./src/middlewares/logger'))
+
  // Check Authentication:
 app.use(require('./src/middlewares/authentication'))
 app.use(require("./src/middlewares/queryHandler"))
 
-app.all("/", (req, res) => {
+app.all('/', (req, res) => {
   res.send({
-    error: false,
-    message: `<h1 style={color:blueviolet; text-align: center; font-size: 2rem; margin: 1rem}>Welcome to Blog API</h1>`,
-    user: req.user
+      error: false,
+      message: 'Welcome to Blog API',
+      documents: {
+          swagger: '/documents/swagger',
+          redoc: '/documents/redoc',
+          json: '/documents/json',
+      },
+      user: req.user
   })
 })
 

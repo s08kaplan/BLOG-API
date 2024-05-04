@@ -1,14 +1,16 @@
 {
+  "title": "Blog API Service",
   "name": "blog-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon",
+    "debug": "DEBUG=* nodemon"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "PyScript",
+  "license": "ISC Licence",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

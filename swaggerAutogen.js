@@ -12,7 +12,7 @@ const document = {
 		version: packageJson.version,
 		title: packageJson.title,
 		description: packageJson.description,
-		termsOfService: "#",
+		termsOfService: "http://127.0.0.1:8080/#",
 		contact: { name: packageJson.author, email: "yalnizgarip1i@gmail.com" },
 		license: { name: packageJson.license, },
 	},
@@ -36,7 +36,6 @@ const document = {
 		"Blog": require('./src/models/blog').schema.obj,
 		"Category": require('./src/models/category').schema.obj,
 		"Comment": require('./src/models/comment').schema.obj,
-		"Like": require('./src/models/like').schema.obj
 	}
 }
 
