@@ -5,6 +5,19 @@ const User = require("../models/user")
 
 module.exports = {
     list: async (req, res) => {
+
+          /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "List Blogs"
+        #swagger.description = `
+            You can send query with endpoint for search[], sort[], page and limit.
+            <ul> Examples:
+                <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
+                <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
+                <li>URL/?<b>page=2&limit=1</b></li>
+            </ul>
+        `
+    */
        
         // const data = await Blog.find()
         const data = await res.getModelList(Blog)
@@ -17,6 +30,19 @@ module.exports = {
     },
 
     create: async (req, res) => {
+
+          /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Create Blogs"
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+                name: 'Test Blog'
+            }
+        }
+    */
+
          req.body.userId = req.user._id
         const data = await Blog.create(req.body)
         
@@ -28,6 +54,12 @@ module.exports = {
 
     read: async (req, res) => {
        
+
+         /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Get Single Blog"
+    */
+
         const data = await Blog.findOne({ _id: req.params.blogId })
         data.countOfViews++
         await data.save()
@@ -41,6 +73,19 @@ module.exports = {
 
     update: async (req, res) => {
       
+
+          /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Update Blog"
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+                name: 'Test Blog'
+            }
+        }
+    */
+
         const data = await Blog.updateOne({ _id: req.params.blogId}, req.body, { runValidators: true })
 
         res.status(202).send({
@@ -52,6 +97,12 @@ module.exports = {
 
     delete: async (req, res) => {
       
+
+          /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Delete Blog"
+    */
+
         const { deletedCount } = await Blog.deleteOne({ _id: req.params.blogId })
 
         res.status(deletedCount ? 204 : 404).send({

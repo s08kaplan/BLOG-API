@@ -8,6 +8,21 @@ const { encryptFunc } = require("../helpers/validationHelpers")
 module.exports = {
 
     login: async (req, res) => {
+
+              /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'Login'
+            #swagger.description = 'Login with username and password'
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: 'true',
+                schema: {
+                    username: "testF0",
+                    password: "1234"
+                }
+            }
+        */
+
       
         const { username, email, password } = req.body
 
@@ -50,6 +65,13 @@ module.exports = {
 
 
     logout: async (req, res) => {
+
+            /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "SimpleToken: Logout"
+            #swagger.description = 'Delete token key.'
+        */
+
          const token = req.headers?.authorization.split(" ")[1]
 
          const { deletedCount } = await Token.deleteOne({ token })

@@ -9,6 +9,9 @@ router.use("/auth", require("./auth"))
 //* user:
 router.use("/users", require("./user"))
 
+// token:
+router.use('/tokens', require('./token'))
+
 //* category:
 router.use("/categories", require("./category"))
 
