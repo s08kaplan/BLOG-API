@@ -56,11 +56,7 @@ const BlogSchema = new Schema({
 
     countOfViews: {
         type: Number,
-        default: 0,
-        transform: function(userId){
-            if(userId !== this.userId) { return this.countOfViews++}
-            else { return this.countOfViews}
-        }
+        default: 0
     },
 
 

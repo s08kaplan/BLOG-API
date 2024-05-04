@@ -19,7 +19,7 @@ module.exports = {
     create: async (req, res) => {
          req.body.userId = req.user._id
         const data = await Blog.create(req.body)
-    
+        
         res.status(201).send({
             error: false,
             data
@@ -29,7 +29,10 @@ module.exports = {
     read: async (req, res) => {
        
         const data = await Blog.findOne({ _id: req.params.blogId })
+        data.countOfViews++
+        await data.save()
 
+       console.log("countOfViews",data.countOfViews);
         res.status(202).send({
             error: false,
             data

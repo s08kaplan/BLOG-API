@@ -46,7 +46,7 @@ module.exports = {
     
           res.status(201).send({
             error: false,
-            message: "Blog unliked successfully",
+            message: "Blog disliked successfully",
           });
         }
       },

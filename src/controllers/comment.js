@@ -1,6 +1,7 @@
 "use strict"
 
 const Comment = require("../models/comment")
+const Blog = require("../models/blog")
 
 module.exports = {
     list: async (req, res) => {
@@ -14,10 +15,11 @@ module.exports = {
     },
 
     create: async (req, res) => {
-     
+        
+         req.body.userId = req.user._id
            const data = await Comment.create(req.body)
            const comments = await Comment.find({blogId: data.blogId})
-           await Blog.updateOne({_id: data.blogId}, {comments})
+           await Blog.updateOne({_id: data.blogId, userId: data.userId}, {comments})
            
         res.status(201).send({
             error: false,
