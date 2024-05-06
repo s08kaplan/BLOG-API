@@ -5,8 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { loginSchema } from "../Helpers/formValidation";
 import axios from "axios";
+import useAuthCalls from "../Custom-hooks/useAuthCalls";
+import { useDispatch } from "react-redux";
+import { fetchFail, fetchStart } from "../Features/authSlice";
 
 const Login = () => {
+    const { login } = useAuthCalls()
+    const dispatch = useDispatch()
   const {
     register,
     control,
@@ -24,15 +29,8 @@ const Login = () => {
     reset,
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const onSubmit = async (data) => {
-   try {
-
-    const res = await axios.post("http://127.0.0.1:8080/auth/login", data)
-    console.log(res.data);
-   
-   } catch (error) {
-    console.log(error);
-   }
+  const onSubmit =  (data) => {
+    dispatch(login(data))
 }
 
 
