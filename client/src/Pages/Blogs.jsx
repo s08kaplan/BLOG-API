@@ -9,7 +9,9 @@ const { blogs } = useSelector(state => state.blog)
     getAllBlogData()
   },[])
   return (
-    <div>
+    <>
+      <h2>Add Blog</h2>
+    <section key={Date.now()}>
       {blogs?.map(blog => (
         <>
         <div>{blog.title}</div>
@@ -21,7 +23,9 @@ const { blogs } = useSelector(state => state.blog)
         </>
         
       ))}
-    </div>
+    </section>
+    </>
+  
   )
 }
 

@@ -39,7 +39,7 @@ const registerUser = async (userInfo) => {
     const logout = async () => {
        
         try {
-           await axiosPublic.get("auth/logout") 
+           await axiosWithToken.get("auth/logout") 
           dispatch(logoutSuccess()) 
            navigate("/")
         } catch (error) {
