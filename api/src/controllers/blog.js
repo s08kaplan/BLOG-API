@@ -20,7 +20,7 @@ module.exports = {
     */
        
         // const data = await Blog.find()
-        const data = await res.getModelList(Blog)
+        const data = await res.getModelList(Blog, {},["userId","categoryId"])
 
         res.status(200).send({
             error: false,

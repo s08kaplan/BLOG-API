@@ -59,7 +59,7 @@ module.exports = {
         const data = await Token.deleteOne({ _id: req.params.id })
 
         res.status(data.deletedCount ? 204 : 404).send({
-            error: !data.deletedCount,
+            error: !(!!data.deletedCount),
             data
         })
 

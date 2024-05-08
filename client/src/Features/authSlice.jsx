@@ -12,7 +12,7 @@ const initialState = {
   },
   loading: false,
   error: false,
-  token: "",
+  token: ""
 };
 
 const AuthSlice = createSlice({

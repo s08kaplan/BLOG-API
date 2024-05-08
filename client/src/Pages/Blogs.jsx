@@ -14,12 +14,12 @@ const { blogs } = useSelector(state => state.blog)
     <section key={Date.now()}>
       {blogs?.map(blog => (
         <>
-        <div>{blog.title}</div>
-        <div>{blog.content}</div>
-        <div>{blog.totalLikes}</div>
-        <div>{blog.countOfViews}</div>
-        <div>{blog.createdAt}</div>
-        <div>{blog.updatedAt}</div>
+        <div>{blog?.title}</div>
+        <div>{blog?.content}</div>
+        <div>{blog?.totalLikes}</div>
+        <div>{blog?.countOfViews}</div>
+        <div>{blog?.createdAt}</div>
+        <div>{blog?.updatedAt}</div>
         </>
         
       ))}
