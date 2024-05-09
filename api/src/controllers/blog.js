@@ -44,6 +44,8 @@ module.exports = {
     */
 
          req.body.userId = req.user._id
+         console.log(req.body.userId);
+         console.log(req.body);
         const data = await Blog.create(req.body)
         
         res.status(201).send({

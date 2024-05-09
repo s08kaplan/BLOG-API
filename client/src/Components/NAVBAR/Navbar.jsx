@@ -15,37 +15,33 @@ const Navbar = () => {
   return (
     <header>
       <nav>
-        <section>
+        <section className={NavbarStyle.logo}>
         <Link to="/"><img src={logo} alt="logo" width="150px"  /></Link>  
           <span>Illuminate Your Thoughts</span>
         </section>
         <section>
           <main>
-            <Link to="/blogs" className="no-underline">
+            <Link to="/blogs">
               Blogs
             </Link>
-            <Link to="/categories" className="no-underline">
+            <Link to="/categories">
               Categories
             </Link>
-            <Link to="/about" className="no-underline">
+            <Link to="/about">
               About
             </Link>
-            <Link to="/contact" className="no-underline">
+            <Link to="/contact">
               Contact
             </Link>
             {/* <Link to=""></Link> */}
           </main>
         </section>
-        <section>
+        <section className={NavbarStyle.avatar}>
           <div onClick={() => setSidebar((prev) => !prev)}>
             <Avatar size="50" src="" round=".8rem" />
           </div>
 
-          {sidebar && (
-            <div>
-              <SideBar />
-            </div>
-          )}
+{/*         
           <Link to={user ? "my-profile" : "/"}>
             <li>My Profile</li>
           </Link>
@@ -58,9 +54,14 @@ const Navbar = () => {
             <Link to="/register">
               <li>Register</li>
             </Link>
-          )}
+          )} */}
         </section>
       </nav>
+      {sidebar && (
+            <div className={NavbarStyle.sidebar}>
+              <SideBar />
+            </div>
+          )}
     </header>
   );
 };

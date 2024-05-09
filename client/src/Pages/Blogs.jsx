@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import useBlogData from "../Custom-hooks/useBlogData"
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Blogs = () => {
 const { getAllBlogData } = useBlogData()
@@ -10,7 +11,7 @@ const { blogs } = useSelector(state => state.blog)
   },[])
   return (
     <>
-      <h2>Add Blog</h2>
+      <Link to="/new-blog">Add Blog</Link>
     <section key={Date.now()}>
       {blogs?.map(blog => (
         <>

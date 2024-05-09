@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SideStyle from "./SideBar.module.scss"
 
 const navigation = [
   { name: "Blogs", to: "/blogs" },
@@ -14,16 +15,15 @@ const navigation = [
 const SideBar = () => {
   const { user } = useSelector((state) => state.auth);
   return (
-    <section>
+    <section className={SideStyle.container}>
       <main>
-        <section>
+        {/* <section className={SideStyle.icon}>
           <XMarkIcon width="20px" />
-        </section>
-        <section>
+        </section> */}
+        <section className={SideStyle.navigation}>
           {navigation.map((item) => (
             <div key={item.name}>
-              <Link to={item.to}>{item.name}</Link>
-              <Link to={!user && "/login"}>{!user && "Log in"}</Link>
+              <Link to={ item.to }>{ item.name }</Link> 
             </div>
           ))}
         </section>

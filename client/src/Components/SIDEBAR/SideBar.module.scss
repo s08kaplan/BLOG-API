@@ -1,0 +1,27 @@
+
+.container{
+    position: absolute;
+    top: 10;
+    right: 0;
+    padding: .5rem;
+
+    background: rgba( 189, 16, 224, 0.05 );
+box-shadow: 0 8px 32px 0 rgb(92, 84, 112, 0.37);
+backdrop-filter: blur( 2.5px );
+-webkit-backdrop-filter: blur( 2.5px );
+border-radius: 10px;
+   & main {
+    display: flex;
+    flex-direction: column;
+}
+
+& .navigation{
+    & div {
+        margin: 0 1rem 1rem;
+       & a{
+        text-decoration: none;
+    }  
+    }
+   
+}
+}
