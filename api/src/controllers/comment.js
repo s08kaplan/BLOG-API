@@ -21,7 +21,7 @@ module.exports = {
             `
         */
 
-        const data = await Comment.find({ isDeleted: false })
+        const data = await Comment.find({ isDeleted: false }).populate(["userId","blogId"])
 
         res.status(200).send({
             error: false,
@@ -63,7 +63,7 @@ module.exports = {
             #swagger.summary = "Get Single Comment"
         */
 
-        const data = await Comment.findOne({ _id: req.params.commentId, isDeleted: false })
+        const data = await Comment.findOne({ _id: req.params.commentId, isDeleted: false }).populate(["userId","blogId"])
 
         res.status(202).send({
             error: false,

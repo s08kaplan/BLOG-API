@@ -4,12 +4,12 @@ import Login from "../Pages/LOGIN/Login";
 import Register from "../Pages/Register";
 import About from "../Pages/About";
 import Categories from "../Components/CATEGORIES/Categories";
-import Blogs from "../Pages/Blogs";
+import Blogs from "../Pages/BLOG/Blogs";
 import Contact from "../Pages/Contact";
 import MyProfile from "../Pages/MyProfile";
 import PrivateRouter from "./PrivateRouter";
 import NotFound from "../Pages/NotFound";
-import BlogDetails from "../Pages/BlogDetails";
+import BlogDetails from "../Pages/BLOG-DETAILS/BlogDetails";
 import NewBlog from "../Pages/NewBlog";
 
 

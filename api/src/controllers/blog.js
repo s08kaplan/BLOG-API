@@ -44,8 +44,7 @@ module.exports = {
     */
 
          req.body.userId = req.user._id
-         console.log(req.body.userId);
-         console.log(req.body);
+         req.body.categoryId = req.body.categories
         const data = await Blog.create(req.body)
         
         res.status(201).send({
