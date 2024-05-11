@@ -18,14 +18,14 @@ const Blogs = () => {
 
       <section key={Date.now()}>
         {blogs?.map((blog) => (
-          <main>
+          <main key={blog._id}>
             <h2>{blog?.title}</h2>
             <section>
               <img src={blog?.image[0]} alt="blog-image" />
             </section>
             <p>{blog?.content}</p>
             <span>likes{blog?.totalLikes}</span>
-            <span>viewed by{blog?.countOfViews}</span>
+            <span>viewed by{Math.floor(Number(blog?.countOfViews)/2)}</span>
             <div>
               {blog?.createdAt ? new Date(blog.createdAt).toLocaleString() : ""}
             </div>

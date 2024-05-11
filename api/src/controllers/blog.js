@@ -3,6 +3,14 @@
 const Blog = require("../models/blog")
 const User = require("../models/user")
 
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+         const DOMPurify = createDOMPurify(window);
+
+
+
 module.exports = {
     list: async (req, res) => {
 
@@ -45,7 +53,12 @@ module.exports = {
 
          req.body.userId = req.user._id
          req.body.categoryId = req.body.categories
-        const data = await Blog.create(req.body)
+         const { content } = req.body
+
+         
+         const sanitizedContent = DOMPurify.sanitize(content);
+        
+        const data = await Blog.create({...req.body, content:sanitizedContent})
         
         res.status(201).send({
             error: false,
