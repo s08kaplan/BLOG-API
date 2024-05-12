@@ -78,7 +78,7 @@ module.exports = {
         data.countOfViews++
         await data.save()
 
-       console.log("countOfViews",data.countOfViews);
+    //    console.log("countOfViews",data.countOfViews);
         res.status(202).send({
             error: false,
             data

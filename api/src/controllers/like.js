@@ -72,7 +72,7 @@ module.exports = {
           }else{
             res.status(200).send({
               error: false,
-              like: blog.totalLikes
+              like: await Blog.findOne({_id: blogId})
             })
           }
       }
