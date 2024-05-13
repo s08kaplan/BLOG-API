@@ -61,6 +61,11 @@ const useBlogData = () => {
   }
 
  const getDetailPage = async (url, blogId) => {
+  console.log("********************");
+  console.log(url);
+  console.log(blogId);
+  console.log("********************");
+
   dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.get(`blogs/${blogId}`);

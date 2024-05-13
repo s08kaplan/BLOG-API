@@ -15,7 +15,7 @@ const BlogDetails = () => {
   const { blogId } = useParams();
   const { axiosWithToken } = useAxios();
 
-  // console.log(blogDetail);
+  console.log(blogDetail);
   useEffect(() => {
     getDetailPage("blogDetail",blogId);
     getLike("blogs", blogId);
@@ -31,7 +31,9 @@ const BlogDetails = () => {
     }
   };
 
-
+  let visitorCount = Math.trunc(Number(blogDetail?.countOfViews?.length)/2)
+visitorCount = visitorCount == 0 ? 1 : visitorCount
+console.log(visitorCount);
   return (
     <main>
         <section>
@@ -47,9 +49,11 @@ const BlogDetails = () => {
             </div>
             <span>{blogDetail?.totalLikes}</span>
             <h4>
-              viewed by <span>{Math.trunc(Number(blogDetail?.countOfViews)/2)} </span>
+              {/* viewed by <span>{Math.trunc(Number(blogDetail?.countOfViews.length)/2)} </span> */}
+              viewed by <span>{visitorCount} </span>
               <span>
-                {Math.trunc(Number(blogDetail?.countOfViews)/2) > 1 ? "people" : "person"}
+                {/* {Math.trunc(Number(blogDetail?.countOfViews.length)/2) > 1 ? "people" : "person"} */}
+                {visitorCount > 1 ? "people" : "person"}
               </span>
             </h4>
             {blogDetail?.userId == user?.id && (

@@ -23,9 +23,9 @@ const Blogs = () => {
             <section>
               <img src={blog?.image[0]} alt="blog-image" />
             </section>
-            <p>{blog?.content}</p>
+            <p className={blogStyle.content}>{blog?.content}</p>
             <span>likes{blog?.totalLikes}</span>
-            <span>viewed by{Math.floor(Number(blog?.countOfViews)/2)}</span>
+            <span>viewed by{Math.floor(Number(blog?.countOfViews.length)/2) == 0 ? 1 : Math.floor(Number(blog?.countOfViews.length)/2) }</span>
             <div>
               {blog?.createdAt ? new Date(blog.createdAt).toLocaleString() : ""}
             </div>
