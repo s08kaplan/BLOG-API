@@ -25,7 +25,7 @@ const Blogs = () => {
             </section>
             <p className={blogStyle.content}>{blog?.content}</p>
             <span>likes{blog?.totalLikes}</span>
-            <span>viewed by{Math.floor(Number(blog?.countOfViews.length)/2) == 0 ? 1 : Math.floor(Number(blog?.countOfViews.length)/2) }</span>
+            <span>viewed by{Math.floor(Number(blog?.countOfViews.length)) == 0 ? 1 : Math.floor(Number(blog?.countOfViews.length)) }</span>
             <div>
               {blog?.createdAt ? new Date(blog.createdAt).toLocaleString() : ""}
             </div>

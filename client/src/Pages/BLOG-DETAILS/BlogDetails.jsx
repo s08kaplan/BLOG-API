@@ -12,7 +12,7 @@ import DOMPurify from "dompurify";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
-  const { user } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const [likeStatus, setLikeStatus] = useState("");
   const { getLike, getDetailPage, getComment } = useBlogData();
   const { blogId } = useParams();
@@ -50,9 +50,9 @@ const BlogDetails = () => {
   useEffect(() => {
    getComment("comments",blogId)
   }, [comment])
-  
+  console.log(token);
 console.log(blogDetail?.countOfViews);
-  let visitorCount = Math.trunc(Number(blogDetail?.countOfViews?.length) / 2);
+  let visitorCount = Math.trunc(Number(blogDetail?.countOfViews?.length));
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
   console.log(show);
   return (
@@ -70,10 +70,8 @@ console.log(blogDetail?.countOfViews);
             </div>
             <span>{blogDetail?.totalLikes}</span>
             <h4>
-              {/* viewed by <span>{Math.trunc(Number(blogDetail?.countOfViews.length)/2)} </span> */}
               viewed by <span>{visitorCount} </span>
               <span>
-                {/* {Math.trunc(Number(blogDetail?.countOfViews.length)/2) > 1 ? "people" : "person"} */}
                 {visitorCount > 1 ? "people" : "person"}
               </span>
             </h4>
