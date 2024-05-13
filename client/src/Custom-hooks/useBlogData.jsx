@@ -48,6 +48,7 @@ const useBlogData = () => {
   };
 
   const getLike = async (url= "blogs",blogId) => {
+    console.log(blogId);
     dispatch(fetchStart());
     try {
       const { data }  = await axiosWithToken.get(`${url}/${blogId}/getLike`);
@@ -59,7 +60,19 @@ const useBlogData = () => {
     }
   }
 
-  return { getAllBlogData, getData, getLike };
+ const getDetailPage = async (url, blogId) => {
+  dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.get(`blogs/${blogId}`);
+      console.log(data);
+      dispatch(getSingleData({ data, url }));
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    }
+ }
+
+  return { getAllBlogData, getData, getLike, getDetailPage };
 };
 
 export default useBlogData;

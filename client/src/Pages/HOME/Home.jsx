@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import useBlogData from "../Custom-hooks/useBlogData";
+import useBlogData from "../../Custom-hooks/useBlogData";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import homeStyle from "./Home.module.scss"
 
 const Home = () => {
   const { getData } = useBlogData();
@@ -12,10 +13,10 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
-      <section>
+    <main className={homeStyle["home-main"]}>
+      <section className={homeStyle.container}>
         {blogs?.map((blog) => (
-          <section className="blog-card">
+          <section className={homeStyle["blog-card"]}>
             <h4>{blog?.title}</h4>
            <Link to={`/blog-details/${blog._id}`}><img src={ blog?.image[0]} alt={blog?.title} /></Link> 
           </section>

@@ -75,7 +75,7 @@ module.exports = {
     */
 
         const data = await Blog.findOne({ _id: req.params.blogId })
-        data.countOfViews++
+       data.countOfViews++
         await data.save()
 
     //    console.log("countOfViews",data.countOfViews);
