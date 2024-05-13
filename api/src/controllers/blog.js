@@ -80,13 +80,13 @@ module.exports = {
         const data = await Blog.findOne({ _id: req.params.blogId })
         if(!data){
             throw new Error("There is no such a blog, it is removed sorry")
-        }else if(data && data.countOfViews.includes(userId)){
-             data.countOfViews.length
-        }else{
-             data.countOfViews.push(userId)
         }
-    //    data.countOfViews++
-        await data.save()
+
+        if(!data.countOfViews.includes(userId)){
+            data.countOfViews.push(userId) 
+            data.countOfViews.length
+             await data.save()
+        }
 
        console.log("countOfViews",data.countOfViews);
         res.status(202).send({

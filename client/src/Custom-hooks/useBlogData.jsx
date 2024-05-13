@@ -77,7 +77,19 @@ const useBlogData = () => {
     }
  }
 
-  return { getAllBlogData, getData, getLike, getDetailPage };
+ const getComment = async (url, blogId) => {
+  dispatch(fetchStart());
+  try {
+    const { data } = await axiosWithToken.get(`blogs/${blogId}`);
+    console.log("comment-data in getComment",data);
+    dispatch(getSingleData({ data, url }));
+  } catch (error) {
+    dispatch(fetchFail());
+    console.log(error);
+  }
+ }
+
+  return { getAllBlogData, getData, getLike, getDetailPage, getComment };
 };
 
 export default useBlogData;
