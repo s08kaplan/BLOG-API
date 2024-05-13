@@ -7,7 +7,7 @@ const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 
 const window = new JSDOM('').window;
-         const DOMPurify = createDOMPurify(window);
+const DOMPurify = createDOMPurify(window);
 
 
 
@@ -84,7 +84,6 @@ module.exports = {
 
         if(!data.countOfViews.includes(userId)){
             data.countOfViews.push(userId) 
-            data.countOfViews.length
              await data.save()
         }
 
