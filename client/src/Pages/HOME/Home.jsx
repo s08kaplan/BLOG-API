@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <main className={homeStyle["home-main"]}>
-      <section className={homeStyle.container}>
+      <section key={Date.now()} className={homeStyle.container}>
         {blogs?.map((blog) => (
           <section className={homeStyle["blog-card"]}>
             <h4>{blog?.title}</h4>

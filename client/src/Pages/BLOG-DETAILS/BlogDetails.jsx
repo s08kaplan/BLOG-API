@@ -11,7 +11,7 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 
 const BlogDetails = () => {
-  const { blogDetail } = useSelector((state) => state.blog);
+  const { blogDetail, likes } = useSelector((state) => state.blog);
   const { user, token } = useSelector((state) => state.auth);
   const [likeStatus, setLikeStatus] = useState("");
   const { getLike, getDetailPage, getComment } = useBlogData();
@@ -20,10 +20,12 @@ const BlogDetails = () => {
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
 
+
+  ;
   console.log(blogDetail);
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
-    getLike("blogs", blogId);
+    getLike("blogDetail", blogId);
   }, [likeStatus]);
   // console.log(blogId);
   const postLike = async () => {
@@ -55,6 +57,7 @@ console.log(blogDetail?.countOfViews);
   let visitorCount = Math.trunc(Number(blogDetail?.countOfViews?.length));
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
   console.log(show);
+  console.log(likes)
   return (
     <main>
       <section>

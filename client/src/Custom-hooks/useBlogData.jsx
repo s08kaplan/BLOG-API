@@ -47,11 +47,12 @@ const useBlogData = () => {
     }
   };
 
-  const getLike = async (url= "blogs",blogId) => {
+  const getLike = async (url,blogId) => {
+    console.log(url);
     console.log(blogId);
     dispatch(fetchStart());
     try {
-      const { data }  = await axiosWithToken.get(`${url}/${blogId}/getLike`);
+      const { data }  = await axiosWithToken.get(`blogs/${blogId}/getLike`);
       console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
