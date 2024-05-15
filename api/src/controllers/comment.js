@@ -47,7 +47,7 @@ module.exports = {
          req.body.userId = req.user._id
            const data = await Comment.create(req.body)
            const comments = await Comment.find({blogId: data.blogId})
-           await Blog.updateOne({_id: data.blogId, userId: data.userId}, {comments})
+           await Blog.updateOne({ _id: data.blogId }, {comments})
            
         res.status(201).send({
             error: false,

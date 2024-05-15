@@ -8,7 +8,7 @@ const Login = lazy(() => import("../Pages/LOGIN/Login"));
 const Contact = lazy(() => import("../Pages/Contact"));
 const About = lazy(() => import("../Pages/About"));
 const MyProfile = lazy(() => import("../Pages/MyProfile"));
-const NotFound = lazy(() => import(NotFound));
+const NotFound = lazy(() => import("../Pages/NotFound"));
 const BlogDetails = lazy(() => import("../Pages/BLOG-DETAILS/BlogDetails"));
 const NewBlog = lazy(() => import("../Pages/NEW-BLOG/NewBlog"));
 const PrivateRouter = lazy(() => import("./PrivateRouter"));

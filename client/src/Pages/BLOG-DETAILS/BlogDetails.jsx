@@ -11,7 +11,7 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 
 const BlogDetails = () => {
-  const { blogDetail, likes } = useSelector((state) => state.blog);
+  const { blogDetail, comments:{ comments} } = useSelector((state) => state.blog);
   const { user, token } = useSelector((state) => state.auth);
   const [likeStatus, setLikeStatus] = useState("");
   const { getLike, getDetailPage, getComment } = useBlogData();
@@ -23,9 +23,12 @@ const BlogDetails = () => {
 
   ;
   console.log(blogDetail);
+  console.log(comments);
+  const a = comments?.map(comment => comment.content)
+  console.log(a);
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
-    getLike("blogDetail", blogId);
+    getLike("blogs", blogId);
   }, [likeStatus]);
   // console.log(blogId);
   const postLike = async () => {
@@ -54,10 +57,10 @@ const BlogDetails = () => {
   }, [comment])
   console.log(token);
 console.log(blogDetail?.countOfViews);
-  let visitorCount = Math.trunc(Number(blogDetail?.countOfViews?.length));
+  let visitorCount = blogDetail?.countOfViews?.length;
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
   console.log(show);
-  console.log(likes)
+  // console.log(likes)
   return (
     <main>
       <section>
@@ -96,17 +99,19 @@ console.log(blogDetail?.countOfViews);
             ) : (
               <div>
                 <h4>Add first comment</h4>
-                <ReactQuill
+              </div>
+            )}
+          </div>
+        )}
+        { show && <div>
+          <ReactQuill
                   // className={newBlogStyle.quill}
                   theme="snow"
                   value={comment}
                   onChange={setComment}
                 />
                 <button onClick={handleComment}>Add Your Comment</button>
-              </div>
-            )}
-          </div>
-        )}
+        </div> }
       </section>
     </main>
   );
