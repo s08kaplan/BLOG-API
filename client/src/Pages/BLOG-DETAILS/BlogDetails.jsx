@@ -9,6 +9,7 @@ import useAxios from "../../Custom-hooks/useAxios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
+import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
 
 const BlogDetails = () => {
   const { blogDetail, comments:{ comments} } = useSelector((state) => state.blog);
@@ -46,7 +47,7 @@ const BlogDetails = () => {
     const content = sanitizedContent.replace(/<[^>]*>/g, "");
     try {
       const data = await axiosWithToken.post("comments", {content, blogId})
-      console.log("comment-data",data);
+      // console.log("comment-data",data);
     } catch (error) {
       console.log(error);
     }
@@ -113,6 +114,7 @@ console.log(blogDetail?.countOfViews);
                 <button onClick={handleComment}>Add Your Comment</button>
         </div> }
       </section>
+      <BlogModal />
     </main>
   );
 };
