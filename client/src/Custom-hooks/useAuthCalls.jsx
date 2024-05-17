@@ -27,6 +27,7 @@ const registerUser = async (userInfo) => {
         dispatch(fetchStart())
         try {
           const { data } = await axiosPublic.post("auth/login", userInfo) 
+          console.log(data.user);
           dispatch(loginSuccess(data)) 
            navigate("/blogs")
         } catch (error) {

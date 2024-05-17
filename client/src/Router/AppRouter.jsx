@@ -15,7 +15,7 @@ const PrivateRouter = lazy(() => import("./PrivateRouter"));
 
 const AppRouter = () => {
   return (
-    <>
+    
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -33,7 +33,7 @@ const AppRouter = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
-    </>
+   
   );
 };
 

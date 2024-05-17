@@ -14,8 +14,6 @@ const Blogs = () => {
   console.log(blogs);
   return (
     <main>
-      <Link to="/new-blog">Add Blog</Link>
-
       <section key={Date.now()}>
         {blogs?.map((blog) => (
           <main key={blog._id}>
@@ -38,6 +36,7 @@ const Blogs = () => {
           </main>
         ))}
       </section>
+      <Link to="/new-blog">Add New Blog</Link>
     </main>
   );
 };

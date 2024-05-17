@@ -8,7 +8,7 @@ const initialState = {
     lastName: "",
     email: "",
     image: [],
-    bio:""
+    biography:""
   },
   loading: false,
   error: false,
@@ -47,16 +47,16 @@ const AuthSlice = createSlice({
       state.error = false;
       state.user = {
         ...state.user,
-        username: payload.user.username,
-        firstName: payload.user.firstName,
-        lastName: payload.user.lastName,
-        email: payload.user.email,
-        image: payload.user.image,
-        bio: payload.user.bio || "",
-        id: payload.user._id
+        username: payload?.user?.username,
+        firstName: payload?.user?.firstName,
+        lastName: payload?.user?.lastName,
+        email: payload?.user?.email,
+        image: payload?.user?.image,
+        bio: payload?.user?.bio || "",
+        id: payload?.user?._id
       };
 
-      state.token = payload.token;
+      state.token = payload?.token;
     },
 
     logoutSuccess: (state) => {
