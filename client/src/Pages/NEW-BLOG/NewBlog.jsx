@@ -6,6 +6,7 @@ import useAxios from "../../Custom-hooks/useAxios";
 import newBlogStyle from "./NewBlog.module.scss";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import DOMPurify from "dompurify";
+import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
   const { categories } = useSelector((state) => state.blog);
@@ -19,6 +20,8 @@ const NewBlog = () => {
   });
   const [text, setText] = useState("");
   // console.log("categories", categories);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData("categories");
@@ -43,6 +46,7 @@ const NewBlog = () => {
     await postBlog("blogs", inputs);
     setInputs({ title: "", image: "", categories: "", isPublish: "" });
     setText("");
+    navigate("/blogs")
   };
 
   const postBlog = async (url, postData) => {
