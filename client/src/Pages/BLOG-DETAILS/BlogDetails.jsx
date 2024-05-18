@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { LiaHeart } from "react-icons/lia";
 import { FaTrashAlt } from "react-icons/fa";
-import detailStyle from "./BlogDetails.module.scss";
 import useAxios from "../../Custom-hooks/useAxios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { VscEdit } from "react-icons/vsc";
 import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
+import detailStyle from "./BlogDetails.module.scss";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
@@ -56,27 +56,27 @@ console.log(user);
   
  
   return (
-    <main>
+    <main className={detailStyle.main}>
       <section>
         <div className={detailStyle["detail-header"]}>
           <h2>{blogDetail?.title}</h2>
-          <div>
+          
             <img src={blogDetail?.image} alt="blog-image" />
-            <div>
+            <div className={detailStyle.likes}>
               <LiaHeart
                 onClick={postLike}
                 fill={`${blogDetail?.likes?.includes(user?.id) ? "red" : ""}`}
               />
-            </div>
             <span>{blogDetail?.totalLikes}</span>
+            </div>
             {
               visitorCount && (
-              <h4>
+              <div className={detailStyle.views}>
                 viewed by <span>{visitorCount} </span>
                 <span>
                   {visitorCount > 1 ? "people" : "person"}
                 </span>
-              </h4>)
+              </div>)
             }
             
             {blogDetail?.userId == user?.id && (
@@ -85,8 +85,8 @@ console.log(user);
                 <VscEdit onClick={()=>setEditBlogModal(!editBlogModal)}/>
               </span>
             )}
-            <p>{blogDetail?.content}</p>
-          </div>
+            <p className={detailStyle.content}>{blogDetail?.content}</p>
+          
         </div>
         <button onClick={() => setShow((prev) => !prev)}>Show comments</button>
         {show && (
@@ -110,7 +110,7 @@ console.log(user);
         )}
         { show && 
           <ReactQuill
-                  // className={newBlogStyle.quill}
+          className={detailStyle.quill}
                   theme="snow"
                   value={comment}
                   onChange={setComment}

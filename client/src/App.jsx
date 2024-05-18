@@ -9,7 +9,9 @@ function App() {
     <>
       <Router>
         <Navbar />
-        <AppRouter />
+        <main>
+          <AppRouter />
+        </main>
         <Footer />
       </Router>
     </>

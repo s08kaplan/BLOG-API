@@ -1,3 +1,4 @@
+@import "../../../scss/abstract/mixins";
 
 $primary-color: #3498db;
 $secondary-color: #bd10e0;
@@ -26,18 +27,15 @@ $border-radius: 10px;
   }
 
   & main {
-    display: flex;
-    flex-direction: column;
+    @include flex($fd: column);
   }
 
   & .navigation {
-    display: flex;
-    flex-direction: column;
+    @include flex($fd: column);
 
     & div {
       margin: 0 1rem 1rem;
-      display: flex;
-      flex-direction: column;
+      @include flex($fd: column);
 
       & a {
         text-decoration: none;

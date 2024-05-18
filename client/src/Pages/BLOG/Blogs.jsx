@@ -13,8 +13,8 @@ const Blogs = () => {
 
   console.log(blogs);
   return (
-    <main>
-      <section key={Date.now()}>
+    <main className={blogStyle.main}>
+      <section key={Date.now()} className={blogStyle["main-section"]}>
         {blogs?.map((blog) => (
           <main key={blog._id}>
             <h2>{blog?.title}</h2>
@@ -23,14 +23,14 @@ const Blogs = () => {
             </section>
             <p className={blogStyle.content}>{blog?.content}</p>
             <span>likes{blog?.totalLikes}</span>
-            <span>viewed by{Math.floor(Number(blog?.countOfViews.length)) == 0 ? 1 : Math.floor(Number(blog?.countOfViews.length)) }</span>
+            <span>viewed by{(blog?.countOfViews.length) == 0 ? 1 : (blog?.countOfViews.length)}</span>
             <div>
               {blog?.createdAt ? new Date(blog.createdAt).toLocaleString() : ""}
             </div>
             {/* <div>{blog?.updatedAt
                 ? new Date(blog.updatedAt).toLocaleString()
                 : ""}</div> */}
-            <Link to={`/blog-details/${blog?._id}`}>
+            <Link to={`/blog-details/${blog?._id}`} className={blogStyle["new-blog-link"]}>
               <button>Read more</button>
             </Link>
           </main>

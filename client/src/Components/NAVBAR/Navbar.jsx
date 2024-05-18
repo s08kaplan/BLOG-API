@@ -22,8 +22,8 @@ const Navbar = () => {
   }
 
   return (
-    <header>
-      <nav>
+    <header className={NavbarStyle.header}>
+      <nav className={NavbarStyle.nav}>
         <section className={NavbarStyle.logo}>
         <Link to="/"><img src={logo} alt="logo" width="150px"  /></Link>  
           <span>Illuminate Your Thoughts</span>

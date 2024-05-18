@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { useNavigate } from "react-router-dom";
+import categoriesStyle from "./Categories.module.scss"
 
 const Categories = () => {
   const { categories } = useSelector((state) => state.blog);
@@ -27,16 +28,16 @@ const Categories = () => {
 
  
   return (
-    <div>
-      <div>
+    
+      <div className={categoriesStyle.container}>
         <h3>Your site Your Choice</h3>
-        <div>
+        <div className={categoriesStyle.categories}>
           {categories?.map((category) => (
             <h3 onClick={() => handleClick(category._id)}>{category.name} </h3>
           ))}
         </div>
       </div>
-    </div>
+    
   );
 };
 
