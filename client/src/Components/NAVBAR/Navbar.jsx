@@ -11,6 +11,15 @@ const Navbar = () => {
   const { user, token } = useSelector((state) => state.auth);
   const { logout, login } = useAuthCalls();
   const [sidebar, setSidebar] = useState(false);
+  console.log(sidebar);
+
+  const toggleSidebar = () => {
+    setSidebar((prev) => !prev);
+  };
+
+  const closeSidebar = () => {
+    setSidebar(false)
+  }
 
   return (
     <header>
@@ -37,29 +46,15 @@ const Navbar = () => {
           </main>
         </section>
         <section className={NavbarStyle.avatar}>
-          <div onClick={() => setSidebar((prev) => !prev)}>
+          {/* <div onClick={() => setSidebar((prev) => !prev)}> */}
+          <div onClick={toggleSidebar}>
             <Avatar size="50" src={ user?.image[0] || "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_640.png" } round=".8rem" />
           </div>
-
-{/*         
-          <Link to={user ? "my-profile" : "/"}>
-            <li>My Profile</li>
-          </Link>
-          <Link to={!token ? "/login" : ""}>
-            <li onClick={() => (token ? logout() : login())}>
-              {token ? "Log out" : " Log in"}
-            </li>
-          </Link>
-          {!token && (
-            <Link to="/register">
-              <li>Register</li>
-            </Link>
-          )} */}
         </section>
       </nav>
       {sidebar && (
             <div className={NavbarStyle.sidebar}>
-              <SideBar />
+              <SideBar isActive = {sidebar} onClose = {closeSidebar} />
             </div>
           )}
     </header>
