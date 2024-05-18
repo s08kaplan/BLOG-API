@@ -7,7 +7,7 @@ import footerStyle from "./Footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className={footerStyle.footer}>
       <main className={footerStyle.container}>
         <section className={footerStyle.message}>
           Express Yourself Freely

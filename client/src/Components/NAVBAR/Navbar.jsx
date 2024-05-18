@@ -13,13 +13,7 @@ const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
   console.log(sidebar);
 
-  const toggleSidebar = () => {
-    setSidebar((prev) => !prev);
-  };
-
-  const closeSidebar = () => {
-    setSidebar(false)
-  }
+ 
 
   return (
     <header className={NavbarStyle.header}>
@@ -47,14 +41,14 @@ const Navbar = () => {
         </section>
         <section className={NavbarStyle.avatar}>
           {/* <div onClick={() => setSidebar((prev) => !prev)}> */}
-          <div onClick={toggleSidebar}>
+          <div onClick={() => setSidebar(!sidebar)}>
             <Avatar size="50" src={ user?.image[0] || "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_640.png" } round=".8rem" />
           </div>
         </section>
       </nav>
       {sidebar && (
             <div className={NavbarStyle.sidebar}>
-              <SideBar isActive = {sidebar} onClose = {closeSidebar} />
+              <SideBar />
             </div>
           )}
     </header>

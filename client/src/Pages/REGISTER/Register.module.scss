@@ -1,5 +1,3 @@
-@import "../../../scss/abstract/mixins";
-
 $primary-color: #3498db;
 $text-color: #333;
 $error-color: #e74c3c;
@@ -8,7 +6,7 @@ $form-background-color: #fff;
 $form-border-color: #ddd;
 $container-padding: 20px;
 
-.new-blog-main {
+.register-main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +36,7 @@ $container-padding: 20px;
   }
 
   input,
-  select {
+  textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid $form-border-color;
@@ -51,20 +49,11 @@ $container-padding: 20px;
       outline: none;
     }
   }
-}
 
-.quill {
-  margin-bottom: 15px;
-
-  .ql-container {
-    height: 200px;
-    border-radius: 5px;
-    border: 1px solid $form-border-color;
-  }
-
-  .ql-toolbar {
-    border-radius: 5px;
-    border: 1px solid $form-border-color;
+  .error {
+    color: $error-color;
+    font-size: 0.875em;
+    margin-top: 5px;
   }
 }
 
@@ -88,4 +77,3 @@ button {
     cursor: not-allowed;
   }
 }
-

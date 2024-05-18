@@ -11,8 +11,8 @@ $border-radius: 10px;
 
 .container {
   position: absolute;
-  top: 60px;
-  right: 10px;
+  top: 80px;
+  right: 5px;
   padding: $padding;
   background: $background-color;
   box-shadow: 0 8px 32px 0 $box-shadow-color;
@@ -22,9 +22,9 @@ $border-radius: 10px;
   z-index: 10;
   transition: transform 0.3s ease-in-out;
 
-  &.active {
-    transform: translateX(0);
-  }
+  // &.active {
+  //   transform: translateX(0);
+  // }
 
   & main {
     @include flex($fd: column);

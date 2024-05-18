@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { LiaHeart } from "react-icons/lia";
 import { BsEye } from "react-icons/bs";
-import style from "./CategoryDetail.module.scss"
 import { useNavigate } from "react-router-dom";
+import style from "./CategoryDetail.module.scss"
 
 const CategoryDetail = () => {
   const { categoryDetail, blogs } = useSelector((state) => state.blog);

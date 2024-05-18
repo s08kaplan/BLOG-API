@@ -1,23 +1,19 @@
 @import "../../../scss/abstract/mixins";
-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+.footer {
+  margin-top: 1rem;
   width: 100%;
-  background-color: #3498db;
+  padding: 20px 0;
   color: white;
-  // padding: 0.4rem;
-  // height: 8rem;
-  // overflow: hidden;
   background: url("../../assets/logo-2.png") no-repeat;
   background-size: contain;
   background-position: left;
   background-color: #22283174;
-  color: #cf314efe;
+ 
   & .container {
-    @include flex($fd: column);
-    padding: 20px;
-    background-color: #3498db;
+    @include flex($jc: space-between);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:0 20px;
     color: white;
     & .message {
       font-size: 1.2rem;
@@ -25,12 +21,16 @@ footer {
     }
 
     & .footer-icons {
-      @include flex();
+      @include flex($jc: flex-end);
+      gap: 20px;
 
       & div {
         font-size: 1.5rem;
         cursor: pointer;
-
+        transition: color 0.3s;
+        &:hover {
+          color: #3498db;
+        }
         & svg {
           fill: white;
           transition: fill 0.3s ease;
@@ -48,11 +48,12 @@ footer {
 @media (max-width: 768px) {
   .container {
     padding: 20px 10px;
+    justify-content: center;
   }
 
   .footer-icons {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-end;
 
     div {
       margin-bottom: 10px;

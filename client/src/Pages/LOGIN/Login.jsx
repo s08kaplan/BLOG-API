@@ -38,9 +38,9 @@ const Login = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <section>
+    <section className={LoginStyle["login-form"]}>
       <main>
-        <section className={LoginStyle["login-form"]}>
+        <section >
           <div>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <section className={LoginStyle["input-group"]}>
@@ -48,6 +48,7 @@ const Login = () => {
                   type="text"
                   id="username"
                   name="username"
+                  placeholder=" "
                   {...register("username")}
                 />
                                 <label className={LoginStyle["user-label"]} htmlFor="username">Username</label>
@@ -60,6 +61,7 @@ const Login = () => {
                   type="text"
                   id="email"
                   name="email"
+                  placeholder=" "
                   {...register("email")}
                 />
                 <label className={LoginStyle["user-label"]} htmlFor="email">Email</label>
@@ -72,6 +74,7 @@ const Login = () => {
                   type="password"
                   id="password"
                   name="password"
+                  placeholder=" "
                   {...register("password")}
                 />
                 <label className={LoginStyle["user-label"]} htmlFor="password">Password</label>

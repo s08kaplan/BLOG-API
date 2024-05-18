@@ -59,8 +59,8 @@ const NewBlog = () => {
   };
 
   return (
-    <section>
-      <main>
+    <section className={newBlogStyle["new-blog-main"]}>
+      <main className={newBlogStyle["form-container"]}>
         <section>
           <form onSubmit={handleSubmit}>
             <div className={newBlogStyle["input-group"]}>

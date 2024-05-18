@@ -6,15 +6,17 @@ import { FaTelegram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { BsFillEnvelopeAtFill } from "react-icons/bs";
+import style from "./Contact.module.scss"
+
 
 const Contact = () => {
   return (
     <main>
-      <section>
+      <section className={style["contact-container"]}>
         <h3>
           Illuminate Your <span>Thoughts</span> Your <span>Dreams</span>
         </h3>
-        <div>
+        <div className={style["contact-info"]}>
           <a href="tel:123456789">Phone</a>
           <a href="mailto:pyscript@gmail.com">
             <BsFillEnvelopeAtFill />
@@ -22,27 +24,24 @@ const Contact = () => {
             <h4>pyscript@gmail.com</h4>
           </a>
         </div>
-        <div className="contact-footer">
-          <div className="icons">
-            <div className="whatsapp">
+        <div className={style["contact-footer"]}>
+          <div className={style.icons}>
+            <div className={style.whatsapp}>
               <IoLogoWhatsapp />
             </div>
-            <div className="facebook">
+            <div className={style.facebook}>
               <FaFacebook />
             </div>
-            <div className="instagram">
+            <div className={style.instagram}>
               <IoLogoInstagram />
             </div>
-            <div className="telegram">
+            <div className={style.telegram}>
               <FaTelegram />
             </div>
-            <div>
+            <div className={style.twitter}>
               <FaXTwitter />
             </div>
           </div>
-          {/* <div className="arrow">
-            <FaArrowAltCircleUp />
-          </div> */}
         </div>
       </section>
     </main>

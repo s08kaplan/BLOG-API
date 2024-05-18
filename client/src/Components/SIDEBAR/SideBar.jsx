@@ -14,32 +14,32 @@ const navigation = [
   { name: "Register", to: "/register" },
 ];
 
-const SideBar = ({isActive, onClose}) => {
+const SideBar = () => {
   // const { token } = useSelector((state) => state.auth);
   // const { logout } = useAuthCalls();
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
   // console.log(token);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (isActive && !e.target.closest(`.${SideStyle.container}`)) {
-        console.log(e.target);
-        console.log(isActive);
-        onClose();
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (isActive && !e.target.closest(`.${SideStyle.container}`)) {
+  //       console.log(e.target);
+  //       console.log(isActive);
+  //       onClose();
+  //     }
+  //   };
 
-    document.body.addEventListener("click", handleClickOutside);
+  //   document.body.addEventListener("click", handleClickOutside);
 
-    return () => {
-      document.body.removeEventListener("click", handleClickOutside);
-    };
-  }, [isActive, onClose]);
+  //   return () => {
+  //     document.body.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, [isActive, onClose]);
 
   return (
     
-      <section className={`${SideStyle.container} ${isActive ? SideStyle.active : ""}`}>
+      <section className={SideStyle.container}>
         <main>
           <section className={SideStyle.navigation}>
             {navigation.map((item) => (
