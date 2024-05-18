@@ -6,6 +6,7 @@ const initialState = {
   blogs: [],
   comments: [],
   blogDetail: {},
+  categoryDetail: [],
   loading: false,
   error: false,
 };
@@ -25,7 +26,7 @@ const BlogSlice = createSlice({
       state.users = payload[0];
       state.categories = payload[1];
       state.blogs = payload[2];
-      state.comments = payload[3];
+      // state.comments = payload[3];
     },
 
     getSingleData: (state, { payload }) => {

@@ -30,7 +30,7 @@ const Blogs = () => {
             {/* <div>{blog?.updatedAt
                 ? new Date(blog.updatedAt).toLocaleString()
                 : ""}</div> */}
-            <Link to={`/blog-details/${blog._id}`}>
+            <Link to={`/blog-details/${blog?._id}`}>
               <button>Read more</button>
             </Link>
           </main>

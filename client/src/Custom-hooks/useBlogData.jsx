@@ -16,10 +16,10 @@ const useBlogData = () => {
 
     try {
       const [users, categories, blogs, comments] = await Promise.all([
-        axiosWithToken("users"),
+        axiosWithToken("users?limit=20"),
         axiosWithToken("categories"),
-        axiosWithToken("blogs"),
-        axiosWithToken("comments"),
+        axiosWithToken("blogs?limit=20"),
+        // axiosWithToken("comments"),
       ]);
 
       dispatch(
@@ -39,7 +39,7 @@ const useBlogData = () => {
   const getData = async (url = "blogs") => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}/`);
+      const { data } = await axiosWithToken(`${url}?limit=20`);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
@@ -48,12 +48,12 @@ const useBlogData = () => {
   };
 
   const getLike = async (url,blogId) => {
-    console.log(url);
-    console.log(blogId);
+    // console.log(url);
+    // console.log(blogId);
     dispatch(fetchStart());
     try {
       const { data }  = await axiosWithToken.get(`blogs/${blogId}/getLike`);
-      console.log(data);
+      // console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
@@ -93,7 +93,7 @@ const useBlogData = () => {
   dispatch(fetchStart());
   try {
     const { data } = await axiosWithToken.get(`blogs/${blogId}`);
-    console.log("comment-data in getComment",data);
+    // console.log("comment-data in getComment",data);
     dispatch(getSingleData({ data, url }));
   } catch (error) {
     dispatch(fetchFail());
@@ -101,7 +101,23 @@ const useBlogData = () => {
   }
  }
 
-  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment };
+ const getCategoryById = async (url, categoryId) => {
+  // console.log(categoryId);
+  // console.log(url);
+  dispatch(fetchStart());
+  try {
+    // const { data } = await axiosWithToken.get(`categories/${categoryId}`);
+    const { data } = await axiosWithToken.get(`categories/${categoryId}`);
+    // console.log("category detail",data);
+    dispatch(getSingleData({ data, url }));
+  } catch (error) {
+    dispatch(fetchFail());
+    console.log(error);
+  }
+ }
+
+
+  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById };
 };
 
 export default useBlogData;

@@ -59,9 +59,10 @@ module.exports = {
             #swagger.tags = ["Categories"]
             #swagger.summary = "Get Single Category"
         */
-
-        const data = await Category.findOne({ _id: req.params.categoryId })
-
+       const categoryId = req.params.categoryId || req.body.id
+    //    console.log(categoryId);
+        // const data = await Category.findOne({ _id: req.params.categoryId })
+        const data = await Category.findOne({ _id: categoryId})
         res.status(202).send({
             error: false,
             data

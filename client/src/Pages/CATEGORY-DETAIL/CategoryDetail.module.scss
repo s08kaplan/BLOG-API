@@ -1,0 +1,32 @@
+.main {
+    // display: grid;
+    // grid-template-columns: repeat(3, 1fr);
+    display: flex;
+
+    & .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .detail-container {
+            display: flex;
+            flex-direction: column;
+            &:hover{
+                cursor: pointer;
+            }
+            & p {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 3;
+            }
+            & div {
+              
+                & span {
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
