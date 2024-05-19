@@ -1,12 +1,18 @@
 @import "../../../scss/abstract/mixins";
 
+$primary-color: #3498db;
+$secondary-color: #bd10e0;
+$text-color: #333;
+
 .modal-main {
     @include flex($fd: column);
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
     height: 100%;
+    overflow-y: scroll;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 
@@ -18,6 +24,13 @@
   width: 100%;
   box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
   position: relative;
+
+ & h2.title {
+    color: #333; 
+    font-size: 1.5rem;
+    font-weight: bold; 
+    margin-bottom: 1rem; 
+  }
     
  & .input-group {
     margin-bottom: 20px;

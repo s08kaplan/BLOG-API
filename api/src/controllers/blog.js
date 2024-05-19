@@ -28,7 +28,12 @@ module.exports = {
     */
        
         // const data = await Blog.find()
-        const data = await res.getModelList(Blog, {},["userId","categoryId"])
+        const blogFilters = !(req.user?._id)
+        const blogStatus = !(req.user?.isAdmin || req.user?.isStaff )  ? {isDeleted:false} : {}
+        const blogs = await Blog.find({userId: req.user?._id})
+        console.log(blogs);
+     
+        const data = await res.getModelList(Blog, {...blogStatus},["userId","categoryId"])
 
         res.status(200).send({
             error: false,
@@ -76,8 +81,9 @@ module.exports = {
 
 
         const userId = req.user?._id
-
-        const data = await Blog.findOne({ _id: req.params.blogId })
+        const customFilter = !(req.user?.isAdmin || req.user?.isStaff) ? {isDeleted: false,isPublish: true} : {}
+        const data = await Blog.findOne({ _id: req.params.blogId, ...customFilter })
+       
         if(!data){
             throw new Error("There is no such a blog, it is removed sorry")
         }
@@ -109,8 +115,15 @@ module.exports = {
         }
     */
 
+        const blog = await Blog.findOne({_id: req.params.blogId})
+        if(!(req.user?.isAdmin || req.user?.isStaff ) || (blog?.userId !== req.user?._id)) {
+            res.status(403).send({
+                error: true,
+                message:"You are not the owner of the blog to update it"
+            })
+        }
         const data = await Blog.updateOne({ _id: req.params.blogId}, req.body, { runValidators: true })
-
+       
         res.status(202).send({
             error: false,
             data,
@@ -126,10 +139,20 @@ module.exports = {
         #swagger.summary = "Delete Blog"
     */
 
-        const { deletedCount } = await Blog.deleteOne({ _id: req.params.blogId })
+        // const { deletedCount } = await Blog.deleteOne({ _id: req.params.blogId })
+        const blogs = await Blog.findOne({userId: req.user?._id})
 
-        res.status(deletedCount ? 204 : 404).send({
-            error: !(!!deletedCount)
+        if(!(req.user?.isAdmin || req.user?.isStaff) || req.user?._id !== blogs?.userId){
+           res.status(403).send({
+            message: "You are not the owner of the blog to do this operation"
+           })
+        }
+          
+         const deletedBlog = await Blog.updateOne({ _id: req.params.blogId },{isDeleted: true})
+
+        res.status(deletedBlog ? 204 : 404).send({
+            // error: !(!!deletedBlog)
+            message: "Deleted successfully"
         })
     },
 }
