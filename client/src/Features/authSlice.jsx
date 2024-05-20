@@ -8,7 +8,10 @@ const initialState = {
     lastName: "",
     email: "",
     image: [],
-    biography:""
+    biography:"",
+    isActive: "",
+    isAdmin: "",
+    isStaff: "",
   },
   loading: false,
   error: false,
@@ -34,8 +37,11 @@ const AuthSlice = createSlice({
         lastName: payload.data.lastName,
         image: payload.data.image,
         email: payload.data.email,
-        bio: payload.data.bio || "",
-        id: payload.data._id
+        biography: payload.data.biography || "",
+        id: payload.data._id,
+        isActive: payload.data.isActive,
+        isAdmin: payload.data.isAdmin,
+        isStaff: payload.data.isStaff,
 
       };
 
@@ -52,8 +58,11 @@ const AuthSlice = createSlice({
         lastName: payload?.user?.lastName,
         email: payload?.user?.email,
         image: payload?.user?.image,
-        bio: payload?.user?.bio || "",
-        id: payload?.user?._id
+        biography: payload?.user?.biography || "",
+        id: payload?.user?._id,
+        isActive: payload.user?.isActive,
+        isAdmin: payload.user?.isAdmin,
+        isStaff: payload.user?.isStaff,
       };
 
       state.token = payload?.token;
@@ -77,7 +86,10 @@ const AuthSlice = createSlice({
         email: payload.email,
         image: payload.image,
         biography: payload.biography || "",
-        id: payload._id
+        id: payload._id,
+        isActive: payload.isActive,
+        isAdmin: payload.isAdmin,
+        isStaff: payload.isStaff,
       };
     },
 

@@ -140,8 +140,8 @@ module.exports = {
       { _id: req.params.userId },
       { isDeleted: true, isActive: false }
     );
-    const hey = await Token.deleteOne({ userId: req.params.userId });
-    console.log(hey);
+    // const hey = await Token.deleteOne({ userId: req.params.userId });
+    // console.log(hey);
     res.status(data.deletedCount ? 204 : 404).send({
       error: !!!data.deletedCount,
       data,

@@ -116,6 +116,20 @@ const useBlogData = () => {
   }
  }
 
+//  const deleteBlog = async (url, blogId) => {
+//   // console.log(blogId);
+//   // console.log(url);
+//   dispatch(fetchStart());
+//   try {
+//     const { data } = await axiosWithToken.delete(`${url}/${blogId}`);
+//     // console.log("category detail",data);
+//     dispatch(getSingleData({ data, url }));
+//   } catch (error) {
+//     dispatch(fetchFail());
+//     console.log(error);
+//   }
+//  }
+
 
   return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById };
 };

@@ -7,6 +7,8 @@ import newBlogStyle from "./NewBlog.module.scss";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
+import { modules } from "../../Helpers/quillModules";
+
 
 const NewBlog = () => {
   const { categories } = useSelector((state) => state.blog);
@@ -41,8 +43,11 @@ const NewBlog = () => {
   };
   console.log(inputs);
 
+
+  console.log(text);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     await postBlog("blogs", inputs);
     setInputs({ title: "", image: "", categories: "", isPublish: "" });
     setText("");
@@ -80,6 +85,7 @@ const NewBlog = () => {
                 theme="snow"
                 value={text}
                 onChange={setText}
+                modules={modules}
               />
             </div>
             <div className={newBlogStyle["input-group"]}>

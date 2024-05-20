@@ -14,6 +14,7 @@ const BlogModal = ({
   blogId,
   content,
   categoryId,
+  onClose
 }) => {
   const { categories } = useSelector((state) => state.blog);
   const { getData } = useBlogData();
@@ -68,6 +69,8 @@ const BlogModal = ({
   const categoryName = (categories?.filter(
     (category) => category._id == categoryId
   ))[0]?.name;
+
+  
 
   return (
     <main className={modalBlogStyle["modal-main"]}>
@@ -134,6 +137,7 @@ const BlogModal = ({
               </select>
             </div>
             <button>Submit</button>
+            <button style={{marginLeft:"1rem", backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>
           </form>
         </div>
       )}

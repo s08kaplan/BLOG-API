@@ -82,7 +82,7 @@ module.exports = {
 
         const userId = req.user?._id
         const customFilter = !(req.user?.isAdmin || req.user?.isStaff) ? {isDeleted: false,isPublish: true} : {}
-        const data = await Blog.findOne({ _id: req.params.blogId, ...customFilter })
+        const data = await Blog.findOne({ _id: req.params.blogId, ...customFilter }).populate("userId")
        
         if(!data){
             throw new Error("There is no such a blog, it is removed sorry")
@@ -147,7 +147,12 @@ module.exports = {
             message: "You are not the owner of the blog to do this operation"
            })
         }
-          
+         if(req.user?.isAdmin || req.user?.isStaff) {
+            const { deletedCount } = await Blog.deleteOne({ _id: req.params.blogId })
+            res.status(deletedCount ? 204 : 404).send({
+                message:"Blog deleted by the authorized person permanently"
+            })
+         }
          const deletedBlog = await Blog.updateOne({ _id: req.params.blogId },{isDeleted: true})
 
         res.status(deletedBlog ? 204 : 404).send({

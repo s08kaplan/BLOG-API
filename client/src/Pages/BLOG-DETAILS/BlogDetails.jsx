@@ -16,7 +16,7 @@ const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
   const [likeStatus, setLikeStatus] = useState("");
-  const { getLike, getDetailPage, postComment} = useBlogData();
+  const { getLike, getDetailPage, postComment, getData} = useBlogData();
   const { blogId } = useParams();
   const { axiosWithToken } = useAxios();
   const [show, setShow] = useState(false);
@@ -46,6 +46,12 @@ const BlogDetails = () => {
 
   }
 
+  const handleDelete = async () => {
+    const data = await axiosWithToken.delete(`blogs/${blogDetail?._id}`)
+    console.log(data);
+   const result= await getData("blogs")
+   console.log(result);
+  }
   let visitorCount = blogDetail?.countOfViews?.length;
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
   
@@ -53,7 +59,9 @@ const BlogDetails = () => {
   
   console.log(blogDetail)
 console.log(user);
-  
+  // console.log(blogDetail?.userId?.isActive == true);
+  console.log(( blogDetail?.userId?._id == user?.id  ) ? "a": "no");
+  console.log( (blogDetail?.userId?.isAdmin === true || blogDetail?.userId?.isStaff === true)   ? "a": "no"); 
  
   return (
     <main className={detailStyle.main}>
@@ -79,9 +87,9 @@ console.log(user);
               </div>)
             }
             
-            {blogDetail?.userId == user?.id && (
+            {(blogDetail?.userId?._id == user?.id || (user?.isAdmin == true || user?.isStaff == true)) && (
               <span className={detailStyle.modal}>
-                {/* <FaTrashAlt /> */}
+                <FaTrashAlt onClick={handleDelete}/>
                 <VscEdit onClick={()=>setEditBlogModal(!editBlogModal)}/>
               </span>
             )}
@@ -120,7 +128,7 @@ console.log(user);
          { show &&  <button onClick={handleComment}>Add Your Comment</button>}
       </section>
       {
-        editBlogModal && <BlogModal {...blogDetail} blogId={blogId} categoryId={categoryId} />
+        editBlogModal && <BlogModal {...blogDetail} blogId={blogId} categoryId={categoryId} onClose={setEditBlogModal} />
       }
       
     </main>
