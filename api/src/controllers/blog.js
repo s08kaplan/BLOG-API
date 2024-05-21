@@ -152,12 +152,14 @@ module.exports = {
             res.status(deletedCount ? 204 : 404).send({
                 message:"Blog deleted by the authorized person permanently"
             })
-         }
-         const deletedBlog = await Blog.updateOne({ _id: req.params.blogId },{isDeleted: true})
+         }else {
+             const deletedBlog = await Blog.updateOne({ _id: req.params.blogId },{isDeleted: true})
 
         res.status(deletedBlog ? 204 : 404).send({
             // error: !(!!deletedBlog)
             message: "Deleted successfully"
         })
+         }
+        
     },
 }

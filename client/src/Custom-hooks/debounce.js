@@ -1,10 +1,13 @@
-const myDebounce = (func,delay) => {
-    let timer
-    return(...args) => {
-        clearTimeout(timer)
+import { useEffect, useState } from "react"
 
-      timer = setTimeout(() => func(...args),delay ) 
-    }
+const useDebounce = (value, delay=250) => {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+
+   setTimeout(()=> setDebouncedValue(value),delay)
+
+  }, [value])
+  
+  return debouncedValue
 }
-
-export default myDebounce

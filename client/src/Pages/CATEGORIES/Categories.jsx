@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ const Categories = () => {
   const { categories } = useSelector((state) => state.blog);
   const { getData, getCategoryById } = useBlogData();
   const navigate = useNavigate();
+  const first = useRef(second)
 
   useEffect(() => {
     getData("categories");
@@ -30,12 +31,19 @@ const Categories = () => {
   return (
     
       <div className={categoriesStyle.container}>
-        <h3>Your site Your Choice</h3>
+        <div>
+          <h3>Your site Your Choice</h3>
         <div className={categoriesStyle.categories}>
           {categories?.map((category) => (
             <h3 onClick={() => handleClick(category._id)}>{category.name} </h3>
           ))}
         </div>
+        <div>
+          <h4>Add Category</h4>
+          <input type="text"  />
+        </div>
+        </div>
+        
       </div>
     
   );
