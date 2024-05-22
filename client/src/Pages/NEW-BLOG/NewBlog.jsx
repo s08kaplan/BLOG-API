@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import useBlogData from "../../Custom-hooks/useBlogData";
 import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import { modules } from "../../Helpers/quillModules";
+import useDebounce from "../../Custom-hooks/useDebounce";
 
 
 const NewBlog = () => {
@@ -20,8 +21,10 @@ const NewBlog = () => {
     categories: "",
     isPublish: "",
   });
-  const [text, setText] = useState("");
   // console.log("categories", categories);
+  const [text, setText] = useState("");
+  const quillRef = useRef(null)
+  const debouncedInputs = useDebounce(inputs, 250)
 
   const navigate = useNavigate()
 
@@ -29,26 +32,41 @@ const NewBlog = () => {
     getData("categories");
   }, []);
 
+  // useEffect(() => {
+  //   const sanitizedContent = DOMPurify.sanitize(text);
+  //   setInputs((prevInputs) => ({
+  //     ...prevInputs,
+  //     content: sanitizedContent,
+  //   }));
+  // }, [text]);
+
   const handleForm = (e) => {
     const { name, value } = e.target;
-    const sanitizedContent = DOMPurify.sanitize(text);
-    const content = sanitizedContent.replace(/<[^>]*>/g, "");
-    console.log(content);
+    // const sanitizedContent = DOMPurify.sanitize(text);
+    // const content = sanitizedContent.replace(/<[^>]*>/g, "");
+    // console.log(content);
 
     setInputs({
       ...inputs,
       [name]: value,
-      content,
+      // content,
     });
   };
   console.log(inputs);
 
-
+  // const handleTextChange = (value) => {
+  //   setText(value);
+  // };
   console.log(text);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    await postBlog("blogs", inputs);
+    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
+    const postData = {
+      ...inputs,
+      content: sanitizedContent,
+    };
+    // await postBlog("blogs", inputs);
+    await postBlog("blogs", postData);
     setInputs({ title: "", image: "", categories: "", isPublish: "" });
     setText("");
     navigate("/blogs")
@@ -85,7 +103,9 @@ const NewBlog = () => {
                 theme="snow"
                 value={text}
                 onChange={setText}
+                // onChange={handleTextChange}
                 modules={modules}
+                ref= {quillRef}
               />
             </div>
             <div className={newBlogStyle["input-group"]}>

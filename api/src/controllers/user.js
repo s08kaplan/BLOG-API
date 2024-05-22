@@ -19,7 +19,11 @@ module.exports = {
                 </ul>
             `
         */
-
+            const auth = req.headers?.authorization || null
+            const token = auth ? auth.split(" ")[1] : null
+            if(!token){
+              throw new Error("Please log in first")
+            }
     const customFilters =
       req.user?.isAdmin || req.user?.isStaff ? {} : { isDeleted: false };
     const data = await User.find(customFilters);

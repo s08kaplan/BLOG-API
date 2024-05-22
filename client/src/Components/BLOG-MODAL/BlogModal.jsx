@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import useAxios from "../../Custom-hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import BlogPost from "../BLOG-POST/BlogPost";
 
 const BlogModal = ({
   title,
@@ -38,8 +39,9 @@ const BlogModal = ({
 
   const handleForm = (e) => {
     const { name, value } = e.target;
-    const sanitizedContent = DOMPurify.sanitize(text);
-    const content = sanitizedContent.replace(/<[^>]*>/g, "");
+    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
+    // const content = sanitizedContent.replace(/<[^>]*>/g, "");
+    const content = sanitizedContent
     console.log(content);
 
     setInputs({
@@ -76,7 +78,7 @@ const BlogModal = ({
     <main className={modalBlogStyle["modal-main"]}>
       {open && (
         <div className={modalBlogStyle["modal"]}>
-          <button onClick={() => setOpen((prev) => !prev)}>X</button>
+          {/* <button onClick={() => setOpen((prev) => !prev)}>X</button> */}
 
           <form onSubmit={handleSubmit}>
             <div className={modalBlogStyle["input-group"]}>

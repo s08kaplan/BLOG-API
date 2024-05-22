@@ -38,10 +38,10 @@ const Login = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <section className={LoginStyle["login-form"]}>
+    
       <main>
         <section >
-          <div>
+          <div className={LoginStyle["login-form"]}>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <section className={LoginStyle["input-group"]}>
                 <input
@@ -88,7 +88,7 @@ const Login = () => {
           </div>
         </section>
       </main>
-    </section>
+   
   );
 };
 
