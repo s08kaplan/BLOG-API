@@ -76,7 +76,7 @@ const NewBlog = () => {
   // };
   const handleForm = (e) => {
     const { name, value } = e.target;
-    inputRefs.current[name] ;
+    inputRefs.current[name] = value ;
     
   };
   // console.log(debouncedInputs);
@@ -88,8 +88,8 @@ const NewBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
-    // const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
-    const sanitizedContent = DOMPurify.sanitize(quillRef.current.getEditor().getText(), { USE_PROFILES: { html: true } });
+    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
+    // const sanitizedContent = DOMPurify.sanitize(quillRef.current.getEditor().getText(), { USE_PROFILES: { html: true } });
     // const postData = {
     //   // ...inputs,
     //   ...debouncedInputs,
@@ -100,6 +100,7 @@ const NewBlog = () => {
       content: sanitizedContent,
     };
     // await postBlog("blogs", inputs);
+    console.log(postData);
     await postBlog("blogs", postData);
     // setInputs({ title: "", image: "", categories: "", isPublish: "" });
     // setText("");
