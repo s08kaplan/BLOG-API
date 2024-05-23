@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { LiaHeart } from "react-icons/lia";
 import { FaTrashAlt } from "react-icons/fa";
@@ -23,6 +23,8 @@ const BlogDetails = () => {
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
   const [editBlogModal, setEditBlogModal] = useState(false);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
@@ -48,11 +50,9 @@ const BlogDetails = () => {
 
   }
 
-  const handleDelete = async () => {
-    const data = await axiosWithToken.delete(`blogs/${blogDetail?._id}`)
-    // console.log(data);
-   const result= await getData("blogs")
-  //  console.log(result);
+  const handleDelete =  () => {
+    const data =  axiosWithToken.delete(`blogs/${blogDetail?._id}`)
+  navigate("/blogs")
   }
   let visitorCount = blogDetail?.countOfViews?.length;
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
