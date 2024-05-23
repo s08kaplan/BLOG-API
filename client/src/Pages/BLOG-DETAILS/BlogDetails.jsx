@@ -50,21 +50,15 @@ const BlogDetails = () => {
 
   const handleDelete = async () => {
     const data = await axiosWithToken.delete(`blogs/${blogDetail?._id}`)
-    console.log(data);
+    // console.log(data);
    const result= await getData("blogs")
-   console.log(result);
+  //  console.log(result);
   }
   let visitorCount = blogDetail?.countOfViews?.length;
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
   
   const categoryId = blogDetail?.categoryId
   
-  console.log(blogDetail)
-  console.log(blogDetail?.comments?.map(comment => (comment.content)))
-console.log(user);
-  // console.log(blogDetail?.userId?.isActive == true);
-  console.log(( blogDetail?.userId?._id == user?.id  ) ? "a": "no");
-  console.log( (blogDetail?.userId?.isAdmin === true || blogDetail?.userId?.isStaff === true)   ? "a": "no"); 
  
   return (
     <main className={detailStyle.main}>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import modalBlogStyle from "./BlogModal.module.scss";
 import ReactQuill from "react-quill";
+import { modules } from "../../Helpers/quillModules";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 import useBlogData from "../../Custom-hooks/useBlogData";
@@ -98,6 +99,7 @@ const BlogModal = ({
                 theme="snow"
                 value={text}
                 onChange={setText}
+                modules={modules}
               />
             </div>
             <div className={modalBlogStyle["input-group"]}>
