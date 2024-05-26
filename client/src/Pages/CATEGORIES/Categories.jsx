@@ -8,8 +8,8 @@ const Categories = () => {
   const { categories } = useSelector((state) => state.blog);
   const { getData, getCategoryById } = useBlogData();
   const navigate = useNavigate();
-  const first = useRef(second)
 
+  
   useEffect(() => {
     getData("categories");
   }, []);

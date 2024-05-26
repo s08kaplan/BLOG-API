@@ -30,7 +30,7 @@ const MyProfile = () => {
     const { name, value } = e.target;
     inputRefs.current[name] = value;
   };
-console.log(user);
+// console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();

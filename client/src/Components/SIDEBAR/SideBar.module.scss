@@ -33,6 +33,18 @@ $border-radius: 10px;
   & .navigation {
     @include flex($fd: column);
 
+    & .logout {
+      text-decoration: none;
+      color: $text-color;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+
+      &:hover{
+        cursor: pointer;
+        color: $primary-color;
+      }
+    }
     & div {
       margin: 0 1rem 1rem;
       @include flex($fd: column);

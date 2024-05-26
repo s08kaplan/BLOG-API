@@ -10,14 +10,14 @@ const navigation = [
   { name: "Profile", to: "/my-profile" },
   { name: "New Blog", to: "/new-blog" },
   { name: "About", to: "/about" },
-  { name: "Login", to: "/login" },
-  { name: "Register", to: "/register" },
+  // { name: "Login", to: "/login" },
+  // { name: "Register", to: "/register" },
 ];
 
 const SideBar = () => {
-  // const { token } = useSelector((state) => state.auth);
-  // const { logout } = useAuthCalls();
-  // const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
+  const { logout } = useAuthCalls();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   // console.log(token);
 
@@ -36,21 +36,36 @@ const SideBar = () => {
   //     document.body.removeEventListener("click", handleClickOutside);
   //   };
   // }, [isActive, onClose]);
+  // console.log(user);
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
   return (
-    
-      <section className={SideStyle.container}>
-        <main>
-          <section className={SideStyle.navigation}>
-            {navigation.map((item) => (
-              <div key={item.name}>
-                <Link to={item.to}>{item.name}</Link>
+    <section className={SideStyle.container}>
+      <main>
+        <section className={SideStyle.navigation}>
+          {navigation.map((item) => (
+            <div key={item.name}>
+              <Link to={item.to}>{item.name}</Link>
+            </div>
+          ))}
+          {token ? (
+            <div className={SideStyle.logout} onClick={handleLogout}>Log out</div>
+          ) : (
+            <>
+              <div>
+                <Link to="/login">Login</Link>
               </div>
-            ))}
-          </section>
-        </main>
-      </section>
-   
+              <div>
+                <Link to="/register">Register</Link>
+              </div>
+            </>
+          )}
+        </section>
+      </main>
+    </section>
   );
 };
 
