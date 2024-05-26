@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { modules } from "../../Helpers/quillModules";
 import profileStyles from "./MyProfile.module.scss"
+import BlogPost from "../../Components/BLOG-POST/BlogPost";
 
 const MyProfile = () => {
   const { axiosWithToken } = useAxios();
@@ -15,11 +16,11 @@ const MyProfile = () => {
 
 // console.log(user);
   const inputRefs = useRef({
-    username: `${user?.username}`,
-    firstName: `${user?.firstName}`,
-    lastName: `${user?.lastName}`,
-    email: `${user?.email}`,
-    image: `${user?.image}`,
+    username: user?.username,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
+    image: user?.image,
   });
   
   const [userModal, setUserModal] = useState(false);
@@ -29,7 +30,7 @@ const MyProfile = () => {
     const { name, value } = e.target;
     inputRefs.current[name] = value;
   };
-
+console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +41,8 @@ const MyProfile = () => {
     };
     const userId = user?.id;
     updatedUser(userId, userInfo);
+    inputRefs.current = ""
+    setUserModal(false)
   };
 
   return (
@@ -55,7 +58,8 @@ const MyProfile = () => {
         <h2>{user?.username}</h2>
       </section>
       <section className={profileStyles["profile-body"]}>
-        <p>{user?.biography || "biography"}</p>
+        {/* <p>{user?.biography || "biography"}</p> */}
+        <BlogPost content={user?.biography}/>
       </section>
       <button onClick={() => setUserModal(!userModal)}>Edit Profile</button>
       <button>my blogs</button>
@@ -68,7 +72,7 @@ const MyProfile = () => {
               type="text"
               id="username"
               name="username"
-              value={inputRefs.current.username}
+              defaultValue={inputRefs.current.username}
               onChange={handleForm}
             />
 
@@ -77,7 +81,7 @@ const MyProfile = () => {
               type="text"
               id="firstName"
               name="firstName"
-              value={inputRefs.current.firstName}
+              defaultValue={inputRefs.current.firstName}
               onChange={handleForm}
             />
 
@@ -86,7 +90,7 @@ const MyProfile = () => {
               type="text"
               id="lastName"
               name="lastName"
-              value={inputRefs.current.lastName}
+              defaultValue={inputRefs.current.lastName}
               onChange={handleForm}
             />
 
@@ -95,7 +99,7 @@ const MyProfile = () => {
               type="text"
               id="email"
               name="email"
-              value={inputRefs.current.email}
+              defaultValue={inputRefs.current.email}
               onChange={handleForm}
             />
 
@@ -105,7 +109,7 @@ const MyProfile = () => {
               type="text"
               id="image"
               name="image"
-              value={inputRefs.current.image}
+              defaultValue={inputRefs.current.image}
               onChange={handleForm}
             />
 

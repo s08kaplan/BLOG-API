@@ -80,16 +80,16 @@ const AuthSlice = createSlice({
       state.error = false;
       state.user = {
         ...state.user,
-        username: payload.username,
-        firstName: payload.firstName,
-        lastName: payload.lastName,
-        email: payload.email,
-        image: payload.image,
-        biography: payload.biography || "",
-        id: payload._id,
-        isActive: payload.isActive,
-        isAdmin: payload.isAdmin,
-        isStaff: payload.isStaff,
+        username: payload?.username,
+        firstName: payload?.firstName,
+        lastName: payload?.lastName,
+        email: payload?.email,
+        image: payload?.image,
+        biography: payload?.biography || "",
+        id: payload?._id,
+        isActive: payload?.isActive,
+        isAdmin: payload?.isAdmin,
+        isStaff: payload?.isStaff,
       };
     },
 

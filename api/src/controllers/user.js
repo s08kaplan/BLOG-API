@@ -4,6 +4,7 @@ const { encryptFunc } = require("../helpers/validationHelpers");
 const User = require("../models/user");
 const Token = require("../models/token");
 
+
 module.exports = {
   list: async (req, res) => {
     /*
@@ -117,8 +118,8 @@ module.exports = {
       delete req.body.isAdmin;
       delete req.body.isStaff;
     }
-    const customFilter = !(req.user.isAdmin || req.user.isStaff)
-      ? { _id: req.user._id }
+    const customFilter = !(req.user?.isAdmin || req.user?.isStaff)
+      ? { _id: req.user?._id }
       : { _id: req.params.userId };
     const data = await User.updateOne(
       { ...customFilter, isDeleted: false },
