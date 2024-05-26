@@ -8,7 +8,7 @@ const Register = lazy(() => import("../Pages/REGISTER/Register"));
 const Login = lazy(() => import("../Pages/LOGIN/Login"));
 const Contact = lazy(() => import("../Pages/CONTACT/Contact"));
 const About = lazy(() => import("../Pages/About"));
-const MyProfile = lazy(() => import("../Pages/MyProfile"));
+const MyProfile = lazy(() => import("../Pages/MY-PROFILE/MyProfile"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 const BlogDetails = lazy(() => import("../Pages/BLOG-DETAILS/BlogDetails"));
 const NewBlog = lazy(() => import("../Pages/NEW-BLOG/NewBlog"));
