@@ -19,6 +19,7 @@ const BlogModal = ({
   onClose
 }) => {
   const { categories } = useSelector((state) => state.blog);
+  const { user } = useSelector((state) => state.auth);
   const { getData } = useBlogData();
   const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const BlogModal = ({
     image,
     categories: "",
     isPublish,
+    userId: user?.id
   });
   const [text, setText] = useState(content);
 
@@ -37,6 +39,8 @@ const BlogModal = ({
   }, []);
 
   console.log(categoryId);
+  console.log(user);
+  
 
   const handleForm = (e) => {
     const { name, value } = e.target;
@@ -53,6 +57,8 @@ const BlogModal = ({
   };
 
   const putBlog = async (url, postData) => {
+    console.log(url);
+    console.log(postData);
     try {
       const { data } = await axiosWithToken.put(`${url}/${blogId}`, postData);
       console.log(data);
@@ -61,11 +67,12 @@ const BlogModal = ({
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    await putBlog("blogs", inputs);
+     putBlog("blogs", inputs);
     setInputs({ title: "", image: "", categories: "", isPublish: "" });
     setText("");
+    onClose()
     navigate(`/blog-details/${blogId}`);
   };
 
@@ -123,7 +130,8 @@ const BlogModal = ({
                 <option value={categoryId}>{categoryName}</option>
                 {categories?.map((category) => (
                   <option value={category._id}>
-                    {category.name == categoryName ? "" : category.name}
+                    {/* {category.name == categoryName ? "" : category.name} */}
+                    {category.name}
                   </option>
                 ))}
               </select>
