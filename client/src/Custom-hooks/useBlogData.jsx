@@ -130,8 +130,20 @@ const useBlogData = () => {
 //   }
 //  }
 
+const putBlog = async (url,blogId, postData) => {
+  // console.log(url);
+  // console.log(postData);
+  try {
+    const { data } = await axiosWithToken.put(`${url}/${blogId}`, postData);
+    console.log(data);
+    dispatch(getSingleData({url, data}))
+  } catch (error) {
+    console.log(error);
+    dispatch(fetchFail());
+  }
+};
 
-  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById };
+  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById, putBlog };
 };
 
 export default useBlogData;

@@ -20,7 +20,7 @@ const BlogModal = ({
 }) => {
   const { categories } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
-  const { getData } = useBlogData();
+  const { getData, putBlog } = useBlogData();
   const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const BlogModal = ({
   const [inputs, setInputs] = useState({
     title,
     image,
-    categories: "",
+    categoryId,
     isPublish,
     userId: user?.id
   });
@@ -38,8 +38,8 @@ const BlogModal = ({
     getData("categories");
   }, []);
 
-  console.log(categoryId);
-  console.log(user);
+  // console.log(categoryId);
+  // console.log(user);
   
 
   const handleForm = (e) => {
@@ -56,21 +56,21 @@ const BlogModal = ({
     });
   };
 
-  const putBlog = async (url, postData) => {
-    console.log(url);
-    console.log(postData);
-    try {
-      const { data } = await axiosWithToken.put(`${url}/${blogId}`, postData);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  // const putBlog = async (url, postData) => {
+  //   console.log(url);
+  //   console.log(postData);
+  //   try {
+  //     const { data } = await axiosWithToken.put(`${url}/${blogId}`, postData);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+console.log(inputs);
   const handleSubmit =  (e) => {
     e.preventDefault();
-     putBlog("blogs", inputs);
-    setInputs({ title: "", image: "", categories: "", isPublish: "" });
+     putBlog("blogs",blogId, inputs);
+    setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
     setText("");
     onClose()
     navigate(`/blog-details/${blogId}`);
@@ -122,16 +122,16 @@ const BlogModal = ({
             <div className={modalBlogStyle["input-group"]}>
               <select
                 key={Date.now()}
-                name="categories"
+                name="categoryId"
                 id="categories"
-                value={inputs.categories}
+                value={inputs.categoryId}
                 onChange={handleForm}
               >
                 <option value={categoryId}>{categoryName}</option>
                 {categories?.map((category) => (
                   <option value={category._id}>
-                    {/* {category.name == categoryName ? "" : category.name} */}
-                    {category.name}
+                    {category.name == categoryName ? "" : category.name}
+                    {/* {category.name} */}
                   </option>
                 ))}
               </select>
