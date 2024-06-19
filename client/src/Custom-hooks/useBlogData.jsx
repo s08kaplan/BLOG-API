@@ -131,11 +131,12 @@ const useBlogData = () => {
 //  }
 
 const putBlog = async (url,blogId, postData) => {
-  // console.log(url);
-  // console.log(postData);
+  console.log(url);
+  console.log(blogId);
+  console.log(postData);
   try {
-    const { data } = await axiosWithToken.put(`${url}/${blogId}`, postData);
-    console.log(data);
+    const { data } = await axiosWithToken.put(`blogs/${blogId}`, postData);
+    console.log(data)
     dispatch(getSingleData({url, data}))
   } catch (error) {
     console.log(error);

@@ -119,19 +119,24 @@ module.exports = {
     // console.log("req.user.id", req.user?._id);
     // console.log("blog.userId", blog?.userId);
     // console.log(typeof req.user?._id == typeof blog?.userId);
-    console.log(req.user?._id == blog?.userId);
-    console.log(req.user?._id == req.body?.userId);
-   
-    if (
-      !(req.user?.isAdmin || req.user?.isStaff) ||
-      blog?.userId !== req.user?._id
-    ) {
-      res.status(403).send({
-        error: true,
-        message: "You are not the owner of the blog to update it",
-      });
-    }
-     if(req.user?._id == req.body?.userId) {
+    console.log("req.user.id blog.userId",req.user?._id === blog?.userId);
+    console.log("req.user.id req.body.userId",req.user?._id == req.body?.userId);
+   console.log("req.params.blogId", req.params?.blogId);
+   console.log("req.params.blogId.userId", req.params?.blogId?.userId);
+   console.log("blog.userId", blog?.userId);
+   console.log("blog.userId-req.user.id", req.user?._id , blog?.userId);
+   console.log("typeof blog.userId-req.user.id",typeof req.user?._id , typeof blog?.userId);
+    const a = (req.user?._id).toString() 
+    const b = (blog?.userId).toString()
+    console.log( a == b)
+    
+    // if (
+    //   !(req.user?.isAdmin || req.user?.isStaff) ||
+    //   a != b
+    // ) {
+    //   throw new Error("You are not the owner of the blog to update it")
+    // }
+     if(a == b) {
       const data = await Blog.updateOne({ _id: req.params.blogId }, req.body, {
         runValidators: true,
       });
@@ -142,6 +147,28 @@ module.exports = {
         updatedData: await Blog.findOne({ _id: req.params.blogId }),
       });
     }
+
+
+  //  if (
+  //     !(req.user?.isAdmin || req.user?.isStaff) ||
+  //     blog?.userId !== req.user?._id
+  //   ) {
+  //     res.status(403).send({
+  //       error: true,
+  //       message: "You are not the owner of the blog to update it",
+  //     });
+  //   }
+  //    if(req.user?._id == req.body?.userId) {
+  //     const data = await Blog.updateOne({ _id: req.params.blogId }, req.body, {
+  //       runValidators: true,
+  //     });
+
+  //     res.status(202).send({
+  //       error: false,
+  //       data,
+  //       updatedData: await Blog.findOne({ _id: req.params.blogId }),
+  //     });
+  //   }
   },
 
   delete: async (req, res) => {

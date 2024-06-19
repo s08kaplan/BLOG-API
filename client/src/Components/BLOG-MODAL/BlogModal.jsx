@@ -30,7 +30,7 @@ const BlogModal = ({
     image,
     categoryId,
     isPublish,
-    userId: user?.id
+    userId: user?.id,
   });
   const [text, setText] = useState(content);
 
@@ -44,15 +44,15 @@ const BlogModal = ({
 
   const handleForm = (e) => {
     const { name, value } = e.target;
-    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
+    // const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
     // const content = sanitizedContent.replace(/<[^>]*>/g, "");
-    const content = sanitizedContent
-    console.log(content);
+    // const content = sanitizedContent
+    // console.log(content);
 
     setInputs({
       ...inputs,
       [name]: value,
-      content,
+      // content:sanitizedContent
     });
   };
 
@@ -69,7 +69,13 @@ const BlogModal = ({
 console.log(inputs);
   const handleSubmit =  (e) => {
     e.preventDefault();
-     putBlog("blogs",blogId, inputs);
+    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
+    const postData = {
+      ...inputs,
+      content: sanitizedContent,
+    };
+    //  putBlog("blogDetail",blogId, inputs);
+     putBlog("blogDetail",blogId, postData);
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
     setText("");
     onClose()
