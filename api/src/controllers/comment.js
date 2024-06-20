@@ -103,10 +103,12 @@ module.exports = {
             #swagger.summary = "Delete Comment"
         */
 
-        const { deletedCount } = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true })
+        const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
 
-        res.status(deletedCount ? 204 : 404).send({
-            error: !(!!deletedCount)
+        res.status(200).send({
+            error: false,
+            message:"Requested comment deleted successfully",
+            data
         })
     },
 }

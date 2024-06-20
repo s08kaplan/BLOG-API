@@ -38,34 +38,16 @@ const BlogModal = ({
     getData("categories");
   }, []);
 
-  // console.log(categoryId);
-  // console.log(user);
   
-
   const handleForm = (e) => {
     const { name, value } = e.target;
-    // const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
-    // const content = sanitizedContent.replace(/<[^>]*>/g, "");
-    // const content = sanitizedContent
-    // console.log(content);
 
     setInputs({
       ...inputs,
       [name]: value,
-      // content:sanitizedContent
     });
   };
 
-  // const putBlog = async (url, postData) => {
-  //   console.log(url);
-  //   console.log(postData);
-  //   try {
-  //     const { data } = await axiosWithToken.put(`${url}/${blogId}`, postData);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 console.log(inputs);
   const handleSubmit =  (e) => {
     e.preventDefault();
@@ -74,7 +56,7 @@ console.log(inputs);
       ...inputs,
       content: sanitizedContent,
     };
-    //  putBlog("blogDetail",blogId, inputs);
+    
      putBlog("blogDetail",blogId, postData);
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
     setText("");

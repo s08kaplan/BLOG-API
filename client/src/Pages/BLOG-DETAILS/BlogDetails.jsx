@@ -58,8 +58,20 @@ const BlogDetails = () => {
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
   
   const categoryId = blogDetail?.categoryId
-  
+  console.log(blogDetail?.comments);
  
+const handleCommentEdit = async (id) => {
+console.log(id);
+const data = await axiosWithToken.put(`comments/${id}`)
+console.log(data);
+}
+  
+const handleCommentDelete = async (id) => {
+console.log(id);
+const data = await axiosWithToken.delete(`comments/${id}`)
+console.log(data);
+}
+
   return (
     <main className={detailStyle.main}>
       <section>
@@ -99,10 +111,14 @@ const BlogDetails = () => {
             {/* <h4>{comments?.userId.username}</h4> */}
             {blogDetail?.comments?.length > 0 ? (
               blogDetail?.comments?.map((comment) => (
-                // <div key={comment?._id}>
-                //   <div >{comment?.content}</div>
-                // </div>
-                <BlogPost content={comment?.content} />
+                <div key={comment._id}>
+                  <div>
+                    <BlogPost  content={comment?.content} />
+                  <FaTrashAlt onClick={()=>handleCommentDelete(comment?._id)} color="red"/>
+                  <VscEdit onClick={()=>handleCommentEdit(comment?._id)} color="green"/>
+                  </div>
+                  <div style={{border:"2px solid red"}}/>
+                </div>
               ))
             ) : (
               <div>

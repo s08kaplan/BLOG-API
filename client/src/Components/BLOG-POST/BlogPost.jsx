@@ -3,7 +3,7 @@ import DOMPurify from "dompurify";
 
 const BlogPost = ({ content }) => {
   return (
-    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content, { USE_PROFILES: { html: true } }) }} />
+    <div style={{display:"flex",flexDirection:"column",justifyContent:"center", margin:"10px"}} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content, { USE_PROFILES: { html: true } }) }} />
   );
 };
 
