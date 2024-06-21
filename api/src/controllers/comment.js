@@ -102,8 +102,18 @@ module.exports = {
             #swagger.tags = ["Comments"]
             #swagger.summary = "Delete Comment"
         */
+        const user = req.user
+        const comment = await Comment.findOne({_id: req.params.commentId})
+        // console.log(comment.userId.toString());
+        // console.log("user",user._id);
+        console.log("user",user);
 
-        const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
+        const customFilter = (!(user.isAdmin || user.isStaff) || ((user?._id).toString() != comment.userId.toString() )) ? {isDeleted: true} : { }
+        // const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
+console.log(customFilter);
+console.log((user?._id).toString() == comment.userId.toString());
+console.log(!(user.isAdmin || user.isStaff));
+        const data = await Comment.updateOne({ _id: req.params.commentId }, customFilter, { runValidators: true })
 
         res.status(200).send({
             error: false,

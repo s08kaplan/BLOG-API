@@ -12,17 +12,21 @@ import { VscEdit } from "react-icons/vsc";
 import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
 import detailStyle from "./BlogDetails.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
+import EditCommentModal from "../../Components/EDIT-COMMENT-MODAL/EditCommentModal";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
   const [likeStatus, setLikeStatus] = useState("");
-  const { getLike, getDetailPage, postComment, getData} = useBlogData();
+  const { getLike, getDetailPage, postComment, deleteComment} = useBlogData();
   const { blogId } = useParams();
   const { axiosWithToken } = useAxios();
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
   const [editBlogModal, setEditBlogModal] = useState(false);
+  const [editComment, setEditComment] = useState(blogDetail?.comments)
+
+  const [commentModal, setCommentModal] = useState(false)
 
   const navigate = useNavigate()
 
@@ -60,16 +64,26 @@ const BlogDetails = () => {
   const categoryId = blogDetail?.categoryId
   console.log(blogDetail?.comments);
  
+const getCommentId = (id) =>{
+  console.log(id);
+  return id
+}
 const handleCommentEdit = async (id) => {
 console.log(id);
-const data = await axiosWithToken.put(`comments/${id}`)
-console.log(data);
+setCommentModal(prev => !prev)
+const check = blogDetail?.comments.filter(comment => comment._id == id)
+console.log(check);
+console.log(check[0].content);
+setEditComment(check[0].content)
+getCommentId(check[0]._id)
+// const data = await axiosWithToken.put(`comments/${id}`)
+// console.log(data);
 }
   
-const handleCommentDelete = async (id) => {
-console.log(id);
-const data = await axiosWithToken.delete(`comments/${id}`)
-console.log(data);
+const handleCommentDelete =  (commentId) => {
+  console.log(commentId);
+  console.log(blogId);
+deleteComment(commentId, blogId)
 }
 
   return (
@@ -109,8 +123,8 @@ console.log(data);
         {show && (
           <div className={detailStyle.comment} >
             {/* <h4>{comments?.userId.username}</h4> */}
-            {blogDetail?.comments?.length > 0 ? (
-              blogDetail?.comments?.map((comment) => (
+            {blogDetail?.comments?.filter(comment => !comment.isDeleted).length > 0 ? (
+              blogDetail?.comments?.filter(comment => !comment.isDeleted).map((comment) => (
                 <div key={comment._id}>
                   <div>
                     <BlogPost  content={comment?.content} />
@@ -143,7 +157,7 @@ console.log(data);
       {
         editBlogModal && <BlogModal {...blogDetail} blogId={blogId} categoryId={categoryId} onClose={setEditBlogModal} />
       }
-      
+      { commentModal && <EditCommentModal setEditComment={setEditComment} editComment={editComment} onClose={setCommentModal}  />}
     </main>
   );
 };
