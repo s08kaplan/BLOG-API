@@ -25,14 +25,15 @@ module.exports = {
     */
 
     // const data = await Blog.find()
-    const blogFilters = !req.user?._id;
+    // const blogFilters = !req.user?._id;
     const blogStatus = !(req.user?.isAdmin || req.user?.isStaff)
-      ? { isDeleted: false }
+      ? { isDeleted: false, isPublish: true }
       : {};
-    const blogs = await Blog.find({ userId: req.user?._id });
+    // const blogs = await Blog.find({ userId: req.user?._id });
     // console.log(blogs);
+    console.log(blogStatus);
 
-    const data = await res.getModelList(Blog, { ...blogStatus }, [
+    const data = await res.getModelList(Blog,  {...blogStatus} , [
       "userId",
       "categoryId",
     ]);
@@ -82,9 +83,9 @@ module.exports = {
       ? { isDeleted: false, isPublish: true }
       : {};
     const data = await Blog.findOne({
-      _id: req.params.blogId,
-      ...customFilter,
-    }).populate("userId");
+      _id: req.params.blogId},
+      {...customFilter},
+    ).populate("userId");
 
     if (!data) {
       throw new Error("There is no such a blog, it is removed sorry");
@@ -119,13 +120,13 @@ module.exports = {
     // console.log("req.user.id", req.user?._id);
     // console.log("blog.userId", blog?.userId);
     // console.log(typeof req.user?._id == typeof blog?.userId);
-    console.log("req.user.id blog.userId",req.user?._id === blog?.userId);
-    console.log("req.user.id req.body.userId",req.user?._id == req.body?.userId);
-   console.log("req.params.blogId", req.params?.blogId);
-   console.log("req.params.blogId.userId", req.params?.blogId?.userId);
-   console.log("blog.userId", blog?.userId);
-   console.log("blog.userId-req.user.id", req.user?._id , blog?.userId);
-   console.log("typeof blog.userId-req.user.id",typeof req.user?._id , typeof blog?.userId);
+  //   console.log("req.user.id blog.userId",req.user?._id === blog?.userId);
+  //   console.log("req.user.id req.body.userId",req.user?._id == req.body?.userId);
+  //  console.log("req.params.blogId", req.params?.blogId);
+  //  console.log("req.params.blogId.userId", req.params?.blogId?.userId);
+  //  console.log("blog.userId", blog?.userId);
+  //  console.log("blog.userId-req.user.id", req.user?._id , blog?.userId);
+  //  console.log("typeof blog.userId-req.user.id",typeof req.user?._id , typeof blog?.userId);
     const a = (req.user?._id).toString() 
     const b = (blog?.userId).toString()
     console.log( a == b)
@@ -182,7 +183,7 @@ module.exports = {
 
     if (
       !(req.user?.isAdmin || req.user?.isStaff) ||
-      req.user?._id !== blogs?.userId
+      ((req.user?._id).toString()) !== ((blogs?.userId).toString())
     ) {
       res.status(403).send({
         message: "You are not the owner of the blog to do this operation",

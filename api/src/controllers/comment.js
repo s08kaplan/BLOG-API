@@ -1,13 +1,11 @@
-"use strict"
+"use strict";
 
-const Comment = require("../models/comment")
-const Blog = require("../models/blog")
+const Comment = require("../models/comment");
+const Blog = require("../models/blog");
 
 module.exports = {
-    list: async (req, res) => {
-      
-
-         /*
+  list: async (req, res) => {
+    /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "List Comments"
             #swagger.description = `
@@ -21,18 +19,19 @@ module.exports = {
             `
         */
 
-        const data = await Comment.find({ isDeleted: false }).populate(["userId","blogId"])
+    const data = await Comment.find({ isDeleted: false }).populate([
+      "userId",
+      "blogId",
+    ]);
 
-        res.status(200).send({
-            error: false,
-            data
-        })
-    },
+    res.status(200).send({
+      error: false,
+      data,
+    });
+  },
 
-    create: async (req, res) => {
-        
-
-             /*
+  create: async (req, res) => {
+    /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Create Comment"
             #swagger.parameters['body'] = {
@@ -44,37 +43,36 @@ module.exports = {
             }
         */
 
-         req.body.userId = req.user._id
-           const data = await Comment.create(req.body)
-           const comments = await Comment.find({blogId: data.blogId})
-           await Blog.updateOne({ _id: data.blogId }, {comments})
-           
-        res.status(201).send({
-            error: false,
-            data
-        })
-    },
+    req.body.userId = req.user._id;
+    const data = await Comment.create(req.body);
+    const comments = await Comment.find({ blogId: data.blogId });
+    await Blog.updateOne({ _id: data.blogId }, { comments });
 
-    read: async (req, res) => {
-      
+    res.status(201).send({
+      error: false,
+      data,
+    });
+  },
 
-        /*
+  read: async (req, res) => {
+    /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Get Single Comment"
         */
 
-        const data = await Comment.findOne({ _id: req.params.commentId, isDeleted: false }).populate(["userId","blogId"])
+    const data = await Comment.findOne({
+      _id: req.params.commentId,
+      isDeleted: false,
+    }).populate(["userId", "blogId"]);
 
-        res.status(202).send({
-            error: false,
-            data
-        })
-    },
+    res.status(202).send({
+      error: false,
+      data,
+    });
+  },
 
-    update: async (req, res) => {
-      
-
-        /*
+  update: async (req, res) => {
+    /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Update Comment"
             #swagger.parameters['body'] = {
@@ -86,39 +84,50 @@ module.exports = {
             }
         */
 
-        const data = await Comment.updateOne({ _id: req.params.commentId, isDeleted: false }, req.body, { runValidators: true })
+    console.log(req.body);
+    const data = await Comment.updateOne(
+      { _id: req.params.commentId, isDeleted: false },
+      req.body,
+      { runValidators: true }
+    );
 
-        res.status(202).send({
-            error: false,
-            data,
-            updatedData: await Comment.findOne({ _id: req.params.commentId })
-        })
-    },
+    res.status(202).send({
+      error: false,
+      data,
+      updatedData: await Comment.findOne({ _id: req.params.commentId }),
+    });
+  },
 
-    delete: async (req, res) => {
-      
-
-         /*
+  delete: async (req, res) => {
+    /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Delete Comment"
         */
-        const user = req.user
-        const comment = await Comment.findOne({_id: req.params.commentId})
-        // console.log(comment.userId.toString());
-        // console.log("user",user._id);
-        console.log("user",user);
+    const user = req.user;
+    const comment = await Comment.findOne({ _id: req.params.commentId });
+    // console.log(comment.userId.toString());
+    // console.log("user",user._id);
+    console.log("user", user);
 
-        const customFilter = (!(user.isAdmin || user.isStaff) || ((user?._id).toString() != comment.userId.toString() )) ? {isDeleted: true} : { }
-        // const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
-console.log(customFilter);
-console.log((user?._id).toString() == comment.userId.toString());
-console.log(!(user.isAdmin || user.isStaff));
-        const data = await Comment.updateOne({ _id: req.params.commentId }, customFilter, { runValidators: true })
+    const customFilter =
+      !(user.isAdmin || user.isStaff) ||
+      (user?._id).toString() != comment.userId.toString()
+        ? { isDeleted: true }
+        : {};
+    // const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
+    console.log(customFilter);
+    console.log((user?._id).toString() == comment.userId.toString());
+    console.log(!(user.isAdmin || user.isStaff));
+    const data = await Comment.updateOne(
+      { _id: req.params.commentId },
+      ...customFilter,
+      { runValidators: true }
+    );
 
-        res.status(200).send({
-            error: false,
-            message:"Requested comment deleted successfully",
-            data
-        })
-    },
-}
+    res.status(200).send({
+      error: false,
+      message: "Requested comment deleted successfully",
+      data,
+    });
+  },
+};

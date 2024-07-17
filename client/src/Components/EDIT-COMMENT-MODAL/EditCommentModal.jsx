@@ -5,9 +5,9 @@ import DOMPurify from "dompurify";
 import { modules } from "../../Helpers/quillModules";
 import useAxios from "../../Custom-hooks/useAxios";
 
-const EditCommentModal = ({ editComment, setEditComment, onClose }) => {
+const EditCommentModal = ({ editComment, setEditComment, onClose,id }) => {
   // console.log("edit comment", editComment);
-
+// console.log(id);
 
 const { axiosWithToken } = useAxios()
   const [edit, setEdit] = useState(editComment);
@@ -18,7 +18,9 @@ const { axiosWithToken } = useAxios()
   const sanitizedContent = DOMPurify.sanitize(edit, { USE_PROFILES: { html: true } });
   // const content = sanitizedContent.replace(/<[^>]*>/g, "");
   const content = sanitizedContent
-//  const { data } = await axiosWithToken.put(`comments/${}`)
+  console.log(content);
+ const { data } = await axiosWithToken.put(`comments/${id}`,content)
+ console.log(data);
  }
 
   

@@ -25,20 +25,28 @@ const Blogs = () => {
             {/* <p className={blogStyle.content}>{blog?.content}</p> */}
             <BlogPost content={blog?.content} />
             <span>likes{blog?.totalLikes}</span>
-            <span>viewed by{(blog?.countOfViews.length) == 0 ? 1 : (blog?.countOfViews.length)}</span>
+            <span>
+              viewed by
+              {blog?.countOfViews.length == 0 ? 1 : blog?.countOfViews.length}
+            </span>
             <div>
               {blog?.createdAt ? new Date(blog.createdAt).toLocaleString() : ""}
             </div>
             {/* <div>{blog?.updatedAt
                 ? new Date(blog.updatedAt).toLocaleString()
                 : ""}</div> */}
-            <Link to={`/blog-details/${blog?._id}`} className={blogStyle["new-blog-link"]}>
+            <Link
+              to={`/blog-details/${blog?._id}`}
+              className={blogStyle["new-blog-link"]}
+            >
               <button>Read more</button>
             </Link>
           </main>
         ))}
       </section>
-      <Link to="/new-blog">Add New Blog</Link>
+      <section className={blogStyle["add-blog-link"]}>
+        <Link to="/new-blog">Add New Blog</Link>
+      </section>
     </main>
   );
 };
