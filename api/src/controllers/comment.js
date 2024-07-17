@@ -112,8 +112,8 @@ module.exports = {
     const customFilter =
       !(user.isAdmin || user.isStaff) ||
       (user?._id).toString() != comment.userId.toString()
-        ? { isDeleted: true }
-        : {};
+        ? { }
+        : { isDeleted: true };
     // const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
     console.log(customFilter);
     console.log((user?._id).toString() == comment.userId.toString());

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo-2.png";
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
@@ -11,8 +11,32 @@ const Navbar = () => {
   const { user, token } = useSelector((state) => state.auth);
   const { logout, login } = useAuthCalls();
   const [sidebar, setSidebar] = useState(false);
+  const sideRef = useRef()
+  const avatarRef = useRef(null);
 //   console.log(sidebar);
 // console.log(user);
+
+
+  const handleSidebar = (e) => {
+ setSidebar(prev => !prev)
+  }
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (sideRef.current && !sideRef.current.contains(event.target)) {
+      setSidebar(false);
+    }
+  };
+
+  if (sidebar) {
+    window.addEventListener('mousedown', handleClickOutside);
+  } else {
+    window.removeEventListener('mousedown', handleClickOutside);
+  }
+
+  return () => {
+    window.removeEventListener('mousedown', handleClickOutside);
+  };
+}, [sidebar])
 
 
 
@@ -42,14 +66,15 @@ const Navbar = () => {
         </section>
         <section className={NavbarStyle.avatar}>
           {/* <div onClick={() => setSidebar((prev) => !prev)}> */}
-          <div onClick={() => setSidebar(!sidebar)}>
+          {/* <div onClick={() => setSidebar(!sidebar)}> */}
+          <div onClick={handleSidebar}>
             <Avatar size="50" src={ user?.image || "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_640.png" } round=".8rem" />
           </div>
         </section>
       </nav>
       {sidebar && (
-            <div className={NavbarStyle.sidebar}>
-              <SideBar />
+            <div className={NavbarStyle.sidebar} ref={sideRef}>
+              <SideBar/>
             </div>
           )}
     </header>
