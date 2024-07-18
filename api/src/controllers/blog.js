@@ -24,7 +24,7 @@ module.exports = {
         `
     */
 
-    // const data = await Blog.find()
+    // const blogs = await Blog.find()
     // const blogFilters = !req.user?._id;
     const blogStatus = !(req.user?.isAdmin || req.user?.isStaff)
       ? { isDeleted: false, isPublish: true }
@@ -83,8 +83,7 @@ module.exports = {
       ? { isDeleted: false, isPublish: true }
       : {};
     const data = await Blog.findOne({
-      _id: req.params.blogId},
-      {...customFilter},
+      _id: req.params.blogId, ...customFilter},
     ).populate("userId");
 
     if (!data) {
@@ -95,6 +94,8 @@ module.exports = {
       data.countOfViews.push(userId);
       await data.save();
     }
+
+    console.log(data);
 
     //    console.log("countOfViews",data.countOfViews);
     res.status(202).send({
