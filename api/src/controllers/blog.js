@@ -180,7 +180,21 @@ module.exports = {
     */
 
     // const { deletedCount } = await Blog.deleteOne({ _id: req.params.blogId })
-    const blogs = await Blog.findOne({ userId: req.user?._id });
+
+    // !isPublish must be false after user delete the blog and check the admin and staff deleting part
+   
+    const blogs = await Blog.findOne({_id: req.params.blogId})
+
+   
+    // console.log("blogs delete",blogs);
+
+    // console.log("delete req.user._id.toString()",((req.user?._id).toString()));
+    // console.log("delete blogs.userId.toString()",((blogs?.userId).toString()));
+
+
+    if(!blogs){
+      throw new Error("The blog you are looking for has been removed or deleted")
+    }
 
     if (
       !(req.user?.isAdmin || req.user?.isStaff) ||
@@ -198,11 +212,11 @@ module.exports = {
     } else {
       const deletedBlog = await Blog.updateOne(
         { _id: req.params.blogId },
-        { isDeleted: true }
+        { isDeleted: true, isPublish: false }
       );
 
       res.status(deletedBlog ? 204 : 404).send({
-        // error: !(!!deletedBlog)
+        error: !(!!deletedBlog),
         message: "Deleted successfully",
       });
     }

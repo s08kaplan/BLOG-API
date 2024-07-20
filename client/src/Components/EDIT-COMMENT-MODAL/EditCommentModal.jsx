@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { modules } from "../../Helpers/quillModules";
 import useAxios from "../../Custom-hooks/useAxios";
 
-const EditCommentModal = ({ editComment, setEditComment, onClose,id }) => {
+const EditCommentModal = ({ editComment, setEditComment, onClose,id, blogId, userId }) => {
   // console.log("edit comment", editComment);
 // console.log(id);
 
 const { axiosWithToken } = useAxios()
-  const [edit, setEdit] = useState(editComment);
 
  const handleEdit = async () => {
-  console.log(edit);
+  console.log(editComment);
 
-  const sanitizedContent = DOMPurify.sanitize(edit, { USE_PROFILES: { html: true } });
+  const sanitizedContent = DOMPurify.sanitize(editComment, { USE_PROFILES: { html: true } });
   // const content = sanitizedContent.replace(/<[^>]*>/g, "");
   const content = sanitizedContent
   console.log(content);
- const { data } = await axiosWithToken.put(`comments/${id}`,content)
+  const editCommentData = {
+    content,blogId,userId
+  }
+//  const { data } = await axiosWithToken.put(`comments/${id}`,content)
+ const { data } = await axiosWithToken.put(`comments/${id}`,editCommentData)
  console.log(data);
  }
 
@@ -30,8 +33,8 @@ const { axiosWithToken } = useAxios()
         <ReactQuill
           //   className={detailStyle.quill}
           theme="snow"
-          value={edit}
-          onChange={setEdit}
+          value={editComment}
+          onChange={setEditComment}
           modules={modules}
         />
       </div>

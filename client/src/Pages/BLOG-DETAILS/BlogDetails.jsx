@@ -13,6 +13,7 @@ import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
 import detailStyle from "./BlogDetails.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import EditCommentModal from "../../Components/EDIT-COMMENT-MODAL/EditCommentModal";
+import axios from "axios";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
@@ -84,10 +85,14 @@ const BlogDetails = () => {
   const handleCommentDelete = (commentId) => {
     console.log(commentId);
     console.log(blogId);
-    deleteComment(commentId, blogId);
+    // deleteComment(commentId, blogId);
+    const { data } = axios.delete(`comments/${commentId}`)
+    console.log(data);
   };
 
   console.log(editComment);
+  console.log("user",user);
+  console.log("blogId",blogId);
   return (
     <main className={detailStyle.main}>
       <section>
@@ -177,6 +182,8 @@ const BlogDetails = () => {
           editComment={editComment}
           id={editCommentID}
           onClose={setCommentModal}
+          userId={user?.id}
+          blogId={blogId}
         />
       )}
     </main>

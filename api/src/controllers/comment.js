@@ -85,11 +85,14 @@ module.exports = {
         */
 
     console.log(req.body);
+    console.log(req.params.commentId);
     const data = await Comment.updateOne(
       { _id: req.params.commentId, isDeleted: false },
       req.body,
       { runValidators: true }
     );
+
+    console.log("comment data",data);
 
     res.status(202).send({
       error: false,
@@ -120,7 +123,7 @@ module.exports = {
     console.log(!(user.isAdmin || user.isStaff));
     const data = await Comment.updateOne(
       { _id: req.params.commentId },
-      ...customFilter,
+      {...customFilter},
       { runValidators: true }
     );
 
