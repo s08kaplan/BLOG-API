@@ -13,19 +13,19 @@ const Footer = () => {
           Express Yourself Freely
         </section>
         <div className={footerStyle["footer-icons"]}>
-          <div>
+          <div className={`${footerStyle.icon} ${footerStyle.iconWhatsapp}`}>
             <IoLogoWhatsapp />
           </div>
-          <div>
+          <div className={`${footerStyle.icon} ${footerStyle.iconFacebook}`}>
             <FaFacebook />
           </div>
-          <div>
+          <div className={`${footerStyle.icon} ${footerStyle.iconInstagram}`}>
             <IoLogoInstagram />
           </div>
-          <div>
+          <div className={`${footerStyle.icon} ${footerStyle.iconTelegram}`}>
             <FaTelegram />
           </div>
-          <div>
+          <div className={`${footerStyle.icon} ${footerStyle.iconTwitter}`}>
             <FaXTwitter />
           </div>
         </div>

@@ -13,36 +13,48 @@
  
   & .container {
     @include flex($jc: space-between);
-    max-width: 1200px;
+    // max-width: 1200px;
     margin: 0 auto;
     padding:0 20px;
     color: white;
     & .message {
       font-size: 1.2rem;
       margin-bottom: 20px;
+      margin-left: 280px;
     }
 
     & .footer-icons {
       @include flex($jc: flex-end);
       gap: 20px;
 
-      & div {
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: color 0.3s;
-        &:hover {
-          color: #3498db;
+      & .icon {
+        transition: color 0.3s ease;
+
+        &.iconWhatsapp:hover {
+          color: #25D366;
+        }
+       
+        &.iconFacebook:hover {
+          color: #3b5998; 
+        }
+        
+        &.iconInstagram:hover {
+          color: #E1306C; 
+        }
+  
+        &.iconTelegram:hover {
+          color: #0088cc; 
+        }
+  
+        &.iconTwitter:hover {
+          color: #1DA1F2; 
         }
         & svg {
-          fill: white;
-          transition: fill 0.3s ease;
+          font-size: xx-large;
         }
       }
-      &:hover {
-        svg {
-          fill: #bd10e0;
-        }
-      }
+
+     
     }
   }
 }
