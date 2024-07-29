@@ -7,7 +7,7 @@ import CategoryDetail from "../Pages/CATEGORY-DETAIL/CategoryDetail";
 const Register = lazy(() => import("../Pages/REGISTER/Register"));
 const Login = lazy(() => import("../Pages/LOGIN/Login"));
 const Contact = lazy(() => import("../Pages/CONTACT/Contact"));
-const About = lazy(() => import("../Pages/About"));
+const About = lazy(() => import("../Pages/ABOUT/About"));
 const MyProfile = lazy(() => import("../Pages/MY-PROFILE/MyProfile"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 const BlogDetails = lazy(() => import("../Pages/BLOG-DETAILS/BlogDetails"));

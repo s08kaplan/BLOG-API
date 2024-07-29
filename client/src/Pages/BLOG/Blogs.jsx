@@ -15,7 +15,7 @@ const Blogs = () => {
   console.log(blogs);
   return (
     <main className={blogStyle.main}>
-      <section key={Date.now()} className={blogStyle["main-section"]}>
+      <section className={blogStyle["main-section"]}>
         {blogs?.map((blog) => (
           <main key={blog._id}>
             <h2>{blog?.title}</h2>

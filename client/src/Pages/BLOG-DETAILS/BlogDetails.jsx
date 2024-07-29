@@ -18,7 +18,8 @@ import axios from "axios";
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
-  const { getLike, getDetailPage, postComment, deleteComment } = useBlogData();
+  const { getLike, getDetailPage, postComment, deleteComment, getComment } =
+    useBlogData();
   const { blogId } = useParams();
   const [likeStatus, setLikeStatus] = useState("");
   const { axiosWithToken } = useAxios();
@@ -38,7 +39,7 @@ const BlogDetails = () => {
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
-  }, [likeStatus]);
+  }, [likeStatus,comment,editCommentID, blogId]);
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -67,32 +68,29 @@ const BlogDetails = () => {
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
 
   const categoryId = blogDetail?.categoryId;
-  console.log(blogDetail?.comments);
+  console.log("blogDetail?.comments",blogDetail?.comments);
 
   const handleCommentEdit = async (id) => {
     console.log(id);
     setCommentModal((prev) => !prev);
     const check = blogDetail?.comments.filter((comment) => comment._id == id);
-    console.log(check);
-    console.log(check[0].content);
-    setEditComment(check[0].content);
 
-    // const data = await axiosWithToken.put(`comments/${id}`)
-    // console.log(data);
-    setEditCommentID(check[0]._id);
+    console.log(check);
+    // console.log(check[0].content);
+    setEditComment(check[0].content);
+   setEditCommentID(id);
+
   };
 
   const handleCommentDelete = (commentId) => {
     console.log(commentId);
     console.log(blogId);
-    // deleteComment(commentId, blogId);
-    const { data } = axios.delete(`comments/${commentId}`)
-    console.log(data);
+    deleteComment(commentId, blogId);
   };
-
+console.log(editCommentID);
   console.log(editComment);
-  console.log("user",user);
-  console.log("blogId",blogId);
+  // console.log("user", user);
+  // console.log("blogId", blogId);
   return (
     <main className={detailStyle.main}>
       <section>
@@ -126,29 +124,36 @@ const BlogDetails = () => {
           <BlogPost content={blogDetail?.content} />
         </div>
 
-        <button onClick={() => setShow((prev) => !prev)}>Show comments</button>
+        <button className={detailStyle.button} onClick={() => setShow((prev) => !prev)}>Show comments</button>
 
         {show && (
           <div className={detailStyle.comment}>
             {/* <h4>{comments?.userId.username}</h4> */}
-            {blogDetail?.comments?.filter((comment) => !comment.isDeleted)
-              .length > 0 ? (
+            {blogDetail?.comments?.filter(
+              (comment) => comment.isDeleted == false
+            ).length > 0 ? (
               blogDetail?.comments
-                ?.filter((comment) => !comment.isDeleted)
+                ?.filter((comment) => comment.isDeleted == false)
                 .map((comment) => (
                   <div key={comment._id}>
-                    <div>
-                      <BlogPost content={comment?.content} />
-                      <FaTrashAlt
-                        onClick={() => handleCommentDelete(comment?._id)}
-                        color="red"
-                      />
-                      <VscEdit
-                        onClick={() => handleCommentEdit(comment?._id)}
-                        color="green"
-                      />
+                    <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", height:"40px"}}>
+                     {editComment ? <BlogPost content={comment?.content} edited={editComment}  />
+                     :
+                     <BlogPost content={comment?.content} />}
+                      {((user?.id == comment?.userId) || (user?.isAdmin || user?.isStaff)) && (
+                        <div>
+                          <FaTrashAlt
+                            onClick={() => handleCommentDelete(comment?._id)}
+                            color="red"
+                          />
+                          <VscEdit
+                            onClick={() => handleCommentEdit(comment?._id)}
+                            color="green"
+                          />
+                        </div>
+                      )}
                     </div>
-                    <div style={{ border: "2px solid red" }} />
+                    <div style={{ border: "2px solid gray" }} />
                   </div>
                 ))
             ) : (
@@ -158,7 +163,7 @@ const BlogDetails = () => {
             )}
           </div>
         )}
-        {show && (
+        {show && !commentModal && (
           <ReactQuill
             className={detailStyle.quill}
             theme="snow"
@@ -166,7 +171,7 @@ const BlogDetails = () => {
             onChange={setComment}
           />
         )}
-        {show && <button onClick={handleComment}>Add Your Comment</button>}
+        {show && !commentModal && <button className={detailStyle.button} onClick={handleComment}>Add Your Comment</button>}
       </section>
       {editBlogModal && (
         <BlogModal

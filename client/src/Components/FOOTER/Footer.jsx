@@ -9,9 +9,9 @@ const Footer = () => {
   return (
     <footer className={footerStyle.footer}>
       <main className={footerStyle.container}>
-        <section className={footerStyle.message}>
+        <h6 className={footerStyle.message}>
           Express Yourself Freely
-        </section>
+        </h6>
         <div className={footerStyle["footer-icons"]}>
           <div className={`${footerStyle.icon} ${footerStyle.iconWhatsapp}`}>
             <IoLogoWhatsapp />

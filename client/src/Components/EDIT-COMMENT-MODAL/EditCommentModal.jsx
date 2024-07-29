@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { modules } from "../../Helpers/quillModules";
 import useAxios from "../../Custom-hooks/useAxios";
+import style from "../../Pages/BLOG-DETAILS/BlogDetails.module.scss"
 
 const EditCommentModal = ({ editComment, setEditComment, onClose,id, blogId, userId }) => {
   // console.log("edit comment", editComment);
@@ -15,7 +16,6 @@ const { axiosWithToken } = useAxios()
   console.log(editComment);
 
   const sanitizedContent = DOMPurify.sanitize(editComment, { USE_PROFILES: { html: true } });
-  // const content = sanitizedContent.replace(/<[^>]*>/g, "");
   const content = sanitizedContent
   console.log(content);
   const editCommentData = {
@@ -23,12 +23,19 @@ const { axiosWithToken } = useAxios()
   }
 //  const { data } = await axiosWithToken.put(`comments/${id}`,content)
  const { data } = await axiosWithToken.put(`comments/${id}`,editCommentData)
- console.log(data);
+
+console.log("updateComment data", data);
+ console.log("******------*****",data);
+ console.log("comment edit modal set edit", data?.updatedData?.content);
+ setEditComment(data?.updatedData?.content)
+  // const res = await axiosWithToken(`comments/${id}`)
+  // console.log("response",res?.data?.data?.content);
+ onClose()
  }
 
-  
+  console.log(editComment);
   return (
-    <>
+    <main style={{marginTop:"1rem"}}>
       <div>
         <ReactQuill
           //   className={detailStyle.quill}
@@ -38,8 +45,8 @@ const { axiosWithToken } = useAxios()
           modules={modules}
         />
       </div>
-      <button onClick={handleEdit}>Submit</button>
-    </>
+      <button className={style.button} onClick={handleEdit} style={{ margin:"1rem auto"}}>Submit</button>
+    </main>
   );
 };
 

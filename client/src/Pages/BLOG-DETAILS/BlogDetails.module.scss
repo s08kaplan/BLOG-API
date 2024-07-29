@@ -52,21 +52,6 @@ $background-color: #f4f4f4;
       color: $secondary-color;
     }
 
-    button {
-      padding: 10px 20px;
-      background-color: $primary-color;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: $secondary-color;
-      }
-    }
-
     .comment {
       width: 100%;
       max-width: 800px;
@@ -106,6 +91,22 @@ $background-color: #f4f4f4;
       margin-top: 10px;
       color: $text-color;
       font-size: 0.9rem;
+    }
+  }
+
+  .button {
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $secondary-color;
     }
   }
 }

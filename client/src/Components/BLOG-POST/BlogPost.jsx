@@ -1,9 +1,17 @@
 import React from "react";
 import DOMPurify from "dompurify";
 
-const BlogPost = ({ content }) => {
+const BlogPost = ({ content, edited }) => {
+  console.log(edited);
+  
   return (
-    <div  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content, { USE_PROFILES: { html: true } }) }} />
+<>
+  {content != edited ? <div  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content, { USE_PROFILES: { html: true } }) }} />
+  :
+  <div  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(edited, { USE_PROFILES: { html: true } }) }} />
+  }
+</>
+ 
   );
 };
 

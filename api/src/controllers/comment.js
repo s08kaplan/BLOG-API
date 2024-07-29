@@ -45,7 +45,9 @@ module.exports = {
 
     req.body.userId = req.user._id;
     const data = await Comment.create(req.body);
+    // console.log("data in create comment",data);
     const comments = await Comment.find({ blogId: data.blogId });
+    // console.log("comments in create comments",comments);
     await Blog.updateOne({ _id: data.blogId }, { comments });
 
     res.status(201).send({
@@ -84,20 +86,23 @@ module.exports = {
             }
         */
 
-    console.log(req.body);
-    console.log(req.params.commentId);
+    // console.log(req.body);
+    // console.log("update part commentId from params ??????????????????????????????????????",req.params.commentId);
     const data = await Comment.updateOne(
       { _id: req.params.commentId, isDeleted: false },
       req.body,
       { runValidators: true }
     );
 
-    console.log("comment data",data);
+    // console.log("comment data",data);
+    const updatedData = await Comment.findOne({ _id: req.params.commentId, isDeleted: false })
+
+    console.log("****************************************comment updated data****************************", updatedData);
 
     res.status(202).send({
       error: false,
       data,
-      updatedData: await Comment.findOne({ _id: req.params.commentId }),
+      updatedData: await Comment.findOne({ _id: req.params.commentId, isDeleted: false }),
     });
   },
 
@@ -106,24 +111,29 @@ module.exports = {
             #swagger.tags = ["Comments"]
             #swagger.summary = "Delete Comment"
         */
-    const user = req.user;
+    const user = req?.user;
     const comment = await Comment.findOne({ _id: req.params.commentId });
     // console.log(comment.userId.toString());
     // console.log("user",user._id);
-    console.log("user", user);
-
+    // console.log("user", user);
+    if (!comment) {
+      return res.status(404).send({
+        error: true,
+        message: "Comment not found",
+      });
+    }
     const customFilter =
-      !(user.isAdmin || user.isStaff) ||
-      (user?._id).toString() != comment.userId.toString()
+      !(user.isAdmin || user.isStaff) &&
+      (user?._id).toString() != comment?.userId?.toString()
         ? { }
         : { isDeleted: true };
     // const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
-    console.log(customFilter);
-    console.log((user?._id).toString() == comment.userId.toString());
-    console.log(!(user.isAdmin || user.isStaff));
+    // console.log("comment custom filter for delete",customFilter);
+    // console.log((user?._id).toString() == comment?.userId.toString());
+    // console.log(!(user.isAdmin || user.isStaff));
     const data = await Comment.updateOne(
       { _id: req.params.commentId },
-      {...customFilter},
+      customFilter,
       { runValidators: true }
     );
 
