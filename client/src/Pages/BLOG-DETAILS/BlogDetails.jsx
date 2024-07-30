@@ -39,7 +39,7 @@ const BlogDetails = () => {
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
-  }, [likeStatus,comment,editCommentID, blogId]);
+  }, [likeStatus]);
   // console.log(blogId);
   const postLike = async () => {
     try {

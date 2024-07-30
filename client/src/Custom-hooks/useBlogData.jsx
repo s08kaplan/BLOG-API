@@ -103,21 +103,22 @@ const useBlogData = () => {
   }
  }
 
-//  const updateComment = async (url, commentId,updateData) => {
-//   console.log("updateComment",url);
-//   console.log("updateComment",commentId);
-//   console.log(updateData);
-//   dispatch(fetchStart());
-//   try {
-//     const { data } = await axiosWithToken.put(`comments/${commentId}`,updateData);
-//     // console.log("comment-data in getComment",data);
-//     dispatch(getSingleData({ data, url }));
-//   } catch (error) {
-//     dispatch(fetchFail());
-//     console.log(error);
-//   }
+ const updateComment = async (url, commentId,blogId,updateData) => {
+  console.log("updateComment",url);
+  console.log("updateComment",commentId);
+  console.log(updateData);
+  dispatch(fetchStart());
+  try {
+    const { data } = await axiosWithToken.put(`comments/${commentId}`,updateData);
+    // console.log("comment-data in getComment",data);
+    getComment("blogDetail",blogId)
+    // dispatch(getSingleData({ data, url }));
+  } catch (error) {
+    dispatch(fetchFail());
+    console.log(error);
+  }
 
-//  }
+ }
 
  const deleteComment = async (commentId,blogId) => {
   console.log(commentId);
@@ -176,7 +177,7 @@ const putBlog = async (url,blogId, postData) => {
   }
 };
 
-  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById, putBlog, deleteComment };
+  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById, putBlog, updateComment, deleteComment };
 };
 
 export default useBlogData;
