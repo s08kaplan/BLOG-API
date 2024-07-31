@@ -18,7 +18,7 @@ import axios from "axios";
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
-  const { getLike, getDetailPage, postComment, deleteComment, getComment } =
+  const { getLike, getDetailPage, postComment, deleteComment, getComment , updateComment} =
     useBlogData();
   const { blogId } = useParams();
   const [likeStatus, setLikeStatus] = useState("");
@@ -39,7 +39,8 @@ const BlogDetails = () => {
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
-  }, [likeStatus]);
+    getComment("blogs",blogId)
+  }, [likeStatus,editComment]);
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -79,6 +80,9 @@ const BlogDetails = () => {
     // console.log(check[0].content);
     setEditComment(check[0].content);
    setEditCommentID(id);
+   const { data } = await axiosWithToken(`comments/${id}`)
+   console.log(data);
+   console.log(editComment);
 
   };
 
@@ -189,6 +193,7 @@ console.log(editCommentID);
           onClose={setCommentModal}
           userId={user?.id}
           blogId={blogId}
+          updateComment={updateComment}
         />
       )}
     </main>

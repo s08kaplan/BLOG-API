@@ -6,7 +6,7 @@ import { modules } from "../../Helpers/quillModules";
 import useAxios from "../../Custom-hooks/useAxios";
 import style from "../../Pages/BLOG-DETAILS/BlogDetails.module.scss"
 
-const EditCommentModal = ({ editComment, setEditComment, onClose,id, blogId, userId }) => {
+const EditCommentModal = ({ editComment, setEditComment, onClose,id, blogId, userId, updateComment }) => {
   // console.log("edit comment", editComment);
 // console.log(id);
 

@@ -40,6 +40,7 @@ const useBlogData = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken(`${url}?limit=20`);
+      console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
@@ -110,7 +111,7 @@ const useBlogData = () => {
   dispatch(fetchStart());
   try {
     const { data } = await axiosWithToken.put(`comments/${commentId}`,updateData);
-    // console.log("comment-data in getComment",data);
+    console.log("update-data in updateComment",data);
     getComment("blogDetail",blogId)
     // dispatch(getSingleData({ data, url }));
   } catch (error) {

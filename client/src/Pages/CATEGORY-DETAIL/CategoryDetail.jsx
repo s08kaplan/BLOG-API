@@ -4,6 +4,7 @@ import { LiaHeart } from "react-icons/lia";
 import { BsEye } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import style from "./CategoryDetail.module.scss"
+import BlogPost from "../../Components/BLOG-POST/BlogPost";
 
 const CategoryDetail = () => {
   const { categoryDetail, blogs } = useSelector((state) => state.blog);
@@ -21,7 +22,7 @@ const CategoryDetail = () => {
         {detail?.map((item) => (
           <div className={style["detail-container"]} key={item._id} onClick={() =>navigate(`/blog-details/${item?._id}`)}>
             <h3>{item.title}</h3>
-            <p>{item.content == "" ? "Not a blog found be the first " : item.content}</p>
+            <p>{item.content == "" ? "Not a blog found be the first " : <BlogPost content={ item.content}/>}</p>
             <div>
               <span>Author {item.userId?.username}</span>
               <span><LiaHeart/> {item.totalLikes}</span>

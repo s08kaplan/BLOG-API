@@ -19,7 +19,7 @@ module.exports = {
             `
         */
 
-    const data = await Comment.find({ isDeleted: false }).populate([
+    const data = await Comment.find({ isDeleted: false }).sort({ createdAt: -1 }).populate([
       "userId",
       "blogId",
     ]);
