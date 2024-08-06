@@ -31,6 +31,8 @@ const BlogDetails = () => {
   const [editCommentID, setEditCommentID] = useState(null);
 
   const [commentModal, setCommentModal] = useState(false);
+ 
+
 
   const navigate = useNavigate();
 
@@ -80,8 +82,8 @@ const BlogDetails = () => {
     // console.log(check[0].content);
     setEditComment(check[0].content);
    setEditCommentID(id);
-   const { data } = await axiosWithToken(`comments/${id}`)
-   console.log(data);
+  //  const { data } = await axiosWithToken(`comments/${id}`)
+  //  console.log(data);
    console.log(editComment);
 
   };
@@ -141,7 +143,7 @@ console.log(editCommentID);
                 .map((comment) => (
                   <div key={comment._id}>
                     <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", height:"40px"}}>
-                     {editComment ? <BlogPost content={comment?.content} edited={editComment}  />
+                     {comment._id === editCommentID ? <BlogPost content={comment?.content} edited={editComment}  />
                      :
                      <BlogPost content={comment?.content} />}
                       {((user?.id == comment?.userId) || (user?.isAdmin || user?.isStaff)) && (
@@ -188,6 +190,7 @@ console.log(editCommentID);
       {commentModal && (
         <EditCommentModal
           setEditComment={setEditComment}
+          // editComment={editComment}
           editComment={editComment}
           id={editCommentID}
           onClose={setCommentModal}

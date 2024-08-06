@@ -112,8 +112,8 @@ const useBlogData = () => {
   try {
     const { data } = await axiosWithToken.put(`comments/${commentId}`,updateData);
     console.log("update-data in updateComment",data);
-    getComment("blogDetail",blogId)
-    // dispatch(getSingleData({ data, url }));
+   dispatch(getSingleData({ data, url }));
+   await getComment("blogDetail",blogId)
   } catch (error) {
     dispatch(fetchFail());
     console.log(error);
