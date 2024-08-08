@@ -18,7 +18,7 @@
 } */
 
  @import "../scss/abstract/_mixins.scss";
-
+ @import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Anta&family=Goudy+Bookletter+1911&family=Righteous&display=swap');
  body {
      margin: 0;
      padding: 0;

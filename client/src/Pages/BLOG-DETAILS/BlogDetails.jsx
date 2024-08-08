@@ -41,7 +41,7 @@ const BlogDetails = () => {
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
-    getComment("blogs",blogId)
+    // getComment("blogs",blogId)
   }, [likeStatus,editComment]);
   // console.log(blogId);
   const postLike = async () => {
@@ -60,6 +60,7 @@ const BlogDetails = () => {
     });
     const content = sanitizedContent;
     await postComment("comments", content, blogId);
+    setComment("")
   };
 
   const handleDelete = () => {

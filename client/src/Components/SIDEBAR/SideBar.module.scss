@@ -22,16 +22,12 @@ $border-radius: 10px;
   z-index: 10;
   transition: transform 0.3s ease-in-out;
 
-  // &.active {
-  //   transform: translateX(0);
-  // }
-
   & main {
     @include flex($fd: column);
   }
 
   & .navigation {
-    @include flex($fd: column);
+    @include flex($fd: column,$ai:flex-start);
 
     & .logout {
       text-decoration: none;
@@ -71,6 +67,9 @@ $border-radius: 10px;
     height: calc(100% - 60px);
     transform: translateX(41%);
     
+  }
+  .main1 {
+    margin-right: 2rem;
   }
 }
 

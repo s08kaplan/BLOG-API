@@ -10,7 +10,7 @@
   background-size: contain;
   background-position: left;
   background-color: #22283174;
-
+  
   & .container {
     @include flex($jc: space-between);
     // max-width: 1200px;
@@ -21,6 +21,7 @@
       font-size: 1.2rem;
       margin-bottom: 20px;
       margin-left: 280px;
+      font-family: "Akaya Telivigala",serif;
     }
 
     & .footer-icons {

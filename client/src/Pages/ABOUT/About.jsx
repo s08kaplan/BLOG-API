@@ -45,7 +45,7 @@ const About = () => {
         In a world overflowing with information, our goal is to cut through the noise and deliver content that is thoughtfully curated and genuinely useful. We are driven by a commitment to fostering an informed and engaged community and believe that every reader deserves access to high-quality, relevant information.
         </p>
       </section>
-      <section>
+      <section className={style["about-last"]}>
         <h3>Get In Touch</h3>
         <p>
         We love hearing from our readers! Whether you have questions, feedback, or just want to say hello, feel free to reach out to us at <span title='not a real contact address'>contact@pyscript.com</span> . You can also follow us on <a href="#"><IoLogoWhatsapp /></a>   <a href="#"><FaFacebook /></a> <a href="#"><IoLogoInstagram /></a> <a href="#"><FaTelegram /></a> <a href="#"><FaXTwitter /></a> to stay updated with our latest posts and updates.

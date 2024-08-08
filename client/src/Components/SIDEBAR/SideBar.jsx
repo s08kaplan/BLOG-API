@@ -29,7 +29,7 @@ const SideBar = ({onClose}) => {
   };
   return (
     <section className={SideStyle.container}>
-      <main>
+      <main className={SideStyle.main1}>
         <section className={SideStyle.navigation}>
           {navigation.map((item) => (
             <div key={item.name}  onClick={handleClose}>
