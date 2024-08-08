@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../Pages/HOME/Home";
+import PrivateRouter from "./PrivateRouter";
 
 const Register = lazy(() => import("../Pages/REGISTER/Register"));
 const Login = lazy(() => import("../Pages/LOGIN/Login"));
-// const Home = lazy(() => import("../Pages/HOME/Home"));
 const Blogs = lazy(() => import("../Pages/BLOG/Blogs"));
 const Contact = lazy(() => import("../Pages/CONTACT/Contact"));
 const About = lazy(() => import("../Pages/ABOUT/About"));
@@ -14,7 +14,7 @@ const MyProfile = lazy(() => import("../Pages/MY-PROFILE/MyProfile"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 const BlogDetails = lazy(() => import("../Pages/BLOG-DETAILS/BlogDetails"));
 const NewBlog = lazy(() => import("../Pages/NEW-BLOG/NewBlog"));
-const PrivateRouter = lazy(() => import("./PrivateRouter"));
+// const PrivateRouter = lazy(() => import("./PrivateRouter"));
 
 const AppRouter = () => {
   return (

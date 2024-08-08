@@ -36,7 +36,7 @@ const BlogDetails = () => {
 
   const navigate = useNavigate();
 
-  console.log(blogDetail);
+  // console.log(blogDetail);
 
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
@@ -58,7 +58,6 @@ const BlogDetails = () => {
     const sanitizedContent = DOMPurify.sanitize(comment, {
       USE_PROFILES: { html: true },
     });
-    // const content = sanitizedContent.replace(/<[^>]*>/g, "");
     const content = sanitizedContent;
     await postComment("comments", content, blogId);
   };
@@ -71,10 +70,10 @@ const BlogDetails = () => {
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
 
   const categoryId = blogDetail?.categoryId;
-  console.log("blogDetail?.comments",blogDetail?.comments);
+  // console.log("blogDetail?.comments",blogDetail?.comments);
 
   const handleCommentEdit =  (id) => {
-    console.log(id);
+   
     setCommentModal((prev) => !prev);
     const check = blogDetail?.comments.filter((comment) => comment._id == id);
     
@@ -86,14 +85,10 @@ const BlogDetails = () => {
   };
 
   const handleCommentDelete = (commentId) => {
-    console.log(commentId);
-    console.log(blogId);
+
     deleteComment(commentId, blogId);
   };
-console.log(editCommentID);
-  console.log(editComment);
-  // console.log("user", user);
-  // console.log("blogId", blogId);
+
   return (
     <main className={detailStyle.main}>
       <section>
@@ -127,7 +122,7 @@ console.log(editCommentID);
           <BlogPost content={blogDetail?.content} />
         </div>
 
-        <button className={detailStyle.button} onClick={() => setShow((prev) => !prev)}>Show comments</button>
+        <button className={detailStyle.button} onClick={() => setShow((prev) => !prev)}>{show ? "Hide Comments" : "Show comments"}</button>
 
         {show && (
           <div className={detailStyle.comment}>
