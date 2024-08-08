@@ -86,11 +86,12 @@ module.exports = {
             }
         */
        const user = req.user
+       const comment = await Comment.findOne({_id: req.params.commentId})
             const customFilter =
-            !(user.isAdmin || user.isStaff) ||
-            (user?._id).toString() != comment?.userId?.toString()
-              ? { }
-              : req.body;
+            (user.isAdmin || user.isStaff) ||
+            (user?._id).toString() == comment?.userId?.toString()
+              ?  req.body
+              : { } ;
     
     const data = await Comment.updateOne(
       { _id: req.params.commentId},
@@ -98,9 +99,11 @@ module.exports = {
       { runValidators: true }
     );
 
-    const comment = await Comment.find({ _id: req.params.commentId})
    
-    await Blog.updateOne({_id:req.body.blogId},{ comments: comment})
+console.log("update-------------------------------------------",comment);
+    const commentsOfBlog = await Comment.find({ blogId: comment.blogId})
+    console.log("update===============================================",commentsOfBlog);
+    await Blog.updateOne({_id:req.body.blogId},{ comments: commentsOfBlog})
 
 
     res.status(202).send({
@@ -142,9 +145,7 @@ module.exports = {
     );
 
     const commentsOfBlog = await Comment.find({blogId:comment.blogId})
-    console.log("commentsOfBlog-------------------------------------------",commentsOfBlog);
-    const info = await Blog.updateOne({_id:comment.blogId},{ comments: commentsOfBlog})
-    console.log("infooooooooooooooooooooooooooooooooooooooooooooo",info);
+     await Blog.updateOne({_id:comment.blogId},{ comments: commentsOfBlog})
     res.status(200).send({
       error: false,
       message: "Requested comment deleted successfully",

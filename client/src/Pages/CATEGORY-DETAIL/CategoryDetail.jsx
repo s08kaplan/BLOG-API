@@ -9,8 +9,8 @@ import BlogPost from "../../Components/BLOG-POST/BlogPost";
 const CategoryDetail = () => {
   const { categoryDetail, blogs } = useSelector((state) => state.blog);
   const navigate = useNavigate()
-  // console.log(categoryDetail);
-  // console.log(blogs);
+  console.log(categoryDetail);
+  console.log(blogs);
 
   const detail = blogs?.filter(
     (blog) => blog?.categoryId?._id == categoryDetail?._id

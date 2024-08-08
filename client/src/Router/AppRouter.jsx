@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-// import Home from "../Pages/HOME/Home";
+import Home from "../Pages/HOME/Home";
 
 const Register = lazy(() => import("../Pages/REGISTER/Register"));
 const Login = lazy(() => import("../Pages/LOGIN/Login"));
-const Home = lazy(() => import("../Pages/HOME/Home"));
+// const Home = lazy(() => import("../Pages/HOME/Home"));
 const Blogs = lazy(() => import("../Pages/BLOG/Blogs"));
 const Contact = lazy(() => import("../Pages/CONTACT/Contact"));
 const About = lazy(() => import("../Pages/ABOUT/About"));
