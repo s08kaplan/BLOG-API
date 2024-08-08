@@ -8,11 +8,15 @@ import blogStyle from "./Blog.module.scss";
 const Blogs = () => {
   const { getAllBlogData } = useBlogData();
   const { blogs } = useSelector((state) => state.blog);
+
   useEffect(() => {
     getAllBlogData();
   }, []);
 
   console.log(blogs);
+  if(!blogs.map){
+    return <h2>Just a second please </h2>
+  }
   return (
     <main className={blogStyle.main}>
       <section className={blogStyle["main-section"]}>
@@ -22,7 +26,6 @@ const Blogs = () => {
             <section>
               <img src={blog?.image[0]} alt="blog-image" />
             </section>
-            {/* <p className={blogStyle.content}>{blog?.content}</p> */}
             <BlogPost content={blog?.content} />
             <span>likes{blog?.totalLikes}</span>
             <span>

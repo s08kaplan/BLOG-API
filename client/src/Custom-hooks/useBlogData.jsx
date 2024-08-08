@@ -39,7 +39,7 @@ const useBlogData = () => {
   const getData = async (url = "blogs") => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}?limit=20`);
+      const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
       console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
