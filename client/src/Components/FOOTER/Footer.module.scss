@@ -57,7 +57,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
 
   .footer {
     background-image: url("../../assets/logo-2.png") no-repeat;
@@ -67,11 +67,12 @@
   }
   .container {
     padding: 20px 10px;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .message {
-    font-size: "10px";
+    // font-size: "10px";
+    visibility: hidden;
   }
 
   .footer-icons {

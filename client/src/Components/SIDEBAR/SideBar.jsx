@@ -14,30 +14,15 @@ const navigation = [
   // { name: "Register", to: "/register" },
 ];
 
-const SideBar = () => {
+const SideBar = ({onClose}) => {
   const { token } = useSelector((state) => state.auth);
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // console.log(token);
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (isActive && !e.target.closest(`.${SideStyle.container}`)) {
-  //       console.log(e.target);
-  //       console.log(isActive);
-  //       onClose();
-  //     }
-  //   };
-
-  //   document.body.addEventListener("click", handleClickOutside);
-
-  //   return () => {
-  //     document.body.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, [isActive, onClose]);
-  // console.log(user);
-
+  const handleClose = () => {
+    onClose(false)
+  }
+ 
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -47,7 +32,7 @@ const SideBar = () => {
       <main>
         <section className={SideStyle.navigation}>
           {navigation.map((item) => (
-            <div key={item.name}>
+            <div key={item.name}  onClick={handleClose}>
               <Link to={item.to}>{item.name}</Link>
             </div>
           ))}

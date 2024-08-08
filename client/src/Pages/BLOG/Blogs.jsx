@@ -14,8 +14,8 @@ const Blogs = () => {
   }, []);
 
   console.log(blogs);
-  if(!blogs.map){
-    return <h2>Just a second please </h2>
+  if (!blogs.map) {
+    return <h2>Just a second please </h2>;
   }
   return (
     <main className={blogStyle.main}>
@@ -33,7 +33,7 @@ const Blogs = () => {
               {blog?.countOfViews.length == 0 ? 1 : blog?.countOfViews.length}
             </span>
             <div>
-              {blog?.createdAt ? new Date(blog.createdAt).toLocaleString() : ""}
+              {blog?.createdAt != blog.updatedAt ? new Date(blog.updatedAt).toLocaleString() : new Date(blog.createdAt).toLocaleString() }
             </div>
             {/* <div>{blog?.updatedAt
                 ? new Date(blog.updatedAt).toLocaleString()

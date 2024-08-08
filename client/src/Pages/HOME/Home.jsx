@@ -13,6 +13,10 @@ const Home = () => {
     getData();
   }, []);
 
+  if(!blogs.map) {
+    return <h2>Just a second please</h2>
+  }
+
   return (
     <main className={homeStyle["home-main"]}>
       <section  className={homeStyle.container}>
