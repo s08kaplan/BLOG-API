@@ -14,7 +14,7 @@ const EditCommentModal = ({ editComment, setEditComment, onClose,id, blogId, use
 const { axiosWithToken } = useAxios()
 const  debouncedValue  = useDebounce(editComment)
 
- const handleEdit = async () => {
+ const handleEdit =  () => {
   // console.log(editComment);
   console.log(debouncedValue);
 
@@ -25,16 +25,9 @@ const  debouncedValue  = useDebounce(editComment)
   const editCommentData = {
     content,blogId,userId
   }
-//  const { data } = await axiosWithToken.put(`comments/${id}`,content)
-//  const { data } = await axiosWithToken.put(`comments/${id}`,editCommentData)
- await updateComment("blogDetail",id, blogId, editCommentData)
 
-// console.log("updateComment data", data);
-//  console.log("******------*****",data);
-//  console.log("comment edit modal set edit", data?.updatedData?.content);
-//  setEditComment(data?.updatedData?.content)
-  // const res = await axiosWithToken(`comments/${id}`)
-  // console.log("response",res?.data?.data?.content);
+  updateComment("blogDetail",id, blogId, editCommentData)
+
  onClose()
  }
 

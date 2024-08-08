@@ -73,17 +73,14 @@ const BlogDetails = () => {
   const categoryId = blogDetail?.categoryId;
   console.log("blogDetail?.comments",blogDetail?.comments);
 
-  const handleCommentEdit = async (id) => {
+  const handleCommentEdit =  (id) => {
     console.log(id);
     setCommentModal((prev) => !prev);
     const check = blogDetail?.comments.filter((comment) => comment._id == id);
-
-    console.log(check);
-    // console.log(check[0].content);
+    
     setEditComment(check[0].content);
    setEditCommentID(id);
-  //  const { data } = await axiosWithToken(`comments/${id}`)
-  //  console.log(data);
+
    console.log(editComment);
 
   };

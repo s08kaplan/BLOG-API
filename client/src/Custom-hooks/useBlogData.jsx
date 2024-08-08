@@ -110,10 +110,8 @@ const useBlogData = () => {
   console.log(updateData);
   dispatch(fetchStart());
   try {
-    const { data } = await axiosWithToken.put(`comments/${commentId}`,updateData);
-    console.log("update-data in updateComment",data);
-   dispatch(getSingleData({ data, url }));
-   await getComment("blogDetail",blogId)
+     await axiosWithToken.put(`comments/${commentId}`,updateData);
+      await getComment("blogDetail",blogId)
   } catch (error) {
     dispatch(fetchFail());
     console.log(error);
@@ -127,8 +125,8 @@ const useBlogData = () => {
   dispatch(fetchStart());
   try {
     const {data} = await axiosWithToken.delete(`comments/${commentId}`)
-    console.log(data);
- await getComment("blogDetail",blogId)
+  
+  getComment("blogDetail",blogId)
   } catch (error) {
     dispatch(fetchFail());
     console.log(error);
