@@ -18,8 +18,14 @@ import axios from "axios";
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
-  const { getLike, getDetailPage, postComment, deleteComment, getComment , updateComment} =
-    useBlogData();
+  const {
+    getLike,
+    getDetailPage,
+    postComment,
+    deleteComment,
+    getComment,
+    updateComment,
+  } = useBlogData();
   const { blogId } = useParams();
   const [likeStatus, setLikeStatus] = useState("");
   const { axiosWithToken } = useAxios();
@@ -31,8 +37,6 @@ const BlogDetails = () => {
   const [editCommentID, setEditCommentID] = useState(null);
 
   const [commentModal, setCommentModal] = useState(false);
- 
-
 
   const navigate = useNavigate();
 
@@ -42,7 +46,7 @@ const BlogDetails = () => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
     // getComment("blogs",blogId)
-  }, [likeStatus,editComment]);
+  }, [likeStatus, editComment]);
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -60,7 +64,7 @@ const BlogDetails = () => {
     });
     const content = sanitizedContent;
     await postComment("comments", content, blogId);
-    setComment("")
+    setComment("");
   };
 
   const handleDelete = () => {
@@ -73,20 +77,17 @@ const BlogDetails = () => {
   const categoryId = blogDetail?.categoryId;
   // console.log("blogDetail?.comments",blogDetail?.comments);
 
-  const handleCommentEdit =  (id) => {
-   
+  const handleCommentEdit = (id) => {
     setCommentModal((prev) => !prev);
     const check = blogDetail?.comments.filter((comment) => comment._id == id);
-    
+
     setEditComment(check[0].content);
-   setEditCommentID(id);
+    setEditCommentID(id);
 
-   console.log(editComment);
-
+    //  console.log(editComment);
   };
 
   const handleCommentDelete = (commentId) => {
-
     deleteComment(commentId, blogId);
   };
 
@@ -123,7 +124,12 @@ const BlogDetails = () => {
           <BlogPost content={blogDetail?.content} />
         </div>
 
-        <button className={detailStyle.button} onClick={() => setShow((prev) => !prev)}>{show ? "Hide Comments" : "Show comments"}</button>
+        <button
+          className={detailStyle.button}
+          onClick={() => setShow((prev) => !prev)}
+        >
+          {show ? "Hide Comments" : "Show comments"}
+        </button>
 
         {show && (
           <div className={detailStyle.comment}>
@@ -135,11 +141,19 @@ const BlogDetails = () => {
                 ?.filter((comment) => comment.isDeleted == false)
                 .map((comment) => (
                   <div key={comment._id}>
-                    <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", height:"40px"}}>
-                     {comment._id === editCommentID ? <BlogPost content={comment?.content} edited={editComment}  />
-                     :
-                     <BlogPost content={comment?.content} />}
-                      {((user?.id == comment?.userId) || (user?.isAdmin || user?.isStaff)) && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        height: "40px",
+                      }}
+                    >
+                        <BlogPost content={comment?.content} />
+                    
+                      {(user?.id == comment?.userId ||
+                        user?.isAdmin ||
+                        user?.isStaff) && (
                         <div>
                           <FaTrashAlt
                             onClick={() => handleCommentDelete(comment?._id)}
@@ -170,7 +184,11 @@ const BlogDetails = () => {
             onChange={setComment}
           />
         )}
-        {show && !commentModal && <button className={detailStyle.button} onClick={handleComment}>Add Your Comment</button>}
+        {show && !commentModal && (
+          <button className={detailStyle.button} onClick={handleComment}>
+            Add Your Comment
+          </button>
+        )}
       </section>
       {editBlogModal && (
         <BlogModal

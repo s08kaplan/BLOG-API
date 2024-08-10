@@ -21,7 +21,7 @@ const useAuthCalls = () => {
     try {
       const { data } = await axiosPublic.post("users/", userInfo);
       dispatch(registerSuccess(data));
-      navigate("/blogs");
+      navigate("/");
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);

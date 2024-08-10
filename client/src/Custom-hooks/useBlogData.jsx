@@ -8,7 +8,7 @@ import {
 } from "../Features/BlogSlice";
 
 const useBlogData = () => {
-  const { axiosWithToken } = useAxios();
+  const { axiosPublic, axiosWithToken } = useAxios();
   const dispatch = useDispatch();
 
   const getAllBlogData = async () => {
@@ -39,7 +39,8 @@ const useBlogData = () => {
   const getData = async (url = "blogs") => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
+      // const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
+      const { data } = await axiosPublic(`${url}?limit=20&sort[createdAt]=desc`);
       console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {

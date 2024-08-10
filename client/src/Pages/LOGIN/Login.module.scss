@@ -9,8 +9,8 @@ $form-border-color: #ddd;
 $container-padding: 20px;
 
 .login-form {
-  @include flex();
-  height: 100vh;
+  @include flex($fd:column);
+  height: 100dvh;
   background-color: $background-color;
 }
 
