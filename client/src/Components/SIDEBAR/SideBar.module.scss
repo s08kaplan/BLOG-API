@@ -25,7 +25,7 @@ $border-radius: 10px;
   & main {
     @include flex($fd: column);
     background: $background-color;
-    border-radius: .5rem;
+     border-radius: .5rem;
   }
 
   & .navigation {
@@ -64,13 +64,14 @@ $border-radius: 10px;
 
 @media (max-width: 578px) {
   .container {
-    width: 40%;
+    width: 155px;
     top: 80px;
     height: calc(100% - 60px);
     transform: translateX(41%);
   }
-  .main1 {
-    margin-right: 2rem;
+  .link-div{
+    padding-right: 2rem;
   }
+
 }
 

@@ -1,4 +1,9 @@
 @import "../../../scss//abstract//mixins";
+
+.main{
+  @include flex();
+  width: 100svw;
+}
 .contact-container {
   min-height: 100dvh;
   @include flex($fd: column);

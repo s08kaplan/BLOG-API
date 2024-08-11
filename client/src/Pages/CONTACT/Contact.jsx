@@ -11,7 +11,7 @@ import style from "./Contact.module.scss"
 
 const Contact = () => {
   return (
-    <main>
+    <main className={style.main}>
       <section className={style["contact-container"]}>
         <h3>
           Illuminate Your <span>Thoughts</span> Your <span>Dreams</span>

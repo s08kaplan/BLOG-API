@@ -33,7 +33,7 @@ const SideBar = ({onClose}) => {
       <main className={SideStyle.main1}>
         <section className={SideStyle.navigation}>
           {navigation.map((item) => (
-            <div key={item.name}  onClick={handleClose}>
+            <div key={item.name}  onClick={handleClose} className={SideStyle["link-div"]}>
               <Link to={item.to}>{item.name}</Link>
             </div>
           ))}
