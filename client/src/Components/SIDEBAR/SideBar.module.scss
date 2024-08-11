@@ -11,19 +11,21 @@ $border-radius: 10px;
 
 .container {
   position: absolute;
-  top: 80px;
-  right: 5px;
+  top: 6rem;
+  right: 0;
   padding: $padding;
   background: $background-color;
   box-shadow: 0 8px 32px 0 $box-shadow-color;
   backdrop-filter: blur($blur-value);
   -webkit-backdrop-filter: blur($blur-value);
   border-radius: $border-radius;
-  z-index: 10;
+  z-index: 90;
   transition: transform 0.3s ease-in-out;
 
   & main {
     @include flex($fd: column);
+    background: $background-color;
+    border-radius: .5rem;
   }
 
   & .navigation {
@@ -60,13 +62,12 @@ $border-radius: 10px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 578px) {
   .container {
     width: 40%;
     top: 80px;
     height: calc(100% - 60px);
     transform: translateX(41%);
-    
   }
   .main1 {
     margin-right: 2rem;

@@ -4,7 +4,6 @@ const { encryptFunc } = require("../helpers/validationHelpers");
 const User = require("../models/user");
 const Token = require("../models/token");
 
-
 module.exports = {
   list: async (req, res) => {
     /*
@@ -20,11 +19,11 @@ module.exports = {
                 </ul>
             `
         */
-            const auth = req.headers?.authorization || null
-            const token = auth ? auth.split(" ")[1] : null
-            if(!token){
-              throw new Error("Please log in first")
-            }
+    const auth = req.headers?.authorization || null;
+    const token = auth ? auth.split(" ")[1] : null;
+    if (!token) {
+      throw new Error("Please log in first");
+    }
     const customFilters =
       req.user?.isAdmin || req.user?.isStaff ? {} : { isDeleted: false };
     const data = await User.find(customFilters);
@@ -145,8 +144,6 @@ module.exports = {
       { _id: req.params.userId },
       { isDeleted: true, isActive: false }
     );
-    // const hey = await Token.deleteOne({ userId: req.params.userId });
-    // console.log(hey);
     res.status(data.deletedCount ? 204 : 404).send({
       error: !!!data.deletedCount,
       data,

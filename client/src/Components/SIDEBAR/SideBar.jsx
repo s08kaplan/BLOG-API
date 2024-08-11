@@ -10,6 +10,7 @@ const navigation = [
   { name: "Profile", to: "/my-profile" },
   { name: "New Blog", to: "/new-blog" },
   { name: "About", to: "/about" },
+  { name: "Contact", to: "/contact" },
   // { name: "Login", to: "/login" },
   // { name: "Register", to: "/register" },
 ];

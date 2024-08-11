@@ -100,9 +100,7 @@ module.exports = {
     );
 
    
-console.log("update-------------------------------------------",comment);
     const commentsOfBlog = await Comment.find({ blogId: comment.blogId})
-    console.log("update===============================================",commentsOfBlog);
     await Blog.updateOne({_id:req.body.blogId},{ comments: commentsOfBlog})
 
 
