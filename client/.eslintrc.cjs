@@ -18,4 +18,10 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  "globals": {
+    "describe": "readonly",
+    "it": "readonly",
+    "cy": "readonly",
+    "Cypress": "readonly"
+  }
 }

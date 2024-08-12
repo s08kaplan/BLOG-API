@@ -16,9 +16,9 @@ const CategoryDetail = () => {
     (blog) => blog?.categoryId?._id.toString() == categoryDetail?._id.toString()
   );
   // console.log(detail);
-  if(!blogs.filter){
-    return <h2 style={{position: "absolute", top:"50", left: "50", transform: "translate(-50%, -50%)"}}>Just a second please</h2>
-  }
+  // if(!blogs.filter){
+  //   return <h2 style={{position: "absolute", top:"50", left: "50", transform: "translate(-50%, -50%)"}}>Just a second please</h2>
+  // }
   return (
     <div className={style.main}>
       <div className={style.container}>

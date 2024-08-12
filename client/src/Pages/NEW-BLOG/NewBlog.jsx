@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 import { modules } from "../../Helpers/quillModules";
 import useDebounce from "../../Custom-hooks/useDebounce";
 
-let count=0
+// let count=0
 const NewBlog = () => {
-  count++
-  console.log(count);
+  // count++
+  // console.log(count);
   const { categories } = useSelector((state) => state.blog);
   const { getData } = useBlogData();
   const { axiosWithToken } = useAxios();
@@ -87,6 +87,7 @@ const NewBlog = () => {
             <div className={newBlogStyle["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
+              data-test="newBlogTitle"
                 type="text"
                 id="title"
                 name="title"
@@ -97,6 +98,7 @@ const NewBlog = () => {
             <div>
               <label htmlFor="content">Content</label>
               <ReactQuill
+                data-test="newBlogQuill"
                 className={newBlogStyle.quill}
                 theme="snow"
                 modules={modules}
@@ -106,6 +108,7 @@ const NewBlog = () => {
             <div className={newBlogStyle["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
+                data-test="newBlogImage"
                 type="text"
                 id="image"
                 name="image"
@@ -124,7 +127,7 @@ const NewBlog = () => {
               >
                 <option>Select Category</option>
                 {categories?.map((category) => (
-                  <option value={category._id}>{category.name}</option>
+                  <option value={category._id} data-test="newBlogOption">{category.name}</option>
                 ))}
               </select>
             </div>
@@ -136,11 +139,11 @@ const NewBlog = () => {
                 onChange={handleForm}
               >
                 <option value="">Select Publish Status</option>
-                <option value="true">Publish</option>
+                <option value="true" data-test="newBlogPublish">Publish</option>
                 <option value="false">Draft</option>
               </select>
             </div>
-            <button>Submit</button>
+            <button data-test="newBlogSubmit">Submit</button>
           </form>
         </section>
       </main>

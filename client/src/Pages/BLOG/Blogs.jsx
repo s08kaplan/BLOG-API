@@ -14,21 +14,21 @@ const Blogs = () => {
   }, []);
 
   console.log(blogs);
-  if (!blogs.map) {
-    return <h2>Just a second please </h2>;
-  }
+  // if (!blogs.map) {
+  //   return <h2>Just a second please </h2>;
+  // }
   return (
     <main className={blogStyle.main}>
       <section className={blogStyle["main-section"]}>
         {blogs?.map((blog) => (
           <main key={blog._id}>
-            <h2>{blog?.title}</h2>
+            <h2 data-test="blogTitle">{blog?.title}</h2>
             <section>
-              <img src={blog?.image[0]} alt="blog-image" />
+              <img data-test="blogImage" src={blog?.image[0]} alt="blog-image" />
             </section>
             <BlogPost content={blog?.content} />
-            <span>likes{blog?.totalLikes}</span>
-            <span>
+            <span data-test="blogLikes">likes{blog?.totalLikes}</span>
+            <span data-test="blogViewCount">
               viewed by
               {blog?.countOfViews.length == 0 ? 1 : blog?.countOfViews.length}
             </span>
@@ -42,13 +42,13 @@ const Blogs = () => {
               to={`/blog-details/${blog?._id}`}
               className={blogStyle["new-blog-link"]}
             >
-              <button>Read more</button>
+              <button data-test="blogDetailButton">Read more</button>
             </Link>
           </main>
         ))}
       </section>
       <section className={blogStyle["add-blog-link"]}>
-        <Link to="/new-blog">Add New Blog</Link>
+        <Link to="/new-blog" data-test="addNewBlog">Add New Blog</Link>
       </section>
     </main>
   );
