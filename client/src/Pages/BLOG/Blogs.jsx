@@ -14,6 +14,7 @@ const Blogs = () => {
   }, []);
 
   console.log(blogs);
+
   // if (!blogs.map) {
   //   return <h2>Just a second please </h2>;
   // }

@@ -18,7 +18,7 @@ const useBlogData = () => {
       const [users, categories, blogs, comments] = await Promise.all([
         axiosWithToken("users?limit=20"),
         axiosWithToken("categories"),
-        axiosWithToken("blogs?limit=20"),
+        axiosWithToken("blogs?limit=20&sort[createdAt]=desc"),
         // axiosWithToken("comments"),
       ]);
 

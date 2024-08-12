@@ -118,6 +118,7 @@ const NewBlog = () => {
             </div>
             <div className={newBlogStyle["input-group"]}>
               <select
+                data-test="newBlogSelectCategory"
                 key={Date.now()}
                 name="categories"
                 id="categories"
@@ -127,19 +128,20 @@ const NewBlog = () => {
               >
                 <option>Select Category</option>
                 {categories?.map((category) => (
-                  <option value={category._id} data-test="newBlogOption">{category.name}</option>
+                  <option value={category._id}>{category.name}</option>
                 ))}
               </select>
             </div>
             <div className={newBlogStyle["input-group"]}>
               <select
+              data-test="newBlogPublishSelect"
                 name="isPublish"
                 id="isPublish"
                 value={inputRefs.isPublish}
                 onChange={handleForm}
               >
                 <option value="">Select Publish Status</option>
-                <option value="true" data-test="newBlogPublish">Publish</option>
+                <option value="true">Publish</option>
                 <option value="false">Draft</option>
               </select>
             </div>
