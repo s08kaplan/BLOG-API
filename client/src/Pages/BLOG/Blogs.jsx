@@ -6,11 +6,12 @@ import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import blogStyle from "./Blog.module.scss";
 
 const Blogs = () => {
-  const { getAllBlogData } = useBlogData();
+  const { getAllBlogData, getData } = useBlogData();
   const { blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
-    getAllBlogData();
+    // getAllBlogData();
+    getData()
   }, []);
 
   console.log(blogs);
