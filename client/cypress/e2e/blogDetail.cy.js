@@ -12,6 +12,8 @@ describe('blogs', () => {
     cy.get('[data-test="blogDetailButton"]').should('be.visible').first().click({force:true})
      cy.wait(2000)
      cy.url().should('include', `/blog-details/${Cypress.env('BLOG_ID')}`)
-     
+     cy.visit(`http://localhost:5173/blog-details/${Cypress.env('BLOG_ID')}`);
+     cy.get('[data-test="showHideComments"]').should('exist').and('be.visible').should('have.text','Show Comments').click({force:true})
+     cy.get('[data-test="showHideComments"]').should('be.visible').should('have.text','Hide Comments').click({force:true})
    })
  })

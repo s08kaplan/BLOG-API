@@ -127,8 +127,9 @@ const BlogDetails = () => {
         <button
           className={detailStyle.button}
           onClick={() => setShow((prev) => !prev)}
+          data-test="showHideComments"
         >
-          {show ? "Hide Comments" : "Show comments"}
+          {show ? "Hide Comments" : "Show Comments"}
         </button>
 
         {show && (
