@@ -58,10 +58,10 @@ module.exports = {
         }
     */
 
-    req.body.userId = req.user._id;
+    req.body.userId = req.user?._id;
     req.body.categoryId = req.body.categories;
     const { content } = req.body;
-
+  //  console.log("req.user._id : ",req.user._id);
     const sanitizedContent = DOMPurify.sanitize(content);
 
     const data = await Blog.create({ ...req.body, content: sanitizedContent });

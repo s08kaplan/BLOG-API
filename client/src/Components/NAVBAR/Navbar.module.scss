@@ -70,7 +70,7 @@ header {
       @media (max-width: 768px) {
         display: none;
         flex-direction: column;
-        width: 100%;
+        width: 100svw;
         margin-top: 10px;
     
         a {
@@ -92,7 +92,7 @@ header {
       }
 
       @media (max-width: 768px) {
-        width: 100%;
+        width: 100svw;
        @include flex($jc:flex-end);
       }
     }
@@ -103,6 +103,10 @@ header {
        }
     }
 
+  }
+
+  & .sidebar {
+    // display: none;
   }
 }
 

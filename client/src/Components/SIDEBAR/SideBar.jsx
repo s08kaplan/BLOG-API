@@ -30,7 +30,7 @@ const SideBar = ({onClose}) => {
   };
   return (
     <section className={SideStyle.container}>
-      <main className={SideStyle.main1}>
+      <main className={SideStyle.main}>
         <section className={SideStyle.navigation}>
           {navigation.map((item) => (
             <div key={item.name}  onClick={handleClose} className={SideStyle["link-div"]}>

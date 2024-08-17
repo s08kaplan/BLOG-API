@@ -6,6 +6,7 @@ $text-color: #333;
 $background-color: #f4f4f4;
 
 .main {
+  min-height: 100dvh;
   margin-top: 6rem;
   padding: 20px;
   background-color: $background-color;

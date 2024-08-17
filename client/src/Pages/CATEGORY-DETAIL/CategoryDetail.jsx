@@ -5,6 +5,7 @@ import { BsEye } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import style from "./CategoryDetail.module.scss"
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
+import BlogCard from "../../Components/BLOG-CARD/BlogCard";
 
 const CategoryDetail = () => {
   const { categoryDetail, blogs } = useSelector((state) => state.blog);
@@ -33,6 +34,7 @@ const CategoryDetail = () => {
             </div>
           </div>
         ))}
+        <BlogCard detail={detail}/>
       </div>
     </div>
   );

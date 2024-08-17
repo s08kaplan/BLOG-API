@@ -17,18 +17,22 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
- @import "../scss/abstract/_mixins.scss";
  @import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Anta&family=Goudy+Bookletter+1911&family=Righteous&display=swap');
+
  body {
      margin: 0;
      padding: 0;
+     box-sizing: border-box;
      min-height: 100dvh;
      font-family: Arial, sans-serif;
      overflow-x: hidden;
-    @include flex($fd:column);
+    display:flex;
+    flex-direction: column;
    }
    #root {
-    @include flex($fd: column, $jc: space-between);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
      min-height: 100dvh;
    }
    main {

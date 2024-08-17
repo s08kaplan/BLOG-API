@@ -23,12 +23,7 @@ const NewBlog = () => {
   //   categories: "",
   //   isPublish: "",
   // });
-  // const [inputs, setInputs] = useState({
-  //   title: "",
-  //   image: "",
-  //   categories: "",
-  //   isPublish: "",
-  // });
+
 
   const inputRefs = useRef({
     title: "",
@@ -53,6 +48,16 @@ const NewBlog = () => {
     inputRefs.current[name] = value ;
     
   };
+
+  const postBlog = async (url, postData) => {
+    try {
+      const { data } = await axiosWithToken.post(`${url}/`, postData);
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,15 +73,7 @@ const NewBlog = () => {
     navigate("/blogs")
   };
 
- const postBlog = async (url, postData) => {
-    try {
-      const { data } = await axiosWithToken.post(`${url}/`, postData);
-      // console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-    
-  };
+
 
 
   return (

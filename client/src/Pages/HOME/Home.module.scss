@@ -8,6 +8,7 @@ $card-border-color: #ddd;
 $container-padding: 20px;
 
 .home-main {
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   padding: $container-padding;

@@ -1,32 +1,12 @@
-import React, { useEffect, useId } from "react";
-import useBlogData from "../../Custom-hooks/useBlogData";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import homeStyle from "./Home.module.scss"
+import React from "react";
+import style from "./Home.module.scss"
+import BlogCard from "../../Components/BLOG-CARD/BlogCard";
 
 const Home = () => {
-  const { getData } = useBlogData();
-  const { blogs } = useSelector((state) => state.blog);
-  const id = useId()
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  // if(!blogs.map) {
-  //   return <h2>Just a second please</h2>
-  // }
-
+ 
   return (
-    <main className={homeStyle["home-main"]}>
-      <section  className={homeStyle.container}>
-        {blogs?.map((blog) => (
-          <section key={id} className={homeStyle["blog-card"]}>
-            <h4>{blog?.title}</h4>
-           <Link to={`/blog-details/${blog._id}`}><img src={ blog?.image[0]} alt={blog?.title} /></Link> 
-          </section>
-        ))}
-      </section>
+    <main className={style["home-main"]}>
+      <BlogCard/>
     </main>
   );
 };
