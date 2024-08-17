@@ -13,6 +13,7 @@ $background-color: #fff;
 // 
 $background-color: rgba(238, 232, 232, 0.949);
 $box-shadow-color: rgba(92, 84, 112, 0.37);
+$form-background-color: #fff;
 // 
 
 //  blog
@@ -27,3 +28,6 @@ $card-border-color: #ddd;
 // login
 $error-color: #e74c3c;
 // 
+
+$hover-color: lighten($primary-color, 10%);
+$form-border-color: #ddd;

@@ -6,8 +6,8 @@ import { useEffect } from "react";
 import { loginSchema } from "../../Helpers/formValidation";
 import useAuthCalls from "../../Custom-hooks/useAuthCalls";
 import { useDispatch } from "react-redux";
-import LoginStyle from "./Login.module.scss";
 import { useNavigate } from "react-router-dom";
+import style from "./Login.module.scss";
 
 const Login = () => {
   const { login } = useAuthCalls();
@@ -19,10 +19,6 @@ const Login = () => {
     handleSubmit,
     formState: {
       errors,
-      touchedFields,
-      dirtyFields,
-      isDirty,
-      isValid,
       isSubmitting,
       isSubmitSuccessful,
     },
@@ -42,9 +38,9 @@ const Login = () => {
   return (
     <main>
       <section>
-        <div className={LoginStyle["login-form"]}>
+        <div className={style["login-form"]}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <section className={LoginStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <input
                 data-test="loginUsername"
                 type="text"
@@ -53,14 +49,14 @@ const Login = () => {
                 placeholder=" "
                 {...register("username")}
               />
-              <label className={LoginStyle["user-label"]} htmlFor="username">
+              <label className={style["user-label"]} htmlFor="username">
                 Username
               </label>
 
-              <p className={LoginStyle.error}>{errors.username?.message}</p>
+              <p className={style.error}>{errors.username?.message}</p>
             </section>
 
-            <section className={LoginStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <input
                 data-test="loginEmail"
                 type="text"
@@ -69,14 +65,14 @@ const Login = () => {
                 placeholder=" "
                 {...register("email")}
               />
-              <label className={LoginStyle["user-label"]} htmlFor="email">
+              <label className={style["user-label"]} htmlFor="email">
                 Email
               </label>
 
-              <p className={LoginStyle.error}>{errors.email?.message}</p>
+              <p className={style.error}>{errors.email?.message}</p>
             </section>
 
-            <section className={LoginStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <input
                 data-test="loginPassword"
                 type="password"
@@ -85,11 +81,11 @@ const Login = () => {
                 placeholder=" "
                 {...register("password")}
               />
-              <label className={LoginStyle["user-label"]} htmlFor="password">
+              <label className={style["user-label"]} htmlFor="password">
                 Password
               </label>
 
-              <p className={LoginStyle.error}>{errors.password?.message}</p>
+              <p className={style.error}>{errors.password?.message}</p>
             </section>
 
             <button disabled={isSubmitting} data-test="loginSubmit">Submit</button>

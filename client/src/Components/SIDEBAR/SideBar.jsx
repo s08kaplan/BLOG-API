@@ -6,9 +6,10 @@ import useAuthCalls from "../../Custom-hooks/useAuthCalls";
 import SideStyle from "./SideBar.module.scss";
 
 const navigation = [
-  { name: "Blogs", to: "/blogs" },
   { name: "Profile", to: "/my-profile" },
+  { name: "Blogs", to: "/blogs" },
   { name: "New Blog", to: "/new-blog" },
+  { name: "Categories", to: "/categories" },
   { name: "About", to: "/about" },
   { name: "Contact", to: "/contact" },
   // { name: "Login", to: "/login" },
