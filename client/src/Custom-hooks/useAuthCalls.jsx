@@ -23,7 +23,7 @@ const useAuthCalls = () => {
       dispatch(registerSuccess(data));
       navigate("/");
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };

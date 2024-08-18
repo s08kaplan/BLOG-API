@@ -3,7 +3,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useAuthCalls from "../../Custom-hooks/useAuthCalls";
-import SideStyle from "./SideBar.module.scss";
+import style from "./SideBar.module.scss";
 
 const navigation = [
   { name: "Profile", to: "/my-profile" },
@@ -30,16 +30,16 @@ const SideBar = ({onClose}) => {
     navigate("/");
   };
   return (
-    <section className={SideStyle.container}>
-      <main className={SideStyle.main}>
-        <section className={SideStyle.navigation}>
+    <section className={style.container}>
+      <main className={style.main}>
+        <section className={style.navigation}>
           {navigation.map((item) => (
-            <div key={item.name}  onClick={handleClose} className={SideStyle["link-div"]}>
+            <div key={item.name}  onClick={handleClose} className={style["link-div"]}>
               <Link to={item.to}>{item.name}</Link>
             </div>
           ))}
           {token ? (
-            <div className={SideStyle.logout} onClick={handleLogout}>Log out</div>
+            <div className={style.logout} onClick={handleLogout}>Log out</div>
           ) : (
             <>
               <div>

@@ -12,7 +12,7 @@ $border-radius: 10px;
 .container {
   position: absolute;
   top: 6rem;
-  right: 0;
+  right: 10px;
   padding: $padding;
   background: $background-color;
   box-shadow: 0 8px 32px 0 $box-shadow-color;
@@ -64,10 +64,14 @@ $border-radius: 10px;
 
 @media (max-width: 580px) {
   .container {
-    width: 155px;
+    position: relative;
+    width: 500px;
     top: 80px;
-    height: calc(100% - 60px);
-    transform: translateX(41%);
+    left: 0;
+    right: 0;
+    // height: calc(100% - 60px);
+    height: 500px;
+    // transform: translateX(41%);
   }
   .link-div{
     padding-right: 2rem;

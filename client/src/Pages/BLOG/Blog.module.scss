@@ -12,11 +12,16 @@ $background-color: #f4f4f4;
   background-color: $background-color;
   @include flex($fd: column);
 
-  & .main-section {
-    width: 100%;
+  & .main-section { 
+    @include grid($gtc: repeat(1, 1fr));
+    & main {
+        // width: 100%;
+       
     // max-width: 1200px;
-    @include grid($gtc: 1fr);
+  
     gap: 20px;
+    }
+  
   }
 
   @media only screen and (min-width: (250px,600px)) {
@@ -26,18 +31,23 @@ $background-color: #f4f4f4;
   }
   @media only screen and (width: (600px, 768px)) {
     .main-section {
-      @include grid($gtc: repeat(2, 1fr));
+      @include grid($gtc: repeat(1, 1fr));
     }
   }
 
   @media only screen and (width: (768px, 992px)) {
     .main-section {
-      @include grid($gtc: repeat(3, 1fr));
+      @include grid($gtc: repeat(1, 1fr));
     }
   }
   @media only screen and (width: (992px, 1024px)) {
     .main-section {
-      @include grid($gtc: repeat(4, 1fr));
+      @include grid($gtc: repeat(1, 3fr));
+    }
+  }
+  @media  (min-width: (1025px)) {
+    .main-section {
+      @include grid($gtc: repeat(1, 5fr));
     }
   }
 

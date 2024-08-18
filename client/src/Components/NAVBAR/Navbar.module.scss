@@ -92,7 +92,7 @@ header {
       }
 
       @media (max-width: 768px) {
-        width: 100svw;
+        // width: 100svw;
        @include flex($jc:flex-end);
       }
     }

@@ -56,3 +56,13 @@ button {
 form {
   @include form();
 }
+
+
+.error-message {
+  @include flex($fd:column);
+  margin: 10rem;
+   & a {
+    text-decoration: none;
+    @include button($p:1rem);
+   }
+}
