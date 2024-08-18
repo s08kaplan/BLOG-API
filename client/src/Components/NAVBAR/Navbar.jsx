@@ -69,7 +69,7 @@ useEffect(() => {
           {/* <div onClick={() => setSidebar((prev) => !prev)}> */}
           {/* <div onClick={() => setSidebar(!sidebar)}> */}
           <div onClick={handleSidebar}  ref={avatarRef}>
-            <Avatar size="50" src={ user?.image || "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_640.png" } round=".8rem" />
+            <Avatar size="50" src={ user?.image[0] || "https://cdn.pixabay.com/photo/2017/01/10/03/54/avatar-1968236_640.png" } round=".8rem" />
           </div>
         </section>
       </nav>

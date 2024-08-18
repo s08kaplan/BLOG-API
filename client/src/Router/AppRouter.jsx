@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../Pages/HOME/Home";
-import Blogs from "../Pages/BLOG/Blogs"
+// import Blogs from "../Pages/BLOG/Blogs"
 import PrivateRouter from "./PrivateRouter";
 
 const Register = lazy(() => import("../Pages/REGISTER/Register"));
 const Login = lazy(() => import("../Pages/LOGIN/Login"));
-// const Blogs = lazy(() => import("../Pages/BLOG/Blogs"));
+const Blogs = lazy(() => import("../Pages/BLOG/Blogs"));
 const Contact = lazy(() => import("../Pages/CONTACT/Contact"));
 const About = lazy(() => import("../Pages/ABOUT/About"));
 const Categories = lazy(() => import("../Pages/CATEGORIES/Categories"));
@@ -25,7 +25,7 @@ const AppRouter = () => {
           <Route path="/" element={<Home />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="categories" element={<Categories />} />
-          <Route path="category-detail" element={<CategoryDetail />} />
+          <Route path="category-detail/:categoryId" element={<CategoryDetail />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="about" element={<About />} />

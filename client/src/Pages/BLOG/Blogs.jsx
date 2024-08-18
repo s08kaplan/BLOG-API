@@ -8,10 +8,10 @@ const Blogs = () => {
   const { getAllBlogData, getData } = useBlogData();
   const { blogs } = useSelector((state) => state.blog);
 
-  useEffect(() => {
-    // getAllBlogData();
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   // getAllBlogData();
+  //   // getData();
+  // }, []);
 
   console.log(blogs);
 
