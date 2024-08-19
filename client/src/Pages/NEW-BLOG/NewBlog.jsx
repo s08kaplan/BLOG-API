@@ -79,9 +79,9 @@ const NewBlog = () => {
   return (
     <section className={newBlogStyle["new-blog-main"]}>
       <main className={newBlogStyle["form-container"]}>
-        <section>
+        <div>
           <form onSubmit={handleSubmit}>
-            <div className={newBlogStyle["input-group"]}>
+            <section className={newBlogStyle["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
               data-test="newBlogTitle"
@@ -91,8 +91,8 @@ const NewBlog = () => {
                 value={inputRefs.title}
                 onChange={handleForm}
               />
-            </div>
-            <div>
+            </section>
+            <section>
               <label htmlFor="content">Content</label>
               <ReactQuill
                 data-test="newBlogQuill"
@@ -101,8 +101,8 @@ const NewBlog = () => {
                 modules={modules}
                 ref= {quillRef}
               />
-            </div>
-            <div className={newBlogStyle["input-group"]}>
+            </section>
+            <section className={newBlogStyle["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
                 data-test="newBlogImage"
@@ -112,8 +112,8 @@ const NewBlog = () => {
                 value={inputRefs.image}
                 onChange={handleForm}
               />
-            </div>
-            <div className={newBlogStyle["input-group"]}>
+            </section>
+            <section className={newBlogStyle["input-group"]}>
               <select
                 data-test="newBlogSelectCategory"
                 key={Date.now()}
@@ -128,8 +128,8 @@ const NewBlog = () => {
                   <option value={category._id}>{category.name}</option>
                 ))}
               </select>
-            </div>
-            <div className={newBlogStyle["input-group"]}>
+            </section>
+            <section className={newBlogStyle["input-group"]}>
               <select
               data-test="newBlogPublishSelect"
                 name="isPublish"
@@ -141,10 +141,10 @@ const NewBlog = () => {
                 <option value="true">Publish</option>
                 <option value="false">Draft</option>
               </select>
-            </div>
+            </section>
             <button data-test="newBlogSubmit">Submit</button>
           </form>
-        </section>
+        </div>
       </main>
     </section>
   );

@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./Home.module.scss"
 import BlogCard from "../../Components/BLOG-CARD/BlogCard";
+import style from "./Home.module.scss"
 
 const Home = () => {
  
