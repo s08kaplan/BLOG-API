@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../Pages/HOME/Home";
 // import Blogs from "../Pages/BLOG/Blogs"
 import PrivateRouter from "./PrivateRouter";
+import Loading from "../Components/LOADING/Loading"
 
 const Register = lazy(() => import("../Pages/REGISTER/Register"));
 const Login = lazy(() => import("../Pages/LOGIN/Login"));
@@ -20,7 +21,7 @@ const NewBlog = lazy(() => import("../Pages/NEW-BLOG/NewBlog"));
 const AppRouter = () => {
   return (
     
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div><Loading/></div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="blogs" element={<Blogs />} />
