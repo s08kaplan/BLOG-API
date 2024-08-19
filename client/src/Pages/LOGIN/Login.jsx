@@ -8,7 +8,7 @@ const Login = () => {
   const { error } = useSelector((state) => state.auth);
  
   return (
-      <section>
+      <section className={style.main}>
         {error ? (
           <ErrorPage/>
         ) : (

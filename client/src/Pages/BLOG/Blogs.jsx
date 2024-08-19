@@ -5,15 +5,15 @@ import BlogCard from "../../Components/BLOG-CARD/BlogCard";
 import blogStyle from "./Blog.module.scss";
 
 const Blogs = () => {
-  const { getAllBlogData, getData } = useBlogData();
-  const { blogs } = useSelector((state) => state.blog);
+  // const { getAllBlogData, getData } = useBlogData();
+  // const { blogs } = useSelector((state) => state.blog);
 
   // useEffect(() => {
   //   // getAllBlogData();
   //   // getData();
   // }, []);
 
-  console.log(blogs);
+  // console.log(blogs);
 
  
   return (
