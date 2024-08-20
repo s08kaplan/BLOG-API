@@ -3,4 +3,5 @@
 .post {
    @include flex($fd:column);
    text-wrap: balance;
+   color: black !important;
 }
