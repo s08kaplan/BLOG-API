@@ -7,7 +7,6 @@ $container-padding: 20px;
 .register-main {
   @include flex();
   min-height: 100dvh;
-  // margin: 1rem;
   background-color: $background-color2;
 }
 

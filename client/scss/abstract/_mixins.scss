@@ -70,7 +70,7 @@
   $cur: pointer,
   $t: background-color 0.3s ease,
   $hover-bg: darken($primary-color, 10%),
-  $hover-c: #ddd,
+  $hover-c: $form-border-color,
   $disabled-bg: lighten($primary-color, 20%)
 ) {
   margin: $m;

@@ -7,14 +7,11 @@ $container-padding: 20px;
 .auth-main {
     @include flex();
     min-height: 100dvh;
-    // margin: 1rem;
-    // background-color: $background-color;
   }
 
 .form-container {
   @include flex($fd:column);
   height: 100%;
-//   background-color: $background-color;
 }
 
 .input-group {

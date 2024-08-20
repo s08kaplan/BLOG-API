@@ -3,8 +3,7 @@
 .main-about {
     min-height: 100dvh;
     padding: .5rem;
-    @include flex($fd: column,$g:2rem,$ai:center);
-    // font-family: "Akaya Telivigala",sans-serif;    
+    @include flex($fd: column,$g:2rem,$ai:center);   
     font-family: "Goudy Bookletter 1911",sans-serif;    
     & .title{
        @include flex($fd:column);
@@ -35,7 +34,6 @@
 
 
 .main-intro {
-    /* background-color: red; */
     transition: 2s ease-in-out;
     animation: moveFromTop 1s ease-in-out; 
 }

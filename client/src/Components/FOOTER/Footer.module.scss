@@ -1,4 +1,5 @@
 @import "../../../scss/abstract/mixins";
+
 .footer {
   width: 100svw;
   padding: 1.7rem 0;
@@ -57,8 +58,6 @@
 @media (max-width: 640px) {
 
   .footer {
-    // background-image: url("../../assets/logo-2.png") no-repeat;
-    // background-size: contain;
   background-position: left;
   background-color: #22283174;
   }

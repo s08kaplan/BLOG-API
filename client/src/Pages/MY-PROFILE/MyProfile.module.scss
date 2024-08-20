@@ -1,14 +1,13 @@
+@import "../../../scss/abstract/_mixins.scss";
+@import "../../../scss/abstract/_colors.scss";
+
 .main {
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex($fd: column);
   padding: 20px;
 
   .profile-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex($fd: column);
     margin-bottom: 20px;
 
     img {
@@ -51,9 +50,7 @@
   }
 
   form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex($fd: column);
     width: 100%;
     max-width: 400px;
     padding: 20px;
