@@ -65,8 +65,8 @@ $border-radius: 10px;
 @media (max-width: 580px) {
   .container {
     position: relative;
-    width: 500px;
-    top: 80px;
+    width: 100%;
+    top: 10px;
     left: 0;
     right: 0;
     // height: calc(100% - 60px);

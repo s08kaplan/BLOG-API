@@ -43,7 +43,7 @@ const Categories = () => {
   }
 
   const addCategory = async () => {
-      // console.log(categoryName);
+      console.log(categoryName);
       
       const postData = {name: debouncedName}
     const data =  await axiosWithToken.post("categories",postData)
@@ -74,10 +74,10 @@ const Categories = () => {
   // console.log(categoryName);
 
   return (
-    <div className={style.container}>
-      <div>
+    <section className={style.container}>
+      <main>
         <h3>Your site Your Choice</h3>
-        <div className={style.categories}>
+        <section className={style.categories}>
           {categories?.map((category) => (
             <>
               <h3 onClick={() => handleClick(category._id)}>
@@ -90,14 +90,14 @@ const Categories = () => {
               )}
             </>
           ))}
-        </div>
-        <div className={style.add}>
+        </section>
+        <section className={style.add}>
           <h4>{edit ? "Edit Category" : "Add Category"}</h4>
           <input type="text" value={categoryName} onChange={handleChange}/>
-          <button onClick={edit ? handleEdit : addCategory }  >{edit ? "Edit Category" : "Add Category"}</button>
-        </div>
-      </div>
-    </div>
+          <button onClick={edit ? handleEdit : addCategory } disabled={categoryName.trim() == "" && "disabled"} >{edit ? "Edit Category" : "Add Category"}</button>
+        </section>
+      </main>
+    </section>
   );
 };
 

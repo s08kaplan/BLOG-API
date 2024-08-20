@@ -92,9 +92,9 @@ const BlogDetails = () => {
   };
 
   return (
-    <main className={detailStyle.main}>
-      <section>
-        <div className={detailStyle["detail-header"]}>
+    <section className={detailStyle.main}>
+      
+        <main className={detailStyle["detail-header"]}>
           <h2>{blogDetail?.title}</h2>
 
           <img src={blogDetail?.image} alt="blog-image" />
@@ -122,7 +122,7 @@ const BlogDetails = () => {
           )}
           {/* <p className={detailStyle.content}>{blogDetail?.content}</p> */}
           <BlogPost content={blogDetail?.content} />
-        </div>
+        </main>
 
         <button
           className={detailStyle.button}
@@ -133,7 +133,7 @@ const BlogDetails = () => {
         </button>
 
         {show && (
-          <div className={detailStyle.comment}>
+          <section className={detailStyle.comment}>
             {/* <h4>{comments?.userId.username}</h4> */}
             {blogDetail?.comments?.filter(
               (comment) => comment.isDeleted == false
@@ -175,7 +175,7 @@ const BlogDetails = () => {
                 <h4>Add first comment</h4>
               </div>
             )}
-          </div>
+          </section>
         )}
         {show && !commentModal && (
           <ReactQuill
@@ -190,7 +190,6 @@ const BlogDetails = () => {
             Add Your Comment
           </button>
         )}
-      </section>
       {editBlogModal && (
         <BlogModal
           {...blogDetail}
@@ -202,7 +201,6 @@ const BlogDetails = () => {
       {commentModal && (
         <EditCommentModal
           setEditComment={setEditComment}
-          // editComment={editComment}
           editComment={editComment}
           id={editCommentID}
           onClose={setCommentModal}
@@ -211,7 +209,7 @@ const BlogDetails = () => {
           updateComment={updateComment}
         />
       )}
-    </main>
+    </section>
   );
 };
 

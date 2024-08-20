@@ -1,9 +1,5 @@
-$primary-color: #3498db;
-$secondary-color: #bd10e0;
-$text-color: #333;
-$background-color: #f4f4f4;
-$hover-color: lighten($primary-color, 10%);
-$form-border-color: #ddd;
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
 
 
 .container {
@@ -17,9 +13,9 @@ $form-border-color: #ddd;
   }
 
   .categories {
-    display: flex;
+   @include flex($g:.3rem);
     flex-wrap: wrap;
-    justify-content: center;
+    
 
     h3 {
       margin: 10px;
@@ -32,6 +28,15 @@ $form-border-color: #ddd;
 
       &:hover {
         background-color: $hover-color;
+      }
+    }
+
+    & div {
+      position: relative;
+      left: -1rem;
+      cursor: pointer;
+      & svg {
+        fill:#0cbe09;
       }
     }
   }

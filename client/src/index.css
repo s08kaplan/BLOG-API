@@ -1,8 +1,9 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Anta&family=Goudy+Bookletter+1911&family=Righteous&display=swap');
 
-/* :root {
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -15,26 +16,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-} */
+}
 
- @import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Anta&family=Goudy+Bookletter+1911&family=Righteous&display=swap');
-
- body {
-     margin: 0;
+*{
+  margin: 0;
      padding: 0;
-     box-sizing: border-box;
-     min-height: 100dvh;
-     font-family: Arial, sans-serif;
+     box-sizing: border-box; 
+}
+ body {
+     /* min-height: 100dvh;
+     min-width: 100svw; */
+     /* font-family: Arial, sans-serif; */
      overflow-x: hidden;
     display:flex;
     flex-direction: column;
-   }
-   #root {
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-     min-height: 100dvh;
-   }
-   main {
-     flex: 1;
+    background-color: #ddd;
    }

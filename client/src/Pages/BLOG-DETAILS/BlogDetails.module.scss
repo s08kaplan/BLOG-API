@@ -1,15 +1,14 @@
-$primary-color: #3498db;
-$secondary-color: #bd10e0;
-$text-color: #333;
-$background-color: #f4f4f4;
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
+
 
 .main {
   padding: 20px;
   background-color: $background-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  @include flex($fd:column);
+  min-height: 100dvh;
+  min-width: 100svw;
   box-sizing: border-box;
 
   .detail-header {
@@ -18,10 +17,8 @@ $background-color: #f4f4f4;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    // box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
+   @include flex($fd:column);
     text-align: center;
     margin-bottom: 20px;
 
@@ -77,9 +74,7 @@ $background-color: #f4f4f4;
     }
 
     .likes {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex();
       margin-top: 10px;
 
       span {

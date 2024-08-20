@@ -71,13 +71,13 @@ console.log(inputs);
   
 
   return (
-    <main className={modalBlogStyle["modal-main"]}>
+    <section className={modalBlogStyle["modal-main"]}>
       {open && (
-        <div className={modalBlogStyle["modal"]}>
+        <main className={modalBlogStyle["modal"]}>
           {/* <button onClick={() => setOpen((prev) => !prev)}>X</button> */}
 
           <form onSubmit={handleSubmit}>
-            <div className={modalBlogStyle["input-group"]}>
+            <section className={modalBlogStyle["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
                 type="text"
@@ -86,8 +86,8 @@ console.log(inputs);
                 value={inputs.title}
                 onChange={handleForm}
               />
-            </div>
-            <div>
+            </section>
+            <section>
               <label htmlFor="content">Content</label>
               <ReactQuill
                 className={modalBlogStyle.quill}
@@ -96,8 +96,8 @@ console.log(inputs);
                 onChange={setText}
                 modules={modules}
               />
-            </div>
-            <div className={modalBlogStyle["input-group"]}>
+            </section>
+            <section className={modalBlogStyle["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
                 type="text"
@@ -106,10 +106,9 @@ console.log(inputs);
                 value={inputs.image}
                 onChange={handleForm}
               />
-            </div>
-            <div className={modalBlogStyle["input-group"]}>
+            </section>
+            <section className={modalBlogStyle["input-group"]}>
               <select
-                key={Date.now()}
                 name="categoryId"
                 id="categories"
                 value={inputs.categoryId}
@@ -123,8 +122,8 @@ console.log(inputs);
                   </option>
                 ))}
               </select>
-            </div>
-            <div className={modalBlogStyle["input-group"]}>
+            </section>
+            <section className={modalBlogStyle["input-group"]}>
               <select
                 name="isPublish"
                 id="isPublish"
@@ -135,13 +134,13 @@ console.log(inputs);
                 <option value="true">Publish</option>
                 <option value="false">Draft</option>
               </select>
-            </div>
+            </section>
             <button>Submit</button>
             <button style={{marginLeft:"1rem", backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>
           </form>
-        </div>
+        </main>
       )}
-    </main>
+    </section>
   );
 };
 

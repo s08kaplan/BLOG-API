@@ -1,8 +1,6 @@
 @import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
 
-$primary-color: #3498db;
-$secondary-color: #bd10e0;
-$text-color: #333;
 
 .modal-main {
     @include flex($fd: column);

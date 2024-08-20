@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { useSelector } from "react-redux";
 import BlogCard from "../../Components/BLOG-CARD/BlogCard";
-import blogStyle from "./Blog.module.scss";
+import style from "./Blog.module.scss";
 
 const Blogs = () => {
   // const { getAllBlogData, getData } = useBlogData();
@@ -17,11 +17,11 @@ const Blogs = () => {
 
  
   return (
-    <main className={blogStyle.main}>
-      <section className={blogStyle["main-section"]}>
+    <section className={style.main}>
+      <main className={style["main-section"]}>
         <BlogCard />
-      </section>
-    </main>
+      </main>
+    </section>
   );
 };
 
