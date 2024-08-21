@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import modalBlogStyle from "./BlogModal.module.scss";
+import React, { useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import { modules } from "../../Helpers/quillModules";
 import { useSelector } from "react-redux";
@@ -8,6 +7,8 @@ import useBlogData from "../../Custom-hooks/useBlogData";
 import useAxios from "../../Custom-hooks/useAxios";
 import { useNavigate } from "react-router-dom";
 import BlogPost from "../BLOG-POST/BlogPost";
+import style from "./BlogModal.module.scss";
+import QuillEditor from "../QUILL/QuillEditor";
 
 const BlogModal = ({
   title,
@@ -16,7 +17,8 @@ const BlogModal = ({
   blogId,
   content,
   categoryId,
-  onClose
+  onClose,
+  postBlog
 }) => {
   const { categories } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
@@ -33,6 +35,7 @@ const BlogModal = ({
     userId: user?.id,
   });
   const [text, setText] = useState(content);
+  const quillRef = useRef("")
 
   useEffect(() => {
     getData("categories");
@@ -51,33 +54,31 @@ const BlogModal = ({
 console.log(inputs);
   const handleSubmit =  (e) => {
     e.preventDefault();
-    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
+    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
+    console.log(quillRef.current.value);
     const postData = {
       ...inputs,
       content: sanitizedContent,
+      categories: categoryId
     };
-    
-     putBlog("blogDetail",blogId, postData);
+    console.log(postData);
+    blogId ? putBlog("blogDetail",blogId, postData) : postBlog("blogs", postData)
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
     setText("");
     onClose()
-    navigate(`/blog-details/${blogId}`);
+   blogId ? navigate(`/blog-details/${blogId}`) : navigate("/blogs")
   };
 
   const categoryName = (categories?.filter(
     (category) => category._id == categoryId
   ))[0]?.name;
 
-  
-
   return (
-    <section className={modalBlogStyle["modal-main"]}>
+    <section className={style["modal-main"]}>
       {open && (
-        <main className={modalBlogStyle["modal"]}>
-          {/* <button onClick={() => setOpen((prev) => !prev)}>X</button> */}
-
+        <main className={style["modal"]}>
           <form onSubmit={handleSubmit}>
-            <section className={modalBlogStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
                 type="text"
@@ -87,17 +88,11 @@ console.log(inputs);
                 onChange={handleForm}
               />
             </section>
-            <section>
+            <section  className={style.quill}>
               <label htmlFor="content">Content</label>
-              <ReactQuill
-                className={modalBlogStyle.quill}
-                theme="snow"
-                value={text}
-                onChange={setText}
-                modules={modules}
-              />
+              <QuillEditor value={content} ref={quillRef} />
             </section>
-            <section className={modalBlogStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
                 type="text"
@@ -107,23 +102,24 @@ console.log(inputs);
                 onChange={handleForm}
               />
             </section>
-            <section className={modalBlogStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <select
                 name="categoryId"
                 id="categories"
                 value={inputs.categoryId}
                 onChange={handleForm}
               >
+                <option value="" >Select Category</option>
                 <option value={categoryId}>{categoryName}</option>
                 {categories?.map((category) => (
                   <option value={category._id}>
-                    {category.name == categoryName ? "" : category.name}
-                    {/* {category.name} */}
+                    {/* {category.name == categoryName ? "" : category.name} */}
+                    {category.name}
                   </option>
                 ))}
               </select>
             </section>
-            <section className={modalBlogStyle["input-group"]}>
+            <section className={style["input-group"]}>
               <select
                 name="isPublish"
                 id="isPublish"
@@ -135,8 +131,11 @@ console.log(inputs);
                 <option value="false">Draft</option>
               </select>
             </section>
-            <button>Submit</button>
-            <button style={{marginLeft:"1rem", backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>
+            <section className={style.button}>
+             <button>Submit</button>
+            <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>  
+            </section>
+           
           </form>
         </main>
       )}

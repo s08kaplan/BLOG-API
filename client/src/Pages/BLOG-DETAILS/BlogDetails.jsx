@@ -90,7 +90,8 @@ const BlogDetails = () => {
   const handleCommentDelete = (commentId) => {
     deleteComment(commentId, blogId);
   };
-
+  
+  console.log(blogDetail);
   return (
     <section className={detailStyle.main}>
       

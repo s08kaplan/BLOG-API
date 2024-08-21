@@ -8,7 +8,6 @@ import style from "./SideBar.module.scss";
 const navigation = [
   { name: "Profile", to: "/my-profile" },
   { name: "Blogs", to: "/blogs" },
-  { name: "New Blog", to: "/new-blog" },
   { name: "Categories", to: "/categories" },
   { name: "About", to: "/about" },
   { name: "Contact", to: "/contact" },
@@ -16,30 +15,43 @@ const navigation = [
   // { name: "Register", to: "/register" },
 ];
 
-const SideBar = ({onClose}) => {
+const SideBar = ({ onClose }) => {
   const { token } = useSelector((state) => state.auth);
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
 
   const handleClose = () => {
-    onClose(false)
-  }
- 
+    onClose(false);
+  };
+
   const handleLogout = () => {
     logout();
     navigate("/");
   };
+
+  console.log(token);
   return (
     <section className={style.container}>
       <main className={style.main}>
         <section className={style.navigation}>
           {navigation.map((item) => (
-            <div key={item.name}  onClick={handleClose} className={style["link-div"]}>
+            <div
+              key={item.name}
+              onClick={handleClose}
+              className={style["link-div"]}
+            >
               <Link to={item.to}>{item.name}</Link>
             </div>
           ))}
-          {token ? (
-            <div className={style.logout} onClick={handleLogout}>Log out</div>
+          {token && token !== "" ? (
+            <>
+              <div onClick={handleClose}>
+                <Link to="/new-blog">New Blog</Link>
+              </div>
+              <div className={style.logout} onClick={handleLogout}>
+                Log out
+              </div>
+            </>
           ) : (
             <>
               <div onClick={handleClose}>

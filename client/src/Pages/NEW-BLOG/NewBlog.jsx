@@ -9,21 +9,13 @@ import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import { modules } from "../../Helpers/quillModules";
 import useDebounce from "../../Custom-hooks/useDebounce";
+import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
+import QuillEditor from "../../Components/QUILL/QuillEditor";
 
-// let count=0
 const NewBlog = () => {
-  // count++
-  // console.log(count);
   const { categories } = useSelector((state) => state.blog);
   const { getData } = useBlogData();
   const { axiosWithToken } = useAxios();
-  // const [inputs, setInputs] = useState({
-  //   title: "",
-  //   image: "",
-  //   categories: "",
-  //   isPublish: "",
-  // });
-
 
   const inputRefs = useRef({
     title: "",
@@ -31,22 +23,19 @@ const NewBlog = () => {
     categories: "",
     isPublish: "",
   });
-  // console.log("categories", categories);
   const [text, setText] = useState("");
-  const quillRef = useRef(null)
-  // const debouncedInputs = useDebounce(inputs, 500)
+  const [show, setShow] = useState(false);
+  const quillRef = useRef(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData("categories");
   }, []);
 
-
   const handleForm = (e) => {
     const { name, value } = e.target;
-    inputRefs.current[name] = value ;
-    
+    inputRefs.current[name] = value;
   };
 
   const postBlog = async (url, postData) => {
@@ -56,94 +45,29 @@ const NewBlog = () => {
     } catch (error) {
       console.log(error);
     }
-    
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
-   
+    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, {
+      USE_PROFILES: { html: true },
+    });
+
     const postData = {
       ...inputRefs.current,
       content: sanitizedContent,
     };
     console.log(postData);
     await postBlog("blogs", postData);
-   
-    navigate("/blogs")
+
+    navigate("/blogs");
   };
-
-
-
 
   return (
     <section className={newBlogStyle["new-blog-main"]}>
       <main className={newBlogStyle["form-container"]}>
         <div>
-          <form onSubmit={handleSubmit}>
-            <section className={newBlogStyle["input-group"]}>
-              <label htmlFor="title">Title</label>
-              <input
-              data-test="newBlogTitle"
-                type="text"
-                id="title"
-                name="title"
-                value={inputRefs.title}
-                onChange={handleForm}
-              />
-            </section>
-            <section>
-              <label htmlFor="content">Content</label>
-              <ReactQuill
-                data-test="newBlogQuill"
-                className={newBlogStyle.quill}
-                theme="snow"
-                modules={modules}
-                ref= {quillRef}
-              />
-            </section>
-            <section className={newBlogStyle["input-group"]}>
-              <label htmlFor="image">Image Url</label>
-              <input
-                data-test="newBlogImage"
-                type="text"
-                id="image"
-                name="image"
-                value={inputRefs.image}
-                onChange={handleForm}
-              />
-            </section>
-            <section className={newBlogStyle["input-group"]}>
-              <select
-                data-test="newBlogSelectCategory"
-                key={Date.now()}
-                name="categories"
-                id="categories"
-                value={inputRefs.categories}
-                // style={{ width: "100px" }}
-                onChange={handleForm}
-              >
-                <option>Select Category</option>
-                {categories?.map((category) => (
-                  <option value={category._id}>{category.name}</option>
-                ))}
-              </select>
-            </section>
-            <section className={newBlogStyle["input-group"]}>
-              <select
-              data-test="newBlogPublishSelect"
-                name="isPublish"
-                id="isPublish"
-                value={inputRefs.isPublish}
-                onChange={handleForm}
-              >
-                <option value="">Select Publish Status</option>
-                <option value="true">Publish</option>
-                <option value="false">Draft</option>
-              </select>
-            </section>
-            <button data-test="newBlogSubmit">Submit</button>
-          </form>
+          <BlogModal postBlog={postBlog} onClose={setShow} />
         </div>
       </main>
     </section>

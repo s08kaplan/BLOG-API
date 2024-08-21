@@ -50,4 +50,6 @@ export const formRegisterInputs = [
       "data-test": "loginPassword",
     },
   ];
+
+ 
   
