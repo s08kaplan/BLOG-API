@@ -36,11 +36,11 @@ const useBlogData = () => {
     }
   };
 
-  const getData = async (url = "blogs") => {
+  const getData = async (url = "blogs", page = 1) => {
     dispatch(fetchStart());
     try {
       // const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
-      const { data } = await axiosPublic(`${url}?limit=20&sort[createdAt]=desc`);
+      const { data } = await axiosPublic(`${url}?limit=8&skip=${(page - 1) * 8}&sort[createdAt]=desc&page=${page}`);
       console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {

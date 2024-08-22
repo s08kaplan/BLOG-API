@@ -23,18 +23,17 @@ const BlogModal = ({
   const { categories } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
   const { getData, putBlog } = useBlogData();
-  const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(true);
   const [inputs, setInputs] = useState({
     title,
     image,
-    categoryId,
+    categories:categoryId,
     isPublish,
     userId: user?.id,
   });
-  const [text, setText] = useState(content);
+  // const [text, setText] = useState(content);
   const quillRef = useRef("")
 
   useEffect(() => {
@@ -59,12 +58,12 @@ console.log(inputs);
     const postData = {
       ...inputs,
       content: sanitizedContent,
-      categories: categoryId
+      // categories: categoryId
     };
     console.log(postData);
     blogId ? putBlog("blogDetail",blogId, postData) : postBlog("blogs", postData)
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
-    setText("");
+    // setText("");
     onClose()
    blogId ? navigate(`/blog-details/${blogId}`) : navigate("/blogs")
   };
@@ -104,9 +103,9 @@ console.log(inputs);
             </section>
             <section className={style["input-group"]}>
               <select
-                name="categoryId"
+                name="categories"
                 id="categories"
-                value={inputs.categoryId}
+                value={inputs.categories}
                 onChange={handleForm}
               >
                 <option value="" >Select Category</option>

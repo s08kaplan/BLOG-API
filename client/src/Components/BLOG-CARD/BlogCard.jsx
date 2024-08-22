@@ -1,52 +1,115 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { useSelector } from "react-redux";
-import style from "./BlogCard.module.scss"
+import style from "./BlogCard.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import BlogPost from "../BLOG-POST/BlogPost";
 import { LiaHeart } from "react-icons/lia";
 import { BsEye } from "react-icons/bs";
 
-
-
-const BlogCard = ({detail}) => {
+const BlogCard = ({ detail }) => {
   const { getData } = useBlogData();
-  const { blogs } = useSelector((state) => state.blog);
- 
-  const navigate = useNavigate()
+  const { blogs, details } = useSelector((state) => state.blog);
+  const [pages, setPages] = useState({
+    previousPage: null,
+    currentPage: 1,
+    nextPage: null,
+    totalPages: 1,
+  });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData();
   }, []);
 
-  return (
-    <section  className={style.container}>
-{  detail ? detail?.map((item) => (
-          <div className={style["detail-container"]} key={item._id} onClick={() =>navigate(`/blog-details/${item?._id}`)}>
-            <h3>{item.title}</h3>
-            <p>{item.content == "" ? "Not a blog found be the first " : <BlogPost content={ item.content }/>}</p>
-            <div>
-                <img src={item.image} alt={item.title} />
-            </div>
-            <div>
-              <span>Author {item.userId?.username}</span>
-              <span><LiaHeart/> {item.totalLikes}</span>
-              <span><BsEye />{item.countOfViews?.length}</span>
-            </div>
-          </div>
-        ))
-        :
-
-    blogs?.map((blog) => (
-      <section key={blog?._id} className={style["blog-card"]}>
-        <h4>{blog?.title}</h4>
-       <Link to={`/blog-details/${blog._id}`}><img src={ blog?.image[0]} alt={blog?.title} /></Link> 
-      </section>
-    ))
-    
+  useEffect(() => {
+    if (details?.pages) {
+      setPages({
+        previousPage: details.pages.previous_page || null,
+        currentPage: details.pages.current_page,
+        nextPage: details.pages.next_page || null, 
+        totalPages: details.pages.total_pages,
+      });
     }
-  </section>
-  )
-}
+  }, [details]);
 
-export default BlogCard
+  console.log(details);
+  console.log(details?.pages?.current_page);
+  console.log("pages state: ", pages);
+
+  const handlePage = (newPage) => {
+    if (newPage !== pages.currentPage && newPage > 0 && newPage <= pages.totalPages)
+     {
+      setPages((prev) => ({
+        ...prev,
+        currentPage: newPage,
+      }));
+      getData("blogs", newPage);
+    }
+  };
+
+  return (
+    <section className={style.main}>
+      <main className={style.container}>
+        {detail
+          ? detail?.map((item) => (
+              <div
+                className={style["detail-container"]}
+                key={item._id}
+                onClick={() => navigate(`/blog-details/${item?._id}`)}
+              >
+                <h3>{item.title}</h3>
+                <div>
+                  {item.content == "" ? (
+                    "Not a blog found be the first "
+                  ) : (
+                    <BlogPost content={item.content} />
+                  )}
+                </div>
+                <div>
+                  <img src={item.image} alt={item.title} />
+                </div>
+                <div>
+                  <span>Author {item.userId?.username}</span>
+                  <span>
+                    <LiaHeart /> {item.totalLikes}
+                  </span>
+                  <span>
+                    <BsEye />
+                    {item.countOfViews?.length}
+                  </span>
+                </div>
+              </div>
+            ))
+          : blogs?.map((blog) => (
+              <section key={blog?._id} className={style["blog-card"]}>
+                <h4>{blog?.title}</h4>
+                <Link to={`/blog-details/${blog._id}`}>
+                  <img src={blog?.image[0]} alt={blog?.title} />
+                </Link>
+              </section>
+            ))}
+      </main>
+      <section className={style["pages-main"]}>
+      {!detail && (
+          <div className={style["pages-container"]}>
+            {pages.previousPage && (
+              <div onClick={() => handlePage(pages.previousPage)}>
+                {pages.previousPage}
+              </div>
+            )}
+            <div>{pages.currentPage}</div>
+            {pages.nextPage  && (
+              <div onClick={() => handlePage(pages.nextPage)}>
+                {pages.nextPage}
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+    </section>
+  );
+};
+
+export default BlogCard;

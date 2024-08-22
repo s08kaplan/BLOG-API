@@ -4,6 +4,21 @@
 
 $container-padding: 20px;
 
+.main{
+  position: relative;
+
+  & .pages-main {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 3rem;
+    & .pages-container {
+      & div{
+        color: red;
+      }
+    }
+  }
+}
 
 .container {
     @include flex();

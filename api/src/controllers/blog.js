@@ -24,7 +24,7 @@ module.exports = {
         `
     */
 
-    // const blogs = await Blog.find()
+    // console.log(req.query)
     // const blogFilters = !req.user?._id;
     const blogStatus = !(req.user?.isAdmin || req.user?.isStaff)
       ? { isDeleted: false, isPublish: true }

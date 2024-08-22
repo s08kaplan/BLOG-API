@@ -121,7 +121,6 @@ const BlogDetails = () => {
               <VscEdit onClick={() => setEditBlogModal(!editBlogModal)} />
             </span>
           )}
-          {/* <p className={detailStyle.content}>{blogDetail?.content}</p> */}
           <BlogPost content={blogDetail?.content} />
         </main>
 

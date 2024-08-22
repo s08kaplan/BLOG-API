@@ -11,7 +11,6 @@ const NewBlog = () => {
   const postBlog = async (url, postData) => {
     try {
       const { data } = await axiosWithToken.post(`${url}/`, postData);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }

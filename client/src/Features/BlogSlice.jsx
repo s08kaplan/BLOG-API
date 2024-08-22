@@ -7,6 +7,7 @@ const initialState = {
   comments: [],
   blogDetail: {},
   categoryDetail: [],
+  details:{},
   loading: false,
   error: false,
 };
@@ -37,6 +38,7 @@ const BlogSlice = createSlice({
         { state[payload.url] =  payload.data.updatedData}
       else {
         state[payload.url] = payload.data.data
+        state.details = payload?.data?.details
       }
     },
 

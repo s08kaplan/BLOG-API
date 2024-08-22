@@ -34,7 +34,7 @@ const QuillEditor = forwardRef(({ value }, ref) => {
       }}
       theme="snow"
       modules={modules}
-      value={value}
+      defaultValue={value}
     />
   );
 });
