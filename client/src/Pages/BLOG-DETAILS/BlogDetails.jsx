@@ -10,10 +10,9 @@ import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { VscEdit } from "react-icons/vsc";
 import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
-import detailStyle from "./BlogDetails.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import EditCommentModal from "../../Components/EDIT-COMMENT-MODAL/EditCommentModal";
-import axios from "axios";
+import style from "./BlogDetails.module.scss";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
@@ -90,16 +89,20 @@ const BlogDetails = () => {
   const handleCommentDelete = (commentId) => {
     deleteComment(commentId, blogId);
   };
-  
-  console.log(blogDetail);
-  return (
-    <section className={detailStyle.main}>
-      
-        <main className={detailStyle["detail-header"]}>
-          <h2>{blogDetail?.title}</h2>
 
-          <img src={blogDetail?.image} alt="blog-image" />
-          <div className={detailStyle.likes}>
+  console.log(blogDetail);
+  // console.log(blogDetail?.totalLikes);
+  return (
+    <section className={style.main}>
+      <main className={style["detail-header"]}>
+        <h2>{blogDetail?.title}</h2>
+
+        <img src={blogDetail?.image} alt="blog-image" />
+        <section className={style["likes-main"]}>
+          <span>
+            {new Date(blogDetail?.createdAt).toLocaleDateString("tr-TR")}
+          </span>
+          <div className={style.likes}>
             <LiaHeart
               onClick={postLike}
               fill={`${blogDetail?.likes?.includes(user?.id) ? "red" : ""}`}
@@ -107,89 +110,88 @@ const BlogDetails = () => {
             <span>{blogDetail?.totalLikes}</span>
           </div>
           {visitorCount && (
-            <div className={detailStyle.views}>
+            <div className={style.views}>
               viewed by <span>{visitorCount} </span>
               <span>{visitorCount > 1 ? "people" : "person"}</span>
             </div>
           )}
+        </section>
 
-          {(blogDetail?.userId?._id == user?.id ||
-            user?.isAdmin == true ||
-            user?.isStaff == true) && (
-            <span className={detailStyle.modal}>
-              <FaTrashAlt onClick={handleDelete} />
-              <VscEdit onClick={() => setEditBlogModal(!editBlogModal)} />
-            </span>
-          )}
-          <BlogPost content={blogDetail?.content} />
-        </main>
+        {(blogDetail?.userId?._id == user?.id ||
+          user?.isAdmin == true ||
+          user?.isStaff == true) && (
+          <span className={style.modal}>
+            <FaTrashAlt onClick={handleDelete} />
+            <VscEdit onClick={() => setEditBlogModal(!editBlogModal)} />
+          </span>
+        )}
+        <BlogPost content={blogDetail?.content} />
+      </main>
 
-        <button
-          className={detailStyle.button}
-          onClick={() => setShow((prev) => !prev)}
-          data-test="showHideComments"
-        >
-          {show ? "Hide Comments" : "Show Comments"}
-        </button>
+      <button
+        className={style.button}
+        onClick={() => setShow((prev) => !prev)}
+        data-test="showHideComments"
+      >
+        {show ? "Hide Comments" : "Show Comments"}
+      </button>
 
-        {show && (
-          <section className={detailStyle.comment}>
-            {/* <h4>{comments?.userId.username}</h4> */}
-            {blogDetail?.comments?.filter(
-              (comment) => comment.isDeleted == false
-            ).length > 0 ? (
-              blogDetail?.comments
-                ?.filter((comment) => comment.isDeleted == false)
-                .map((comment) => (
-                  <div key={comment._id}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        height: "40px",
-                      }}
-                    >
-                        <BlogPost content={comment?.content} />
-                    
-                      {(user?.id == comment?.userId ||
-                        user?.isAdmin ||
-                        user?.isStaff) && (
-                        <div>
-                          <FaTrashAlt
-                            onClick={() => handleCommentDelete(comment?._id)}
-                            color="red"
-                          />
-                          <VscEdit
-                            onClick={() => handleCommentEdit(comment?._id)}
-                            color="green"
-                          />
-                        </div>
-                      )}
-                    </div>
-                    <div style={{ border: "2px solid gray" }} />
+      {show && (
+        <section className={style.comment}>
+          {blogDetail?.comments?.filter((comment) => comment.isDeleted == false)
+            .length > 0 ? (
+            blogDetail?.comments
+              ?.filter((comment) => comment.isDeleted == false)
+              .map((comment) => (
+                <div key={comment._id}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      height: "40px",
+                    }}
+                  >
+                    <BlogPost content={comment?.content} />
+
+                    {(user?.id == comment?.userId ||
+                      user?.isAdmin ||
+                      user?.isStaff) && (
+                      <div>
+                        <FaTrashAlt
+                          onClick={() => handleCommentDelete(comment?._id)}
+                          color="red"
+                        />
+                        <VscEdit
+                          onClick={() => handleCommentEdit(comment?._id)}
+                          color="green"
+                        />
+                      </div>
+                    )}
                   </div>
-                ))
-            ) : (
-              <div>
-                <h4>Add first comment</h4>
-              </div>
-            )}
-          </section>
-        )}
-        {show && !commentModal && (
-          <ReactQuill
-            className={detailStyle.quill}
-            theme="snow"
-            value={comment}
-            onChange={setComment}
-          />
-        )}
-        {show && !commentModal && (
-          <button className={detailStyle.button} onClick={handleComment}>
-            Add Your Comment
-          </button>
-        )}
+                  <div style={{ border: "2px solid gray" }} />
+                </div>
+              ))
+          ) : (
+            <div>
+              <h4 style={{color:"black"}}>Add first comment</h4>
+            </div>
+          )}
+        </section>
+      )}
+      {show && !commentModal && (
+        <ReactQuill
+          className={style.quill}
+          theme="snow"
+          value={comment}
+          onChange={setComment}
+        />
+      )}
+      {show && !commentModal && (
+        <button className={style.button} onClick={handleComment}>
+          Add Your Comment
+        </button>
+      )}
       {editBlogModal && (
         <BlogModal
           {...blogDetail}

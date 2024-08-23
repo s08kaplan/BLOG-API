@@ -127,7 +127,7 @@ const AuthForm = ({ formType, schema }) => {
             </section>
           }
         </form>
-        {/* <DevTool control={control} /> */}
+        <DevTool control={control} />
       </main>
     </section>
   );

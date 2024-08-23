@@ -6,15 +6,22 @@ $container-padding: 20px;
 
 .main{
   position: relative;
-
+  bottom: 35px;
+  margin: .5rem;
+  padding: 1rem;
   & .pages-main {
     position: absolute;
-    bottom: 0;
     left: 50%;
     width: 3rem;
+    font-size: 1.3rem;
+   
     & .pages-container {
+      @include flex();
       & div{
-        color: red;
+        @include button();
+       &{ 
+       color: #022840;
+       } 
       }
     }
   }
@@ -72,17 +79,21 @@ $container-padding: 20px;
       transform: translateY(-5px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
+    & .author-like-info {
+      @include flex();
+      
+    }
   }
   
   @media (max-width: 768px) {
     .blog-card {
-      flex: 0 1 calc(50% - 20px); // For two columns layout on smaller screens
+      flex: 0 1 calc(50% - 20px); 
     }
   }
   
   @media (max-width: 480px) {
     .blog-card {
-      flex: 0 1 100%; // For single column layout on mobile screens
+      flex: 0 1 100%;
     }
   }
   

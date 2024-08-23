@@ -18,7 +18,8 @@ const BlogModal = ({
   content,
   categoryId,
   onClose,
-  postBlog
+  postBlog,
+  location
 }) => {
   const { categories } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
@@ -63,7 +64,6 @@ console.log(inputs);
     console.log(postData);
     blogId ? putBlog("blogDetail",blogId, postData) : postBlog("blogs", postData)
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
-    // setText("");
     onClose()
    blogId ? navigate(`/blog-details/${blogId}`) : navigate("/blogs")
   };
@@ -71,6 +71,11 @@ console.log(inputs);
   const categoryName = (categories?.filter(
     (category) => category._id == categoryId
   ))[0]?.name;
+
+console.log(location);
+const handleClose = () => {
+  location == "MyProfile" ? navigate("/my-profile") : onClose(false)
+}
 
   return (
     <section className={style["modal-main"]}>
@@ -132,7 +137,8 @@ console.log(inputs);
             </section>
             <section className={style.button}>
              <button>Submit</button>
-            <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>  
+            {/* <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>   */}
+            <button style={{ backgroundColor:"#ED0800"}} onClick={handleClose}>Close</button>  
             </section>
            
           </form>

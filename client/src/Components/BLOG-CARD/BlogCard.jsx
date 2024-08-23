@@ -28,19 +28,22 @@ const BlogCard = ({ detail }) => {
       setPages({
         previousPage: details.pages.previous_page || null,
         currentPage: details.pages.current_page,
-        nextPage: details.pages.next_page || null, 
+        nextPage: details.pages.next_page || null,
         totalPages: details.pages.total_pages,
       });
     }
   }, [details]);
 
-  console.log(details);
-  console.log(details?.pages?.current_page);
-  console.log("pages state: ", pages);
+  // console.log(details);
+  // console.log(details?.pages?.current_page);
+  // console.log("pages state: ", pages);
 
   const handlePage = (newPage) => {
-    if (newPage !== pages.currentPage && newPage > 0 && newPage <= pages.totalPages)
-     {
+    if (
+      newPage !== pages.currentPage &&
+      newPage > 0 &&
+      newPage <= pages.totalPages
+    ) {
       setPages((prev) => ({
         ...prev,
         currentPage: newPage,
@@ -48,6 +51,8 @@ const BlogCard = ({ detail }) => {
       getData("blogs", newPage);
     }
   };
+
+  // console.log(detail);
 
   return (
     <section className={style.main}>
@@ -60,18 +65,18 @@ const BlogCard = ({ detail }) => {
                 onClick={() => navigate(`/blog-details/${item?._id}`)}
               >
                 <h3>{item.title}</h3>
-                <div>
+                <section>
                   {item.content == "" ? (
                     "Not a blog found be the first "
                   ) : (
                     <BlogPost content={item.content} />
                   )}
-                </div>
+                </section>
                 <div>
                   <img src={item.image} alt={item.title} />
                 </div>
-                <div>
-                  <span>Author {item.userId?.username}</span>
+                <section className={style["author-like-info"]}>
+                  <span>{item.userId?.username}</span>
                   <span>
                     <LiaHeart /> {item.totalLikes}
                   </span>
@@ -79,7 +84,7 @@ const BlogCard = ({ detail }) => {
                     <BsEye />
                     {item.countOfViews?.length}
                   </span>
-                </div>
+                </section>
               </div>
             ))
           : blogs?.map((blog) => (
@@ -92,7 +97,7 @@ const BlogCard = ({ detail }) => {
             ))}
       </main>
       <section className={style["pages-main"]}>
-      {!detail && (
+        {!detail && (
           <div className={style["pages-container"]}>
             {pages.previousPage && (
               <div onClick={() => handlePage(pages.previousPage)}>
@@ -100,7 +105,7 @@ const BlogCard = ({ detail }) => {
               </div>
             )}
             <div>{pages.currentPage}</div>
-            {pages.nextPage  && (
+            {pages.nextPage && (
               <div onClick={() => handlePage(pages.nextPage)}>
                 {pages.nextPage}
               </div>

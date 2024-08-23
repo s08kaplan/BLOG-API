@@ -2,18 +2,36 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../../Custom-hooks/useAuthCalls";
 import DOMPurify from "dompurify";
-import profileStyles from "./MyProfile.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import QuillEditor from "../../Components/QUILL/QuillEditor";
 import { formRegisterInputs } from "../../Helpers/formInputs";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import BlogCard from "../../Components/BLOG-CARD/BlogCard";
+import { useNavigate } from "react-router-dom";
+import style from "./MyProfile.module.scss";
 
 const MyProfile = () => {
   const { updatedUser } = useAuthCalls();
   const { user } = useSelector((state) => state.auth);
-  const { blogs } = useSelector((state) => state.blog);
+  const { blogs, details } = useSelector((state) => state.blog);
+
   const [show, setShow] = useState(false);
+  const [userModal, setUserModal] = useState(false);
+  const quillRef = useRef(user?.biography);
+
+  const navigate = useNavigate();
+
+  
+  const inputRefs = useRef({
+    username: user?.username,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
+    image: user?.image || [],
+    biography: user?.biography || "",
+    password: "",
+  });
+
 
   const { getData } = useBlogData();
   useEffect(() => {
@@ -26,18 +44,7 @@ const MyProfile = () => {
 
   // console.log(user);
   // console.log(blogs);
-  const inputRefs = useRef({
-    username: user?.username,
-    firstName: user?.firstName,
-    lastName: user?.lastName,
-    email: user?.email,
-    image: user?.image || [],
-    biography: user?.biography || "",
-    password: "",
-  });
-
-  const [userModal, setUserModal] = useState(false);
-  const quillRef = useRef(user?.biography);
+console.log(details);
 
   const handleForm = (e) => {
     const { name, value } = e.target;
@@ -67,9 +74,18 @@ const MyProfile = () => {
     setShow((prev) => !prev);
   };
 
+  const handleNavigate = () => {
+    navigate("/new-blog", { state: { from: "MyProfile" }});
+  };
+
+  const handlePage = (e) => {
+    const page = e.target.textContent
+   getData("blogs", page)
+  }
+
   return (
-    <main className={profileStyles.main}>
-      <section className={profileStyles["profile-header"]}>
+    <main className={style.main}>
+      <section className={style["profile-header"]}>
         <img
           src={
             (Array.isArray(user?.image) && user?.image[0]) ||
@@ -79,11 +95,11 @@ const MyProfile = () => {
         />
         <h2>{user?.username}</h2>
       </section>
-      <section className={profileStyles["profile-body"]}>
+      <section className={style["profile-body"]}>
         <BlogPost content={user?.biography} />
       </section>
       <button onClick={() => setUserModal(!userModal)}>Edit Profile</button>
-      <button onClick={showMyBlogs}>my blogs</button>
+      <button onClick={showMyBlogs}>My Blogs</button>
 
       {userModal && (
         <div>
@@ -118,8 +134,18 @@ const MyProfile = () => {
         </div>
       )}
       {show && (
-        <section>
-          <BlogCard detail={userBlogs} />
+        <section className={userBlogs?.length == 0  ? style["no-content"]  : style.blogs}>
+          {userBlogs?.length !== 0 ? (
+            // <BlogCard detail={userBlogs} />
+            <BlogCard />
+          ) : (
+            !details?.pages?.total_pages && userBlogs.length == 0 ?
+            <span onClick={handleNavigate} className={style["span-message"]}>
+               Add Your First Blog
+            </span>
+            :
+            <button onClick={handlePage} className={style["previous-page"]}>{details?.pages?.previous_page }</button>
+          )}
         </section>
       )}
     </main>
