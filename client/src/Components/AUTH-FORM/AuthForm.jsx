@@ -104,7 +104,7 @@ const AuthForm = ({ formType, schema }) => {
                   <p className={style.error}>{errors[item.name]?.message}</p>
                 </section>
               ))}
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting} data-test="loginRegisterSubmit">
             {isSubmitting
               ? "Submitting..."
               : formType === "register"

@@ -35,7 +35,7 @@ Cypress.Commands.add("login", () => {
   cy.get('[data-test="loginUsername"]').should("be.visible").type("Veli");
   cy.get('[data-test="loginEmail"]').should("be.visible").type("veli@site.com");
   cy.get('[data-test="loginPassword"]').should("be.visible").type("aA?123456");
-  cy.get('[data-test="loginSubmit"]')
+  cy.get('[data-test="loginRegisterSubmit"]')
     .should("be.visible")
     .click({ force: true });
   cy.url().should("include", "/blogs");
@@ -66,4 +66,13 @@ Cypress.Commands.add("fetchBlogId", () => {
       console.log(id);
     });
   });
+});
+
+
+Cypress.Commands.add('typeInQuill', (selector, text) => {
+  cy.get(selector)
+    .find('.ql-editor') 
+    .click()
+    .focused()
+    .type(text, { force: true });
 });

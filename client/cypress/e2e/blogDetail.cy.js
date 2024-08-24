@@ -9,7 +9,7 @@ describe('blogs', () => {
      cy.wait(1000)
      
     
-    cy.get('[data-test="blogDetailButton"]').should('be.visible').first().click({force:true})
+     cy.get('[data-test="blogImage"]').should('exist').first().click({force:true})
      cy.wait(2000)
      cy.url().should('include', `/blog-details/${Cypress.env('BLOG_ID')}`)
      cy.visit(`http://localhost:5173/blog-details/${Cypress.env('BLOG_ID')}`);

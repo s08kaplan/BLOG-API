@@ -64,7 +64,7 @@ const BlogCard = ({ detail }) => {
                 key={item._id}
                 onClick={() => navigate(`/blog-details/${item?._id}`)}
               >
-                <h3>{item.title}</h3>
+                <h3 data-test="blogTitle">{item.title}</h3>
                 <section>
                   {item.content == "" ? (
                     "Not a blog found be the first "
@@ -73,7 +73,7 @@ const BlogCard = ({ detail }) => {
                   )}
                 </section>
                 <div>
-                  <img src={item.image} alt={item.title} />
+                  <img src={item.image} alt={item.title} data-test="blogImage" />
                 </div>
                 <section className={style["author-like-info"]}>
                   <span>{item.userId?.username}</span>
@@ -89,9 +89,9 @@ const BlogCard = ({ detail }) => {
             ))
           : blogs?.map((blog) => (
               <section key={blog?._id} className={style["blog-card"]}>
-                <h4>{blog?.title}</h4>
                 <Link to={`/blog-details/${blog._id}`}>
-                  <img src={blog?.image[0]} alt={blog?.title} />
+                <h4 data-test="blogTitle">{blog?.title}</h4>
+                  <img src={blog?.image[0]} alt={blog?.title} data-test="blogImage"/>
                 </Link>
               </section>
             ))}

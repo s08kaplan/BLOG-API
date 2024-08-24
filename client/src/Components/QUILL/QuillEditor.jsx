@@ -28,7 +28,7 @@ const QuillEditor = forwardRef(({ value }, ref) => {
   }, [value]);
 
   return (
-    <section className={style.quill}>
+    <section className={style.quill} data-test="quillEditor">
    <ReactQuill
       ref={(el) => {
         quillRef.current = el;

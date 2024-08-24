@@ -9,10 +9,10 @@ const Footer = () => {
   return (
     <footer className={footerStyle.footer}>
       <main className={footerStyle.container}>
-        <h6 className={footerStyle.message}>
+        <h6 className={footerStyle.message} data-test="footerMessage">
           Express Yourself Freely
         </h6>
-        <div className={footerStyle["footer-icons"]}>
+        <div className={footerStyle["footer-icons"]} data-test="footerIcons">
           <div className={`${footerStyle.icon} ${footerStyle.iconWhatsapp}`}>
             <IoLogoWhatsapp />
           </div>

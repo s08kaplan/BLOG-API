@@ -46,7 +46,7 @@ const SideBar = ({ onClose }) => {
           {token && token !== "" ? (
             <>
               <div onClick={handleClose}>
-                <Link to="/new-blog">New Blog</Link>
+                <Link to="/new-blog" data-test="newBlogLink">New Blog</Link>
               </div>
               <div className={style.logout} onClick={handleLogout}>
                 Log out

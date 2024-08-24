@@ -85,6 +85,7 @@ const handleClose = () => {
             <section className={style["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
+                data-test="newBlogTitle"
                 type="text"
                 id="title"
                 name="title"
@@ -99,6 +100,7 @@ const handleClose = () => {
             <section className={style["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
+              data-test="newBlogImage"
                 type="text"
                 id="image"
                 name="image"
@@ -108,6 +110,7 @@ const handleClose = () => {
             </section>
             <section className={style["input-group"]}>
               <select
+              data-test="newBlogSelectCategory"
                 name="categories"
                 id="categories"
                 value={inputs.categories}
@@ -125,6 +128,7 @@ const handleClose = () => {
             </section>
             <section className={style["input-group"]}>
               <select
+              data-test="newBlogPublishSelect"
                 name="isPublish"
                 id="isPublish"
                 value={inputs.isPublish}
@@ -136,7 +140,7 @@ const handleClose = () => {
               </select>
             </section>
             <section className={style.button}>
-             <button>Submit</button>
+             <button data-test="newBlogSubmit">Submit</button>
             {/* <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>   */}
             <button style={{ backgroundColor:"#ED0800"}} onClick={handleClose}>Close</button>  
             </section>
