@@ -155,11 +155,77 @@ The React frontend is organized into the following structure:
 ├── index.css
 ├── main.jsx
 └── structure.txt
+```
 ###Key Libraries
--**React Router DOM**: Manages the navigation and routing within the application.
--**Redux Toolkit**: Provides a streamlined approach to managing global state with slices for authentication and blogs.
--**Axios**: Facilitates making HTTP requests to the backend API.
--**DOMPurify**: Ensures that any HTML content is sanitized before rendering, preventing XSS attacks.
--**React Hook Form**: Simplifies form handling and validation.
--**Yup**: Works with React Hook Form to provide schema-based validation for forms.
--**Sass**: Enables modular and reusable styling through its powerful features.
+- **React Router DOM**: Manages the navigation and routing within the application.
+- **Redux Toolkit**: Provides a streamlined approach to managing global state with slices for authentication and blogs.
+- **Axios**: Facilitates making HTTP requests to the backend API.
+- **DOMPurify**: Ensures that any HTML content is sanitized before rendering, preventing XSS attacks.
+- **React Hook Form**: Simplifies form handling and validation.
+- **Yup**: Works with React Hook Form to provide schema-based validation for forms.
+- **Sass**: Enables modular and reusable styling through its powerful features.
+
+  #Backend
+  ##Key Libraries
+  - **Express.js**: A minimal and flexible Node.js web application framework for building RESTful APIs.
+  - **Mongoose**: An ODM (Object Data Modeling) library for MongoDB and Node.js.
+  - **MongoDB**: A NoSQL database used for storing data.
+### Folder Structure for Backend
+
+```plaintext
+.
+├── configs/
+│   ├── dbConnection.js
+│   └── swagger.json
+├── controllers/
+│   ├── auth.js
+│   ├── blog.js
+│   ├── category.js
+│   ├── comment.js
+│   ├── like.js
+│   ├── token.js
+│   └── user.js
+├── helpers/
+│   ├── sendMail.js
+│   ├── sync.js
+│   └── validationHelpers.js
+├── middlewares/
+│   ├── authentication.js
+│   ├── errorHandler.js
+│   ├── logger.js
+│   ├── permissions.js
+│   ├── queryHandler.js
+│   └── upload.js
+├── models/
+│   ├── blog.js
+│   ├── category.js
+│   ├── comment.js
+│   ├── token.js
+│   └── user.js
+└── routes/
+    ├── auth.js
+    ├── blog.js
+    ├── category.js
+    ├── comment.js
+    ├── document.js
+    ├── index.js
+    ├── like.js
+    ├── token.js
+    └── user.js
+```
+## Installation
+
+### Frontend
+
+```bash
+git clone <repository-url>
+cd client
+pnpm install
+pnpm start
+
+### Backend
+cd api
+npm install
+nodemon
+
+
