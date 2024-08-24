@@ -9,7 +9,7 @@ $container-padding: 20px;
 }
 
 .auth-title {
-  color: #000;
+  color: $text-color-2;
 }
 .form-container {
   @include flex($fd: column);
@@ -30,9 +30,8 @@ input {
     top: 0;
     left: 10px;
     font-size: 0.75em;
-    // color: $btn-color;
-    color: #191D3A;
-    background-color: $form-background-color;
+    color: $label-color;
+    background-color: $background-color;
     padding: 0 5px;
   }
 }
@@ -75,7 +74,7 @@ form {
   @include flex($g: 0.1rem);
   // margin-left: 1rem;
   & span {
-    color: #000;
+    color: $text-color-2;
     margin-left: 2.5rem;
   }
 }

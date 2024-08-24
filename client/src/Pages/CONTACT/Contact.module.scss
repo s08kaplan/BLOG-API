@@ -3,7 +3,7 @@
 .main{
   @include flex();
   width: 100svw;
-  color: #fff;
+  color: $background-color;
   background-color: #333;
   // background: linear-gradient(130deg, rgba(203,59,242,1) 19%, rgba(118,119,228,1) 100%, rgba(203,59,242,1) 100%); 
 }
@@ -16,7 +16,7 @@
   h3 {
     margin-top: 2rem;
     text-align: center;
-    color: #fff;
+    color: $background-color;
     span {
       color: #007bff;
     }
@@ -34,7 +34,7 @@
    width: 100svw;
    height: 8rem;
     a {
-      color: #333;
+      color: $text-color;
       text-decoration: none;
       @include flex($jc:space-between);
       position: relative;
@@ -88,19 +88,19 @@
           transition: 0.3s ease-in-out;
         }
         &:hover:nth-child(1) {
-          color: #25d366;
+          color: $whatsapp-color;
         }
         &:hover:nth-child(2) {
-          color: #007bff;
+          color: $facebook-color
         }
         &:hover:nth-child(3) {
-          color: #c32aa3;
+          color: $instagram-color;
         }
         &:hover:nth-child(4) {
-          color: #0088cc;
+          color: $telegram-color;
         }
         &:hover:nth-child(5) {
-          // color: #14171a;
+          color: $twitter-color-2;
           animation: spin 1s ease-in-out;
         }
       }

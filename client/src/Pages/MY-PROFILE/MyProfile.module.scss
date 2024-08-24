@@ -59,7 +59,7 @@
     width: 2rem;
     height: 2rem;
   @include flex();
-    color: white;
+    color: $background-color;
     font-size: 1.2rem;
     cursor: pointer;
   
@@ -90,7 +90,7 @@
 
 
    & button {
-      @include button($bg:$primary-color,$hover-c:#fff,$hover-bg:blueviolet);
+      @include button($bg:$primary-color,$hover-c:$background-color,$hover-bg:blueviolet);
     }
 
   }
@@ -150,7 +150,7 @@
         width: 2rem;
         height: 2rem;
       @include flex();
-        color: white;
+        color: $background-color;
         font-size: 1.2rem;
         cursor: pointer;
       

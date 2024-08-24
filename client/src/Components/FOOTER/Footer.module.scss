@@ -3,7 +3,7 @@
 .footer {
   width: 100svw;
   padding: 1.7rem 0;
-  color: white;
+  color: $background-color;
   background: url("../../assets/logo-2.png") no-repeat;
   background-size: contain;
   background-position: left;
@@ -13,7 +13,7 @@
     @include flex($jc: space-between);
     margin: 0 auto;
     padding: 0 20px;
-    color: white;
+    color: $background-color;
     & .message {
       font-size: 1.2rem;
       margin-bottom: 20px;
@@ -29,23 +29,23 @@
         transition: color 0.3s ease;
         cursor: pointer;
         &.iconWhatsapp:hover {
-          color: #25d366;
+          color: $whatsapp-color;
         }
 
         &.iconFacebook:hover {
-          color: #3b5998;
+          color: $facebook-color;
         }
 
         &.iconInstagram:hover {
-          color: #e1306c;
+          color: $instagram-color;
         }
 
         &.iconTelegram:hover {
-          color: #0088cc;
+          color: $telegram-color
         }
 
         &.iconTwitter:hover {
-          color: #1da1f2;
+          color: $twitter-color;
         }
         & svg {
           font-size: xx-large;
@@ -59,7 +59,7 @@
 
   .footer {
   background-position: left;
-  background-color: #22283174;
+  background-color: $footer-bg;
   }
   .container {
     padding: 20px 10px;

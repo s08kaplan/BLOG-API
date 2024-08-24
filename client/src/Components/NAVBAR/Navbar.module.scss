@@ -3,9 +3,6 @@
 
 header {
   background-color: #fff;
-  // background-color: #ffdee9;
-  // background: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
-
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: 100px;
   position: relative;
@@ -61,7 +58,7 @@ header {
           bottom: 0;
           transform-origin: bottom right;
           transition: transform 0.25s ease-out;
-          background-color: blueviolet;
+          background-color: $color-3;
         }
         &:hover::after {
           transform: scaleX(1);

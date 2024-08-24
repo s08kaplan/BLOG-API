@@ -7,7 +7,7 @@
     font-family: "Goudy Bookletter 1911",sans-serif; 
     font-size: x-large;
     color: $text-color;
-    background-color: #fff;
+    background-color: $background-color;
  
     & .title{
        @include flex($fd:column);

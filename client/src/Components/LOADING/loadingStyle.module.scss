@@ -23,7 +23,7 @@
       border-radius: 0.5rem;
       animation: fade 1.5s infinite both;
       &:nth-child(2) {
-        color: teal;
+        color: #008080;
         animation-delay: 0.3s;
       }
       &:nth-child(3) {
@@ -54,23 +54,24 @@
 
 @keyframes move {
   0% {
-    top: 150px;
-    left: 20px;
+    top: 50%;
+    left: 10%;
   }
   20% {
-    top: 250px;
-    left: 20px;
+    top: 50%;
+    left: 30%;
   }
   40% {
-    top: 250px;
-    left: 400px;
+    top: 50%;
+    left: 50%;
   }
   80% {
-    top: 150px;
-    left: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   100% {
-    top: 150px;
-    left: 20px;
+    top: -100%;
+    left: 50%;
   }
 }
