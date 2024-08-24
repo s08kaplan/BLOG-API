@@ -54,6 +54,7 @@ const AuthForm = ({ formType, schema }) => {
   return (
     <section className={style["auth-main"]}>
       <main className={style["form-container"]}>
+        <h2 className={style["auth-title"]}>{formType === "login" ? "" : "Register Form"}</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           {formType == "register"
             ? formRegisterInputs.map((item) =>
@@ -118,7 +119,7 @@ const AuthForm = ({ formType, schema }) => {
                   : "Already have an account"}
               </span>
               <button
-                style={{ width: "5rem", marginLeft: "1rem" }}
+                style={{ width: "5rem" }}
                 onClick={handleNavigate}
                 data-test="loginRegisterButton"
               >

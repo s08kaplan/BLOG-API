@@ -21,7 +21,6 @@ const MyProfile = () => {
 
   const navigate = useNavigate();
 
-  
   const inputRefs = useRef({
     username: user?.username,
     firstName: user?.firstName,
@@ -31,7 +30,6 @@ const MyProfile = () => {
     biography: user?.biography || "",
     password: "",
   });
-
 
   const { getData } = useBlogData();
   useEffect(() => {
@@ -44,7 +42,7 @@ const MyProfile = () => {
 
   // console.log(user);
   // console.log(blogs);
-console.log(details);
+  console.log(details);
 
   const handleForm = (e) => {
     const { name, value } = e.target;
@@ -70,19 +68,42 @@ console.log(details);
     setUserModal(false);
   };
 
-  const showMyBlogs = () => {
-    setShow((prev) => !prev);
+  const handleButtons = (e) => {
+    // console.log(e.target.textContent);
+    const { textContent } = e.target;
+
+    switch (textContent) {
+      case "Edit Profile":
+        setUserModal(true);
+        setShow(false);
+        break;
+
+      case "My Blogs":
+        setUserModal(false);
+        setShow(true);
+        break;
+
+      case "X":
+        setUserModal(false);
+        setShow(false);
+        break;
+
+      default:
+        setUserModal(false);
+        setShow(false);
+        break;
+    }
   };
 
   const handleNavigate = () => {
-    navigate("/new-blog", { state: { from: "MyProfile" }});
+    navigate("/new-blog", { state: { from: "MyProfile" } });
   };
 
   const handlePage = (e) => {
-    const page = e.target.textContent
-   getData("blogs", page)
-  }
-
+    const page = e.target.textContent;
+    getData("blogs", page);
+  };
+  console.log(details?.pages?.total_pages);
   return (
     <main className={style.main}>
       <section className={style["profile-header"]}>
@@ -98,12 +119,16 @@ console.log(details);
       <section className={style["profile-body"]}>
         <BlogPost content={user?.biography} />
       </section>
-      <button onClick={() => setUserModal(!userModal)}>Edit Profile</button>
-      <button onClick={showMyBlogs}>My Blogs</button>
+
+      <button onClick={handleButtons}>Edit Profile</button>
+      <button onClick={handleButtons}>My Blogs</button>
 
       {userModal && (
-        <div>
+        <section>
           <form onSubmit={handleSubmit}>
+            <span className={style.close} onClick={handleButtons}>
+              X
+            </span>
             {formRegisterInputs.map(
               (item) =>
                 item.name !== "biography" && (
@@ -131,20 +156,28 @@ console.log(details);
 
             <button>Submit</button>
           </form>
-        </div>
+        </section>
       )}
       {show && (
-        <section className={userBlogs?.length == 0  ? style["no-content"]  : style.blogs}>
+        <section
+          className={userBlogs?.length == 0 ? style["no-content"] : style.blogs}
+        >
           {userBlogs?.length !== 0 ? (
             // <BlogCard detail={userBlogs} />
-            <BlogCard />
-          ) : (
-            !details?.pages?.total_pages && userBlogs.length == 0 ?
-            <span onClick={handleNavigate} className={style["span-message"]}>
-               Add Your First Blog
+            <div className={style["profile-cards"]}>
+               <span className={style.close} onClick={handleButtons}>
+              X
             </span>
-            :
-            <button onClick={handlePage} className={style["previous-page"]}>{details?.pages?.previous_page }</button>
+              <BlogCard />
+            </div>
+          ) : !details?.page && userBlogs.length == 0 ? (
+            <button onClick={handleNavigate} className={style["span-message"]}>
+              Add Your First Blog
+            </button>
+          ) : (
+            <button onClick={handlePage} className={style["previous-page"]}>
+              {details?.pages?.previous_page}
+            </button>
           )}
         </section>
       )}

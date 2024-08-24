@@ -3,6 +3,9 @@
 .main{
   @include flex();
   width: 100svw;
+  color: #fff;
+  background-color: #333;
+  // background: linear-gradient(130deg, rgba(203,59,242,1) 19%, rgba(118,119,228,1) 100%, rgba(203,59,242,1) 100%); 
 }
 .contact-container {
   min-height: 100dvh;
@@ -13,7 +16,7 @@
   h3 {
     margin-top: 2rem;
     text-align: center;
-    color: #333;
+    color: #fff;
     span {
       color: #007bff;
     }

@@ -1,16 +1,18 @@
 @import "../../../scss/abstract/mixins";
 @import "../../../scss/abstract//colors";
 
-
 $container-padding: 20px;
 
 .auth-main {
-    @include flex();
-    min-height: 100dvh;
-  }
+  @include flex();
+  min-height: 100dvh;
+}
 
+.auth-title {
+  color: #000;
+}
 .form-container {
-  @include flex($fd:column);
+  @include flex($fd: column);
   height: 100%;
 }
 
@@ -19,18 +21,17 @@ $container-padding: 20px;
   position: relative;
 }
 
-
-
 input {
-  @include input($w:100%, $p:10px);
+  @include input($w: 100%, $p: 10px);
 
   &:focus + .user-label,
   &:not(:placeholder-shown) + .user-label {
-    margin-top: .3rem;
+    margin-top: 0.3rem;
     top: 0;
     left: 10px;
     font-size: 0.75em;
-    color: $primary-color;
+    // color: $btn-color;
+    color: #191D3A;
     background-color: $form-background-color;
     padding: 0 5px;
   }
@@ -54,24 +55,29 @@ input {
 }
 
 button {
-  @include button($w:100%);
+  @include button($w: 100%,$m:.5rem auto);
 }
 
 form {
   @include form();
 }
 
-
 .error-message {
-  @include flex($fd:column);
+  @include flex($fd: column);
   margin: 10rem;
-   & a {
+  & a {
     text-decoration: none;
-    @include button($p:1rem);
-   }
+    @include button($p: 1rem);
+  }
 }
 
 .auth-button {
-    @include flex($g:0.1rem);
-    margin-left: 1rem;
+  @include flex($g: 0.1rem);
+  // margin-left: 1rem;
+  & span {
+    color: #000;
+    margin-left: 2.5rem;
+  }
 }
+
+

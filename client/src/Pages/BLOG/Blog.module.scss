@@ -5,8 +5,8 @@
 .main {
   min-height: 100dvh;
   padding: 2rem;
-  background-color: $background-color;
-  @include flex($fd: column);
+  // background-color: $background-color;
+  background: linear-gradient(130deg, rgba(97,190,214,1) 26%, rgba(234,227,235,1) 100%, rgba(64,152,175,1) 100%);  @include flex($fd: column);
 
   & .main-section { 
     @include grid($gtc: repeat(1, 1fr));

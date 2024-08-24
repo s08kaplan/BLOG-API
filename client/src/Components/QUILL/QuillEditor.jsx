@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { modules } from "../../Helpers/quillModules";
+import style from "./QuillStyle.module.scss";
 
 // Forwarding the ref for accessing the Quill editor instance
 const QuillEditor = forwardRef(({ value }, ref) => {
@@ -27,7 +28,8 @@ const QuillEditor = forwardRef(({ value }, ref) => {
   }, [value]);
 
   return (
-    <ReactQuill
+    <section className={style.quill}>
+   <ReactQuill
       ref={(el) => {
         quillRef.current = el;
         if (ref) ref.current = el;
@@ -35,7 +37,10 @@ const QuillEditor = forwardRef(({ value }, ref) => {
       theme="snow"
       modules={modules}
       defaultValue={value}
-    />
+      className={style.inner}
+    />      
+    </section>
+ 
   );
 });
 
