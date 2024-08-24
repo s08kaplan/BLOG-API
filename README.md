@@ -156,7 +156,7 @@ The React frontend is organized into the following structure:
 ├── main.jsx
 └── structure.txt
 ```
-###Key Libraries
+### Key Libraries
 - **React Router DOM**: Manages the navigation and routing within the application.
 - **Redux Toolkit**: Provides a streamlined approach to managing global state with slices for authentication and blogs.
 - **Axios**: Facilitates making HTTP requests to the backend API.
@@ -165,8 +165,8 @@ The React frontend is organized into the following structure:
 - **Yup**: Works with React Hook Form to provide schema-based validation for forms.
 - **Sass**: Enables modular and reusable styling through its powerful features.
 
-  #Backend
-  ##Key Libraries
+  # Backend
+  ## Key Libraries
   - **Express.js**: A minimal and flexible Node.js web application framework for building RESTful APIs.
   - **Mongoose**: An ODM (Object Data Modeling) library for MongoDB and Node.js.
   - **MongoDB**: A NoSQL database used for storing data.
