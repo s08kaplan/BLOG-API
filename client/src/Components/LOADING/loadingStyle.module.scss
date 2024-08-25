@@ -1,0 +1,77 @@
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
+.main {
+  @include flex();
+
+  & .content {
+    position: absolute;
+    @include flex();
+    animation: move 3s ease-in-out infinite;
+    // font-size: 3rem;
+    & h3 {
+      font-size: 4rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #54a0ff, #5f27cd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fade 3s ease-in-out infinite;
+    }
+    & span {
+      font-size: 5rem;
+      border-radius: 0.5rem;
+      animation: fade 1.5s infinite both;
+      &:nth-child(2) {
+        color: #008080;
+        animation-delay: 0.3s;
+      }
+      &:nth-child(3) {
+        color: #1a5f7a;
+        animation-delay: 0.6s;
+      }
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes move {
+  0% {
+    top: 50%;
+    left: 10%;
+  }
+  20% {
+    top: 50%;
+    left: 30%;
+  }
+  40% {
+    top: 50%;
+    left: 50%;
+  }
+  80% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    top: -100%;
+    left: 50%;
+  }
+}

@@ -1,0 +1,103 @@
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
+
+$container-padding: 20px;
+
+.main{
+  position: relative;
+  bottom: 35px;
+  margin: .5rem;
+  padding: 1rem;
+  & .pages-main {
+    position: absolute;
+    left: 50%;
+    width: 3rem;
+    font-size: 1.3rem;
+   
+    & .pages-container {
+      @include flex();
+      & div{
+        @include button();
+       &{ 
+       color: #022840;
+       } 
+      }
+    }
+  }
+}
+
+.container {
+    @include flex();
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .blog-card {
+    background-color: $background-color;
+    border: 1px solid $card-border-color;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    flex: 0 1 calc(33.333% - 20px); // For three columns layout
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  
+   & h4 {
+      margin: 0;
+      padding: 10px;
+      color: $primary-color;
+      font-size: 1.2em;
+    }
+  
+   & img {
+      width: 100%;
+      height: 250px;
+      object-fit: fill;
+      display: block;
+      border-bottom: 1px solid $card-border-color;
+    }
+   
+    & a {
+      text-decoration: none;
+    }
+  }
+
+
+  .detail-container {
+    background-color: $background-color;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    & .author-like-info {
+      @include flex();
+      
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .blog-card {
+      flex: 0 1 calc(50% - 20px); 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .blog-card {
+      flex: 0 1 100%;
+    }
+  }
+  

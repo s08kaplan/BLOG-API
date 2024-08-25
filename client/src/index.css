@@ -1,0 +1,35 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Anta&family=Goudy+Bookletter+1911&family=Righteous&display=swap');
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #fff;
+  background-color: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*{
+  margin: 0;
+     padding: 0;
+     box-sizing: border-box; 
+}
+ body {
+     /* min-height: 100dvh;
+     min-width: 100svw; */
+     /* font-family: Arial, sans-serif; */
+     overflow-x: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ddd;
+   }

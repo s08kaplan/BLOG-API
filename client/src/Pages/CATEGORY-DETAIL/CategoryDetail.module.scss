@@ -1,0 +1,64 @@
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
+
+$container-padding: 20px;
+
+.main {
+  min-height: 100dvh;
+  @include flex();
+  padding: $container-padding;
+  background-color: $background-color;
+  & .container {
+    @include flex($fd: column);
+    max-width: 1200px;
+    width: 100%;
+
+    & .detail-container {
+      background-color: $background-color;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      & h3 {
+        color: $primary-color;
+      }
+      & p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 3;
+      }
+      & div {
+        @include flex($jc: space-between);
+        color: $text-color;
+        & span {
+          @include flex();
+
+          & svg {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .detail-container {
+    padding: 15px;
+  }
+}

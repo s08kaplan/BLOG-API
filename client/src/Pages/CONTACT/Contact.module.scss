@@ -1,0 +1,118 @@
+@import "../../../scss//abstract//mixins";
+
+.main{
+  @include flex();
+  width: 100svw;
+  color: $background-color;
+  background-color: #333;
+  // background: linear-gradient(130deg, rgba(203,59,242,1) 19%, rgba(118,119,228,1) 100%, rgba(203,59,242,1) 100%); 
+}
+.contact-container {
+  min-height: 100dvh;
+  @include flex($fd: column);
+  font-family: "Anta";
+  font-size: large;
+  line-height: 1.5rem;
+  h3 {
+    margin-top: 2rem;
+    text-align: center;
+    color: $background-color;
+    span {
+      color: #007bff;
+    }
+  }
+
+  & .explanation {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    @include flex($fd: column);
+  }
+
+  .contact-info {
+    @include flex($g: 2rem);
+    // margin: 1rem;
+   width: 100svw;
+   height: 8rem;
+    a {
+      color: $text-color;
+      text-decoration: none;
+      @include flex($jc:space-between);
+      position: relative;
+      margin-bottom: 10px;
+      svg {
+        // margin-right: 10px;
+      transition: .3s ease-in-out;
+
+      }
+      &:nth-child(1):hover svg{
+        color: #1471b4c9;
+        font-size: 1.5rem;
+      }
+      &:nth-child(2):hover svg{
+        color: #25d366;
+        font-size: 1.5rem;
+      }
+   
+      & .email {
+        display: none;
+      }
+      &:nth-child(2):hover .email {
+         display: inline-block;
+         position: absolute;
+         margin-left: 7rem;
+         color: #25d366;
+      }
+
+    }
+  
+
+  }
+
+  .contact-footer {
+    margin-top: 20px;
+    @include flex($jc: center, $ai: center, $g: 2rem);
+
+    .icons {
+      @include flex();
+
+      .whatsapp,
+      .facebook,
+      .instagram,
+      .telegram,
+      .twitter {
+        transform-origin: center center;
+        & svg {
+          margin-right: 10px;
+          font-size: 2rem;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+        }
+        &:hover:nth-child(1) {
+          color: $whatsapp-color;
+        }
+        &:hover:nth-child(2) {
+          color: $facebook-color
+        }
+        &:hover:nth-child(3) {
+          color: $instagram-color;
+        }
+        &:hover:nth-child(4) {
+          color: $telegram-color;
+        }
+        &:hover:nth-child(5) {
+          color: $twitter-color-2;
+          animation: spin 1s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}

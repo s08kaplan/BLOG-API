@@ -1,0 +1,102 @@
+@import "../../../scss/abstract/mixins";
+
+.footer {
+  width: 100svw;
+  padding: 1.7rem 0;
+  color: $background-color;
+  background: url("../../assets/logo-2.png") no-repeat;
+  background-size: contain;
+  background-position: left;
+  background-color: #22283174;
+  
+  & .container {
+    @include flex($jc: space-between);
+    margin: 0 auto;
+    padding: 0 20px;
+    color: $background-color;
+    & .message {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      margin-left: 280px;
+      font-family: "Akaya Telivigala",serif;
+    }
+
+    & .footer-icons {
+      @include flex($jc: flex-end);
+      gap: 20px;
+
+      & .icon {
+        transition: color 0.3s ease;
+        cursor: pointer;
+        &.iconWhatsapp:hover {
+          color: $whatsapp-color;
+        }
+
+        &.iconFacebook:hover {
+          color: $facebook-color;
+        }
+
+        &.iconInstagram:hover {
+          color: $instagram-color;
+        }
+
+        &.iconTelegram:hover {
+          color: $telegram-color
+        }
+
+        &.iconTwitter:hover {
+          color: $twitter-color;
+        }
+        & svg {
+          font-size: xx-large;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+
+  .footer {
+  background-position: left;
+  background-color: $footer-bg;
+  }
+  .container {
+    padding: 20px 10px;
+    justify-content: space-between;
+  }
+
+  .footer-icons {
+     
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    & .icon {
+      & svg {
+        font-size: "x-small";
+      }
+    }
+  }
+  
+}
+
+@media (max-width: 770px) {
+  .message {
+    display: none;
+  }
+  .container {
+    justify-content: flex-end !important;
+  }
+  
+  
+}
+@media (max-width: 580px) {
+  .footer {
+    background-position: center;
+  }
+  .footer-icons {
+    display: none !important;
+    
+  }
+  
+}
