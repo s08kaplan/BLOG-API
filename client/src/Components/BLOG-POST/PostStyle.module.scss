@@ -1,7 +1,0 @@
-@import "../../../scss/abstract/mixins";
-
-.post {
-   @include flex($fd:column);
-   text-wrap: balance;
-   color: $text-color-2 !important;
-}
