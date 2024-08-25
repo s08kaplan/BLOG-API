@@ -2,7 +2,7 @@
  
  const express = require("express")
  const app = express()
- const path = require("path")
+//  const path = require("path")
  const cors = require("cors")
 
  require("dotenv").config()
@@ -23,41 +23,30 @@
 
  // Call static uploadFile:
 app.use('/upload', express.static('./upload'))
-app.use(express.static(path.join(__dirname, "public")))
+// app.use(express.static(path.join(__dirname, "public")))
 
 // Run Logger:
-// app.use(require('./src/middlewares/logger'))
+app.use(require('./src/middlewares/logger'))
 
  // Check Authentication:
 app.use(require('./src/middlewares/authentication'))
 app.use(require("./src/middlewares/queryHandler"))
 
-app.all('/api', (req, res) => {
+app.all('/', (req, res) => {
   res.send({
       error: false,
       message: 'Welcome to Blog API',
       documents: {
-          swagger: '/api/documents/swagger',
-          redoc: '/api/documents/redoc',
-          json: '/api/documents/json',
+          swagger: '/documents/swagger',
+          redoc: '/documents/redoc',
+          json: '/documents/json',
       },
       user: req.user
   })
 })
 
 //* Routes:
-app.use("/api",require("./src/routes"))
-
-// !deploy-----------------------------------------
-app.use("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname,"./public", "index.html"))
-})
-
-app.use("*", (req, res) => {
-  res.status(404).send({message: "Not Found"})
-})
-
-//! -----------------------------------------------
+app.use(require("./src/routes"))
 
 
  //*error handler

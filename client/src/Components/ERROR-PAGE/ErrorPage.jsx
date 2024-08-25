@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { clearError } from '../../Features/authSlice';
 import style from "./ErrorStyle.module.scss";
 
-const ErrorPage = () => {
+const ErrorPage = ({ msg }) => {
     const { errorMessage, error } = useSelector((state) => state.auth);
     const [message, setMessage] = useState("");
 

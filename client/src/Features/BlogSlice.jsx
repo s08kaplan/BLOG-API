@@ -10,6 +10,7 @@ const initialState = {
   details:{},
   loading: false,
   error: false,
+  blogErrorMessage:""
 };
 
 const BlogSlice = createSlice({
@@ -45,6 +46,7 @@ const BlogSlice = createSlice({
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
+      state.blogErrorMessage= payload?.response?.data?.message
     },
   },
 });
