@@ -5,12 +5,13 @@
 $container-padding: 20px;
 
 .main{
-  position: relative;
-  bottom: 35px;
+  // position: relative;
+  // bottom: 35px;
   margin: .5rem;
   padding: 1rem;
   & .pages-main {
     position: absolute;
+    bottom: -5rem;
     left: 50%;
     width: 3rem;
     font-size: 1.3rem;

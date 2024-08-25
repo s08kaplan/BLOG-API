@@ -23,7 +23,7 @@
     position: relative;
     left: 50%;
     transform: translate(-50%);
-
+    @include flex();
     & form {
       color: $text-color;
     }

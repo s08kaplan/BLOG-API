@@ -1,0 +1,16 @@
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
+.main{
+    @include flex();
+
+    & .container {
+        @include flex();
+       & button{
+        @include button();
+       }
+       & .current-page {
+        @include button($c:$whatsapp-color,$bg:$background-color);
+       }
+    }
+}

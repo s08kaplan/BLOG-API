@@ -14,9 +14,7 @@
   @include flex($fd: column);
 
   & .main-section {
-    @include grid($gtc: repeat(1, 1fr));
-    & main {
-      gap: 20px;
-    }
+    // @include grid($gtc: repeat(1, 1fr));
+   @include flex();
   }
 }

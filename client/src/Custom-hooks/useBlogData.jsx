@@ -41,14 +41,14 @@ const useBlogData = () => {
     try {
       // const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
       const { data } = await axiosPublic(
-        `${url}?limit=8&skip=${
-          (page - 1) * 8
+        `${url}?limit=4&skip=${
+          (page - 1) * 4
         }&sort[createdAt]=desc&page=${page}`
       );
       console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -62,7 +62,7 @@ const useBlogData = () => {
       // console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -79,7 +79,7 @@ const useBlogData = () => {
       // console.log(data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -90,7 +90,7 @@ const useBlogData = () => {
       const { data } = await axiosWithToken.post(url, { content, blogId });
       getComment("blogDetail", blogId);
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
     }
   };
 
@@ -103,7 +103,7 @@ const useBlogData = () => {
       // console.log("comment-data in getComment",data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -117,7 +117,7 @@ const useBlogData = () => {
       await axiosWithToken.put(`comments/${commentId}`, updateData);
       await getComment("blogDetail", blogId);
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -131,7 +131,7 @@ const useBlogData = () => {
 
       getComment("blogDetail", blogId);
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -146,7 +146,7 @@ const useBlogData = () => {
       // console.log("category detail",data);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };
@@ -161,7 +161,7 @@ const useBlogData = () => {
       dispatch(getSingleData({ url, data }));
     } catch (error) {
       console.log(error);
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
     }
   };
 

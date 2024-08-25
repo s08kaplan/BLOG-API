@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../Pages/HOME/Home";
-// import Blogs from "../Pages/BLOG/Blogs"
 import PrivateRouter from "./PrivateRouter";
 import Loading from "../Components/LOADING/Loading";
 
@@ -18,7 +17,6 @@ const MyProfile = lazy(() => import("../Pages/MY-PROFILE/MyProfile"));
 const NotFound = lazy(() => import("../Pages/404/NotFound"));
 const BlogDetails = lazy(() => import("../Pages/BLOG-DETAILS/BlogDetails"));
 const NewBlog = lazy(() => import("../Pages/NEW-BLOG/NewBlog"));
-// const PrivateRouter = lazy(() => import("./PrivateRouter"));
 
 const AppRouter = () => {
   return (

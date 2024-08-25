@@ -36,7 +36,7 @@ const useAuthCalls = () => {
       dispatch(loginSuccess(data));
       navigate("/blogs");
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };

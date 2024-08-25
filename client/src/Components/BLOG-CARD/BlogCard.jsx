@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import BlogPost from "../BLOG-POST/BlogPost";
 import { LiaHeart } from "react-icons/lia";
 import { BsEye } from "react-icons/bs";
+import Pagination from "../PAGINATION/Pagination";
 
 const BlogCard = ({ detail }) => {
   const { getData } = useBlogData();
@@ -34,7 +35,7 @@ const BlogCard = ({ detail }) => {
     }
   }, [details]);
 
-  // console.log(details);
+  console.log(details);
   // console.log(details?.pages?.current_page);
   // console.log("pages state: ", pages);
 
@@ -97,7 +98,7 @@ const BlogCard = ({ detail }) => {
             ))}
       </main>
       <section className={style["pages-main"]}>
-        {!detail && (
+        {/* {!detail && (
           <div className={style["pages-container"]}>
             {pages.previousPage && (
               <div onClick={() => handlePage(pages.previousPage)}>
@@ -111,8 +112,9 @@ const BlogCard = ({ detail }) => {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </section>
+      <Pagination page={details} getData={getData}/>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 @import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
 
 .main{
     @include flex();
@@ -9,7 +10,7 @@
     width: 100svw;
     height: 100dvh;
     margin: 2rem;
-
+    color:$text-color-2;
     & h3 {
         font-size: xx-large; 
         text-align: center;
