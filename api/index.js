@@ -31,21 +31,21 @@ app.use('/upload', express.static('./upload'))
 app.use(require('./src/middlewares/authentication'))
 app.use(require("./src/middlewares/queryHandler"))
 
-app.all('/', (req, res) => {
+app.all('/api', (req, res) => {
   res.send({
       error: false,
       message: 'Welcome to Blog API',
       documents: {
-          swagger: '/documents/swagger',
-          redoc: '/documents/redoc',
-          json: '/documents/json',
+          swagger: '/api/documents/swagger',
+          redoc: '/api/documents/redoc',
+          json: '/api/documents/json',
       },
       user: req.user
   })
 })
 
 //* Routes:
-app.use(require("./src/routes"))
+app.use("/api",require("./src/routes"))
 
  //*error handler
  app.use(require("./src/middlewares/errorHandler"))
