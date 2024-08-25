@@ -47,7 +47,7 @@ const useAuthCalls = () => {
       dispatch(logoutSuccess());
       navigate("/");
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchFail(error));
       console.log(error);
     }
   };

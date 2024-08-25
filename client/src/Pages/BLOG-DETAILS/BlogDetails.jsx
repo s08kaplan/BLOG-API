@@ -62,7 +62,7 @@ const BlogDetails = () => {
       USE_PROFILES: { html: true },
     });
     const content = sanitizedContent;
-    await postComment("comments", content, blogId);
+   content !=="" && await postComment("comments", content, blogId);
     setComment("");
   };
 

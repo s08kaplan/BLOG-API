@@ -29,7 +29,7 @@ const SideBar = ({ onClose }) => {
     navigate("/");
   };
 
-  console.log(token);
+  // console.log(token);
   return (
     <section className={style.container}>
       <main className={style.main}>

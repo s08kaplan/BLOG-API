@@ -1,16 +1,35 @@
 @import "../../../scss/abstract/mixins";
 @import "../../../scss/abstract/colors";
 
-.main{
-    @include flex();
+.main {
+  width: 15rem;
+  @include flex();
 
-    & .container {
-        @include flex();
-       & button{
-        @include button();
-       }
-       & .current-page {
-        @include button($c:$whatsapp-color,$bg:$background-color);
-       }
+  & .container {
+    width: 10rem;
+    @include flex();
+    & button {
+      @include button();
     }
+    & .current-page {
+      @include button($c: $whatsapp-color, $bg: $background-color);
+    }
+
+    @media (max-width: 480px) {
+      @include flex($fd: column);
+
+      & button {
+        font-size: 0.8rem;
+      }
+      button:has(span) {
+        display: none;
+      }
+    }
+  }
 }
+
+// @media (max-width: 768px) {
+//     button:has(span) {
+//       display: none;
+//     }
+//   }

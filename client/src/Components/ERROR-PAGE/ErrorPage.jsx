@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { clearError } from '../../Features/authSlice';
+import { clearBlogError } from '../../Features/BlogSlice';
 import style from "./ErrorStyle.module.scss";
 
-const ErrorPage = ({ msg }) => {
+const ErrorPage = ({ msg, blogError }) => {
     const { errorMessage, error } = useSelector((state) => state.auth);
     const [message, setMessage] = useState("");
 
@@ -55,6 +56,64 @@ const ErrorPage = ({ msg }) => {
             return () => clearTimeout(timer);
         }
       }, [error]);
+
+      useEffect(() => {
+        let timer;
+    
+        switch (blogError) {
+          case msg?.includes("There is no such a blog"):
+            setMessage("Sorry the Blog you are looking for is deleted by the owner");
+            timer = setTimeout(() => {
+              dispatch(clearBlogError());
+            }, 3000);
+    
+            return () => clearTimeout(timer);
+           
+    
+          case msg?.includes("The blog you are looking for has been removed or deleted"):
+            setMessage("The blog you are looking for has been deleted");
+            timer = setTimeout(() => {
+              dispatch(clearBlogError());
+            }, 3000);
+    
+            return () => clearTimeout(timer);
+
+          case msg?.includes("E11000 duplicate key error collection: blogAPI.categories"):
+            setMessage("The category already exists");
+            timer = setTimeout(() => {
+              dispatch(clearBlogError());
+            }, 3000);
+    
+            return () => clearTimeout(timer);
+
+          case msg?.includes("Comment not found"):
+            setMessage("Sorry there is no such a comment");
+            timer = setTimeout(() => {
+              dispatch(clearBlogError());
+            }, 3000);
+    
+            return () => clearTimeout(timer);
+
+          case msg?.includes("Blog not found"):
+            setMessage("Blog not found");
+            timer = setTimeout(() => {
+              dispatch(clearBlogError());
+            }, 3000);
+    
+            return () => clearTimeout(timer);
+    
+          default:
+            setMessage("Sorry there is an error occurred just wait for 3 seconds");
+            timer = setTimeout(() => {
+              dispatch(clearBlogError());
+            }, 3000);
+    
+            return () => clearTimeout(timer);
+        }
+      }, [blogError])
+      
+      console.log("msg from blogError : ",msg);
+      console.log("blogError from blogError : ",blogError);
     
   return (
     <section className={style.main}>

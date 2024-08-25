@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import ErrorPage from "../../Components/ERROR-PAGE/ErrorPage";
 import { useNavigate } from "react-router-dom";
 import { VscEdit } from "react-icons/vsc";
 import useAxios from "../../Custom-hooks/useAxios";
 import useDebounce from "../../Custom-hooks/useDebounce";
+import { fetchFail } from "../../Features/BlogSlice";
 import style from "./Categories.module.scss";
 
 const Categories = () => {
   const { user, token } = useSelector((state) => state.auth);
-  const { categories, blogErrorMessage, error } = useSelector(
+  const { categories, blogErrorMessage, error} = useSelector(
     (state) => state.blog
   );
+  const dispatch = useDispatch()
   const { getData, getCategoryById } = useBlogData();
   const { axiosWithToken } = useAxios();
   const [categoryId, setCategoryId] = useState("");
@@ -48,10 +50,16 @@ const Categories = () => {
     console.log(categoryName);
 
     const postData = { name: debouncedName };
-    const data = await axiosWithToken.post("categories", postData);
+    try {
+      const data = await axiosWithToken.post("categories", postData);
     console.log(data);
     getData("categories");
     setCategoryName("");
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail(error))
+    }
+    
   };
 
   const getEditInfo = async (id, name) => {
@@ -84,7 +92,7 @@ const Categories = () => {
         <h3>Your site Your Choice</h3>
         <section className={style.categories}>
           {error ? (
-            <ErrorPage msg={blogErrorMessage} />
+            <ErrorPage msg={blogErrorMessage} blogError={error} />
           ) : (
             categories?.map((category) => (
               <>

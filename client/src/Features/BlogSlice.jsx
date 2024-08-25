@@ -48,10 +48,13 @@ const BlogSlice = createSlice({
       state.error = true;
       state.blogErrorMessage= payload?.response?.data?.message
     },
+    clearBlogError:(state) => {
+      state.error = false
+    }
   },
 });
 
-export const { fetchStart, fetchFail, getAllData, getSingleData } =
+export const { fetchStart, fetchFail, getAllData, getSingleData, clearBlogError } =
   BlogSlice.actions;
 
 export default BlogSlice.reducer;

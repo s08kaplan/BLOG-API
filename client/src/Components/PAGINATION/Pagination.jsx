@@ -19,11 +19,11 @@ const Pagination = ({ page, getData }) => {
       });
     }
   }, [page]);
-  console.log("page: ", page);
-  console.log("1: ", pageInfo.previousPage);
-  console.log("2: ", pageInfo.currentPage);
-  console.log("3: ", pageInfo.nextPage);
-  console.log("4: ", pageInfo.totalPages);
+  // console.log("page: ", page);
+  // console.log("1: ", pageInfo.previousPage);
+  // console.log("2: ", pageInfo.currentPage);
+  // console.log("3: ", pageInfo.nextPage);
+  // console.log("4: ", pageInfo.totalPages);
 
   const handlePage = (newPage) => {
     if (
@@ -62,7 +62,7 @@ const Pagination = ({ page, getData }) => {
         {pageInfo.totalPages !== 1 &&
           pageInfo.currentPage !== pageInfo.totalPages && (
             <button onClick={() => handlePage(pageInfo.totalPages)}>
-              <span>Total page</span>: {pageInfo.totalPages}
+              <span>Total pages</span>: {pageInfo.totalPages}
             </button>
           )}
 

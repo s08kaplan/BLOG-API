@@ -1,12 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import { modules } from "../../Helpers/quillModules";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 import useBlogData from "../../Custom-hooks/useBlogData";
-import useAxios from "../../Custom-hooks/useAxios";
 import { useNavigate } from "react-router-dom";
-import BlogPost from "../BLOG-POST/BlogPost";
 import style from "./BlogModal.module.scss";
 import QuillEditor from "../QUILL/QuillEditor";
 
