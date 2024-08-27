@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import BlogCard from "../../Components/BLOG-CARD/BlogCard";
@@ -18,10 +18,12 @@ const CategoryDetail = () => {
   // console.log(categoryDetail);
   //   console.log(blogs);
 
-  const detail = blogs?.filter(
-    (blog) =>
-      blog?.categoryId?._id.toString() == categoryDetail?._id?.toString()
-  );
+  const detail = useMemo(() => {
+    return blogs?.filter(
+      (blog) =>
+        blog?.categoryId?._id.toString() == categoryDetail?._id?.toString()
+    );
+  },[blogs, categoryId]);
   console.log(detail);
   return (
     <div className={style.main}>

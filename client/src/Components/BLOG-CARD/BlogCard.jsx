@@ -21,6 +21,8 @@ const BlogCard = ({ detail }) => {
     getData();
   }, []);
 
+  
+
   // console.log(details);
   // console.log(details?.pages?.current_page);
   // console.log("pages state: ", pages);

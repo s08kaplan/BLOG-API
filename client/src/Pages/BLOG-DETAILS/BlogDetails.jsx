@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import useBlogData from "../../Custom-hooks/useBlogData";
@@ -41,11 +41,28 @@ const BlogDetails = () => {
 
   // console.log(blogDetail);
 
+  // useEffect(() => {
+  //   getDetailPage("blogDetail", blogId);
+  //   getLike("blogs", blogId);
+  //   // getComment("blogs",blogId)
+  // }, [likeStatus, editComment]);
+
+
   useEffect(() => {
-    getDetailPage("blogDetail", blogId);
-    getLike("blogs", blogId);
-    // getComment("blogs",blogId)
-  }, [likeStatus, editComment]);
+    const fetchAllData = async () => {
+      try {
+        await Promise.all([
+          getDetailPage("blogDetail", blogId),
+          getLike("blogs", blogId),
+  
+        ]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchAllData();
+  }, [likeStatus, editComment, blogId])
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -70,7 +87,9 @@ const BlogDetails = () => {
     const data = axiosWithToken.delete(`blogs/${blogDetail?._id}`);
     navigate("/blogs");
   };
-  let visitorCount = blogDetail?.countOfViews?.length;
+  let visitorCount = useMemo(()=> {
+    return  blogDetail?.countOfViews?.length;
+  },[blogDetail])
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
 
   const categoryId = blogDetail?.categoryId;
@@ -89,6 +108,10 @@ const BlogDetails = () => {
   const handleCommentDelete = (commentId) => {
     deleteComment(commentId, blogId);
   };
+
+  const showHideComments = () => {
+    setShow((prev) => !prev)
+  }
 
   console.log(blogDetail);
   // console.log(blogDetail?.totalLikes);
@@ -130,7 +153,7 @@ const BlogDetails = () => {
 
       <button
         className={style.button}
-        onClick={() => setShow((prev) => !prev)}
+        onClick={showHideComments}
         data-test="showHideComments"
       >
         {show ? "Hide Comments" : "Show Comments"}
