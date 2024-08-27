@@ -25,9 +25,9 @@ const NewBlog = () => {
   return (
     <section className={style["new-blog-main"]}>
       <main className={style["form-container"]}>
-        <div>
+        <section>
           <BlogModal postBlog={postBlog} onClose={setShow} location={from} />
-        </div>
+        </section>
       </main>
     </section>
   );

@@ -26,12 +26,12 @@ module.exports = {
       
         const { username, email, password } = req.body
 
-        if(!((username || email) && password)) {
+        if(!(username && email && password)) {
             res.errorStatusCode = 400
             throw new Error("Username/email and password must be entered")
         }
 
-        const user = await User.findOne({ $or: [{ username }, { email }], password })
+        const user = await User.findOne({ $and: [{ username }, { email }], password })
 
         if(!user){
             res.errorStatusCode = 401

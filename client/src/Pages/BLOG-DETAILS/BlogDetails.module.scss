@@ -44,8 +44,10 @@
     }
 
     img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      // height: auto;
       object-fit: contain;
       border-radius: 10px;
       margin-bottom: 10px;

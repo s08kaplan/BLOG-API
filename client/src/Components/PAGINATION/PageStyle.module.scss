@@ -9,10 +9,10 @@
     width: 10rem;
     @include flex();
     & button {
-      @include button();
+      @include button($bg: $btn-color-2);
     }
     & .current-page {
-      @include button($c: $whatsapp-color, $bg: $background-color);
+      @include button($c: $whatsapp-color, $bg: $background-color,$p:.8rem,$fs:1.1rem);
     }
 
     @media (max-width: 480px) {
@@ -21,9 +21,21 @@
       & button {
         font-size: 0.8rem;
       }
-      button:has(span) {
-        display: none;
+      & .current-page {
+        @include button($c: $whatsapp-color, $bg: $background-color,$p:.4rem,$fs:1rem);
       }
+    }
+
+    @media (min-width:768px){
+        & button {
+            font-size: x-large;
+            width: 100%;
+        }
+        button:has(span) {
+            @include flex();
+            font-size: x-large;
+            width: 100%;
+          }
     }
   }
 }

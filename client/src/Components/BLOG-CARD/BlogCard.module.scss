@@ -9,11 +9,6 @@ $container-padding: 20px;
   margin: 0.5rem;
   padding: 1rem;
   & .pages-main {
-    // position: relative;
-    // bottom: -0.5rem;
-    // left: 50%;
-    // width: 2rem;
-    // font-size: 1.3rem;
     @include flex($g: 0.2rem);
   }
 }

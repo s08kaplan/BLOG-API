@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./PageStyle.module.scss";
 
 const Pagination = ({ page, getData }) => {
+
   const [pageInfo, setPageInfo] = useState({
     previousPage: null,
     currentPage: 1,
@@ -62,7 +63,7 @@ const Pagination = ({ page, getData }) => {
         {pageInfo.totalPages !== 1 &&
           pageInfo.currentPage !== pageInfo.totalPages && (
             <button onClick={() => handlePage(pageInfo.totalPages)}>
-              <span>Total pages</span>: {pageInfo.totalPages}
+              <span>...{pageInfo.totalPages}</span>
             </button>
           )}
 
