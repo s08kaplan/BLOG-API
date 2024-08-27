@@ -21,8 +21,6 @@ const BlogCard = ({ detail }) => {
     getData();
   }, []);
 
-  
-
   // console.log(details);
   // console.log(details?.pages?.current_page);
   // console.log("pages state: ", pages);
@@ -36,12 +34,15 @@ const BlogCard = ({ detail }) => {
           <ErrorPage msg={blogErrorMessage} blogError={error} />
         ) : detail ? (
           detail?.map((item) => (
-            <div
+            <section
               className={style["detail-container"]}
               key={item._id}
               onClick={() => navigate(`/blog-details/${item?._id}`)}
             >
               <h3 data-test="blogTitle">{item.title}</h3>
+              <div>
+                <img src={item.image} alt={item.title} data-test="blogImage" />
+              </div>
               <section>
                 {item.content == "" ? (
                   "Not a blog found be the first "
@@ -49,9 +50,7 @@ const BlogCard = ({ detail }) => {
                   <BlogPost content={item.content} />
                 )}
               </section>
-              <div>
-                <img src={item.image} alt={item.title} data-test="blogImage" />
-              </div>
+
               <section className={style["author-like-info"]}>
                 <span>{item.userId?.username}</span>
                 <span>
@@ -62,7 +61,7 @@ const BlogCard = ({ detail }) => {
                   {item.countOfViews?.length}
                 </span>
               </section>
-            </div>
+            </section>
           ))
         ) : (
           blogs?.map((blog) => (

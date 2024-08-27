@@ -16,7 +16,7 @@ $container-padding: 20px;
 .container {
   @include flex();
   flex-wrap: wrap;
-  max-width: 1200px;
+  // max-width: 1200px;
   width: 100%;
 }
 
@@ -56,6 +56,7 @@ $container-padding: 20px;
 }
 
 .detail-container {
+  @include flex($fd:column);
   background-color: $background-color;
   padding: 20px;
   margin: 10px 0;
