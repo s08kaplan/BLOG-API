@@ -85,9 +85,11 @@ const useBlogData = () => {
   };
 
   const postComment = async (url, content, blogId) => {
+    console.log(content);
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.post(url, { content, blogId });
+      console.log(data);
       getComment("blogDetail", blogId);
     } catch (error) {
       dispatch(fetchFail(error));
