@@ -106,7 +106,8 @@ const BlogDetails = () => {
   // console.log("blogDetail?.comments",blogDetail?.comments);
 
   const handleCommentEdit = (id) => {
-    setCommentModal((prev) => !prev);
+    // setCommentModal((prev) => !prev);
+    setCommentModal(true);
     const check = blogDetail?.comments.filter((comment) => comment._id == id);
 
     setEditComment(check[0].content);
@@ -121,6 +122,7 @@ const BlogDetails = () => {
 
   const showHideComments = () => {
     setShow((prev) => !prev)
+    
   }
 
   // console.log(blogDetail);
@@ -223,7 +225,7 @@ const BlogDetails = () => {
           Add Your Comment
         </button>
       )}
-      {editBlogModal && (
+      {editBlogModal &&  (
         <BlogModal
           {...blogDetail}
           blogId={blogId}
@@ -231,7 +233,7 @@ const BlogDetails = () => {
           onClose={setEditBlogModal}
         />
       )}
-      {commentModal && (
+      {commentModal && show && (
         <EditCommentModal
           setEditComment={setEditComment}
           editComment={editComment}
