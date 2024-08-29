@@ -16,5 +16,6 @@
   & .main-section {
     // @include grid($gtc: repeat(1, 1fr));
    @include flex();
+   width: 100%;
   }
 }

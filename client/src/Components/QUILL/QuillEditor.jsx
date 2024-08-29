@@ -17,11 +17,21 @@ const QuillEditor = forwardRef(({ value, onChange }, ref) => {
   useEffect(() => {
     if (value !== undefined && value !== internalValue) {
       setInternalValue(value);
+      console.log("value: ", value);
+console.log("internalValue: ", internalValue);
     }
   }, [value]);
-
+console.log("value: ", value);
+console.log("internalValue: ", internalValue);
   // Handle changes in the editor
   const handleChange = (content, delta, source, editor) => {
+    if (editor) {
+      console.log("Editor exists");
+      console.log("Plain Text:", editor.getText());
+      console.log("HTML:", editor.getHTML());
+    } else {
+      console.log("Editor does not exist or is not passed correctly");
+    }
     const sanitizedContent = DOMPurify.sanitize(content);
     setInternalValue(sanitizedContent);
     if (onChange) {
