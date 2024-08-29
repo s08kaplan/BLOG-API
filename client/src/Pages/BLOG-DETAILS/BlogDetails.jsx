@@ -13,7 +13,6 @@ import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
 import style from "./BlogDetails.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import EditCommentModal from "../../Components/EDIT-COMMENT-MODAL/EditCommentModal";
-import axios from "axios";
 import QuillEditor from "../../Components/QUILL/QuillEditor";
 
 const BlogDetails = () => {
@@ -47,7 +46,7 @@ const BlogDetails = () => {
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
-    getComment("blogDetail", blogId);
+    // getComment("blogDetail", blogId);
   }, [likeStatus, editComment, commentModal]);
   // console.log(blogId);
   const postLike = async () => {
@@ -61,17 +60,17 @@ const BlogDetails = () => {
   };
 
   const handleComment = async () => {
-    // const sanitizedContent = DOMPurify.sanitize(comment, {
-    //   USE_PROFILES: { html: true },
-    // });
-    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, {
+    const sanitizedContent = DOMPurify.sanitize(comment, {
       USE_PROFILES: { html: true },
     });
+    // const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, {
+    //   USE_PROFILES: { html: true },
+    // });
     // const content = sanitizedContent.replace(/<[^>]*>/g, "");
     const content = sanitizedContent;
     content !== "" && (await postComment("comments", content, blogId));
-    // setComment("");
-    quillRef.current ? quillRef.current ="" : ""
+    setComment("");
+    // quillRef.current ? quillRef.current ="" : ""
   };
 
   const handleDelete = () => {
@@ -217,8 +216,8 @@ const BlogDetails = () => {
 
         {show && !commentModal && (
           <QuillEditor
-            defaultValue=""
-            ref={quillRef}
+            value={comment}
+            onChange={setComment}
           />
         )}
         

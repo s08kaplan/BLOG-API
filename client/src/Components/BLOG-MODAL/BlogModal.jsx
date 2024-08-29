@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { useNavigate } from "react-router-dom";
-import style from "./BlogModal.module.scss";
 import QuillEditor from "../QUILL/QuillEditor";
+import style from "./BlogModal.module.scss";
 
 const BlogModal = ({
   title,
@@ -51,7 +51,7 @@ console.log(inputs);
   const handleSubmit =  (e) => {
     e.preventDefault();
     const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
-    console.log(quillRef.current.value);
+    // console.log(quillRef.current.value);
     const postData = {
       ...inputs,
       content: sanitizedContent,
