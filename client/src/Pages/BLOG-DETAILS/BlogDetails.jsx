@@ -38,7 +38,7 @@ const BlogDetails = () => {
 
   const [commentModal, setCommentModal] = useState(false);
 
-  const quillRef = useRef(null)
+  const quillRef = useRef(null);
   const navigate = useNavigate();
 
   console.log(blogDetail);
@@ -63,14 +63,9 @@ const BlogDetails = () => {
     const sanitizedContent = DOMPurify.sanitize(comment, {
       USE_PROFILES: { html: true },
     });
-    // const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, {
-    //   USE_PROFILES: { html: true },
-    // });
-    // const content = sanitizedContent.replace(/<[^>]*>/g, "");
     const content = sanitizedContent;
     content !== "" && (await postComment("comments", content, blogId));
     setComment("");
-    // quillRef.current ? quillRef.current ="" : ""
   };
 
   const handleDelete = () => {
@@ -210,17 +205,12 @@ const BlogDetails = () => {
                 <h4>Add first comment</h4>
               </div>
             )}
+            {show && !commentModal && (
+              <QuillEditor value={comment} onChange={setComment} />
+            )}
           </div>
         )}
-        
 
-        {show && !commentModal && (
-          <QuillEditor
-            value={comment}
-            onChange={setComment}
-          />
-        )}
-        
         {show && !commentModal && (
           <button className={style.button} onClick={handleComment}>
             Add Your Comment

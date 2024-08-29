@@ -1,9 +1,6 @@
 import React from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
-import { modules } from "../../Helpers/quillModules";
-import useAxios from "../../Custom-hooks/useAxios";
 import style from "../../Pages/BLOG-DETAILS/BlogDetails.module.scss";
 import useDebounce from "../../Custom-hooks/useDebounce";
 import QuillEditor from "../QUILL/QuillEditor";
@@ -20,7 +17,6 @@ const EditCommentModal = ({
   // console.log("edit comment", editComment);
   // console.log(id);
 
-  const { axiosWithToken } = useAxios();
   const debouncedValue = useDebounce(editComment);
 
   const handleEdit = () => {
