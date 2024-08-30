@@ -51,7 +51,7 @@ const useAuthCalls = () => {
       console.log(error);
     }
   };
-
+ 
   const updatedUser = async (userId, info) => {
     console.log(userId);
     console.log(info);

@@ -1,33 +1,37 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { LiaHeart } from "react-icons/lia";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEye } from "react-icons/fa";
 import useAxios from "../../Custom-hooks/useAxios";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { VscEdit } from "react-icons/vsc";
 import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
+import style from "./BlogDetails.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import EditCommentModal from "../../Components/EDIT-COMMENT-MODAL/EditCommentModal";
+import axios from "axios";
 import QuillEditor from "../../Components/QUILL/QuillEditor";
-import style from "./BlogDetails.module.scss";
+import { useMemo } from "react";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
   const {
     getLike,
+    updateComment,
     getDetailPage,
     postComment,
     deleteComment,
     getComment,
-    updateComment,
   } = useBlogData();
   const { blogId } = useParams();
   const [likeStatus, setLikeStatus] = useState("");
   const { axiosWithToken } = useAxios();
+
 
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
@@ -37,16 +41,10 @@ const BlogDetails = () => {
 
   const [commentModal, setCommentModal] = useState(false);
 
+  const quillRef = useRef(null);
   const navigate = useNavigate();
 
-  // console.log(blogDetail);
-
-  // useEffect(() => {
-  //   getDetailPage("blogDetail", blogId);
-  //   getLike("blogs", blogId);
-  //   // getComment("blogs",blogId)
-  // }, [likeStatus, editComment]);
-
+  console.log(blogDetail);
 
   useEffect(() => {
     const fetchAllData = async () => {
@@ -54,15 +52,14 @@ const BlogDetails = () => {
         await Promise.all([
           getDetailPage("blogDetail", blogId),
           getLike("blogs", blogId),
-  
         ]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchAllData();
-  }, [likeStatus, editComment, blogId])
+  }, [likeStatus, editComment, blogId]);
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -70,11 +67,12 @@ const BlogDetails = () => {
       // console.log(data);
       setLikeStatus(data);
     } catch (error) {
-      // console.log("postLike error", error);
+      console.log("postLike error", error);
     }
   };
 
   const handleComment = async () => {
+    console.log("handle comment runs");
     const sanitizedContent = DOMPurify.sanitize(comment, {
       USE_PROFILES: { html: true },
     });
@@ -97,102 +95,143 @@ const BlogDetails = () => {
     const data = axiosWithToken.delete(`blogs/${blogDetail?._id}`);
     navigate("/blogs");
   };
-  let visitorCount = useMemo(()=> {
-    return  blogDetail?.countOfViews?.length;
-  },[blogDetail])
+  let visitorCount = useMemo(() => {
+    return blogDetail?.countOfViews?.length;
+  }, [blogDetail]);
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
 
   const categoryId = blogDetail?.categoryId;
-  // console.log("blogDetail?.comments",blogDetail?.comments);
+  console.log("blogDetail?.comments", blogDetail?.comments);
 
-  const handleCommentEdit = (id) => {
-    // setCommentModal((prev) => !prev);
+  const handleCommentEdit = async (id) => {
+    console.log(id);
     setCommentModal(true);
-    const check = blogDetail?.comments.filter((comment) => comment._id == id);
+    const check =  blogDetail?.comments.filter((comment) => comment._id == id);
 
+    console.log(check);
+    // console.log(check[0].content);
+    
     setEditComment(check[0].content);
     setEditCommentID(id);
-
-    //  console.log(editComment);
   };
 
   const handleCommentDelete = (commentId) => {
-    deleteComment(commentId, blogId);
+    try {
+      console.log("delete run");
+      deleteComment(commentId, blogId);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(commentId);
+  };
+  const showHideComments = () => {
+    setShow((prev) => !prev);
   };
 
-  const showHideComments = () => {
-    setShow((prev) => !prev)
-    
-  }
+  // ! blog belongs to logged in user or user is Admin or Staff check
+const userStatusCheck = useMemo(() => blogDetail?.userId?._id || blogDetail?.userId == user?.id ||
+user?.isAdmin ||
+user?.isStaff, [blogDetail, user]) 
 
-  // console.log(blogDetail);
-  // console.log(blogDetail?.totalLikes);
+// ! comment belongs to logged in user or user is Admin or Staff check
+const userCommentCheck = useMemo(() =>  blogDetail?.comments
+?.filter((comment) => comment.isDeleted == false)
+.map((comment) => (user?.id == comment?.userId ||
+  user?.isAdmin ||
+  user?.isStaff)), [blogDetail?.comments,user]) 
+                  
+  // console.log(editCommentID);
+  // console.log(editComment);
+  // console.log("user", user);
+  // console.log("blogDetail", blogDetail);
+  // // console.log("blogId", blogId);
+  // console.log(blogDetail?.userId?._id == user?.id);
   return (
-    <section className={style.main}>
-      <main className={style["detail-header"]}>
-        <h2>{blogDetail?.title}</h2>
+    <main className={style.main}>
+      <section className={style.container}>
+        <div className={style["detail-header"]}>
+          <h2>{blogDetail?.title}</h2>
 
-        <img src={blogDetail?.image} alt="blog-image" />
-        <section className={style["likes-main"]}>
-          <span>
-            {new Date(blogDetail?.createdAt).toLocaleDateString("tr-TR")}
-          </span>
-          <div className={style.likes}>
-            <LiaHeart
-              onClick={postLike}
-              fill={`${blogDetail?.likes?.includes(user?.id) ? "red" : ""}`}
-            />
-            <span>{blogDetail?.totalLikes}</span>
-          </div>
-          {visitorCount && (
-            <div className={style.views}>
-              viewed by <span>{visitorCount} </span>
-              <span>{visitorCount > 1 ? "people" : "person"}</span>
+          <img src={blogDetail?.image} alt="blog-image" />
+          <div className={style.info}>
+            <div className={style["info-left"]}>
+              <div className={style.likes}>
+                <LiaHeart
+                  onClick={postLike}
+                  fill={`${blogDetail?.likes?.includes(user?.id) ? "red" : ""}`}
+                />
+                <span>{blogDetail?.totalLikes}</span>
+              </div>
+
+              {visitorCount && (
+                <div className={style.views}>
+                  <div>
+                    <FaEye />
+                  </div>
+                  viewed by <span>{visitorCount} </span>
+                  <span>{visitorCount > 1 ? "people" : "person"}</span>
+                </div>
+              )}
             </div>
-          )}
-        </section>
+            <div className={style["info-right"]}>
+              <span className={style.date}>
+                {new Date(blogDetail?.createdAt).toLocaleDateString()}
+              </span>
 
-        {(blogDetail?.userId?._id == user?.id ||
-          user?.isAdmin == true ||
-          user?.isStaff == true) && (
-          <span className={style.modal}>
-            <FaTrashAlt onClick={handleDelete} />
-            <VscEdit onClick={() => setEditBlogModal(!editBlogModal)} />
-          </span>
-        )}
-        <BlogPost content={blogDetail?.content} />
-      </main>
+              {userStatusCheck && (
+                <div className={style.modal}>
+                  <FaTrashAlt onClick={handleDelete} />
+                  <VscEdit onClick={() => setEditBlogModal(!editBlogModal)} />
+                </div>
+              )}
+            </div>
+          </div>
 
-      <button
-        className={style.button}
-        onClick={showHideComments}
-        data-test="showHideComments"
-      >
-        {show ? "Hide Comments" : "Show Comments"}
-      </button>
+          <BlogPost content={blogDetail?.content} />
+        </div>
 
-      {show && (
-        <section className={style.comment}>
-          {blogDetail?.comments?.filter((comment) => comment.isDeleted == false)
-            .length > 0 ? (
-            blogDetail?.comments
-              ?.filter((comment) => comment.isDeleted == false)
-              .map((comment) => (
-                <div key={comment._id}>
+        <button
+          data-test="showHideComments"
+          className={style.button}
+          onClick={showHideComments}
+        >
+          {show ? "Hide" : "Show"} Comments
+        </button>
+
+        {show && (
+          <div className={style.comment}>
+            {/* <h4>{comments?.userId.username}</h4> */}
+            {blogDetail?.comments?.filter(
+              (comment) => comment.isDeleted == false
+            ).length > 0 ? (
+              blogDetail?.comments
+                ?.filter((comment) => comment.isDeleted == false)
+                .map((comment) => (
                   <div
+                    className={style.comments}
+                    key={comment._id}
                     style={{
                       display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      height: "40px",
+                      padding: "1rem",
+                      borderBottom:"2px solid gray",
+                      boxShadow:"0 8px 32px 0 rgba(92, 84, 112, 0.37)",
+                      borderRadius:"5px",
+                      margin:"6px",
+                      color:"black",
+                      backgroundColor:"white"
                     }}
                   >
-                    <BlogPost content={comment?.content} />
-
-                    {(user?.id == comment?.userId ||
-                      user?.isAdmin ||
-                      user?.isStaff) && (
-                      <div>
+                    <div style={{ width: "100%" }}>
+                      {editComment ? (
+                        <BlogPost
+                          content={comment?.content}
+                        />
+                      ) : (
+                        <BlogPost content={comment?.content} />
+                      )}
+                    </div>
+                    {userCommentCheck && (
+                      <div style={{ width: "100%", textAlign: "right" }}>
                         <FaTrashAlt
                           onClick={() => handleCommentDelete(comment?._id)}
                           color="red"
@@ -203,48 +242,48 @@ const BlogDetails = () => {
                         />
                       </div>
                     )}
+                    {/* <div style={{ border: "2px solid gray" }} /> */}
                   </div>
-                  <div style={{ border: "2px solid gray" }} />
-                </div>
-              ))
-          ) : (
-            <div>
-              <h4 style={{color:"black"}}>Add first comment</h4>
-            </div>
-          )}
-        </section>
-      )}
-      {show && !commentModal && (
-           <QuillEditor
-           value={comment}
-           onChange={setComment}
-         />
-      )}
-      {show && !commentModal && (
-        <button className={style.button} onClick={handleComment}>
-          Add Your Comment
-        </button>
-      )}
-      {editBlogModal &&  (
-        <BlogModal
-          {...blogDetail}
-          blogId={blogId}
-          categoryId={categoryId}
-          onClose={setEditBlogModal}
-        />
-      )}
-      {commentModal && show && (
-        <EditCommentModal
-          setEditComment={setEditComment}
-          editComment={editComment}
-          id={editCommentID}
-          onClose={setCommentModal}
-          userId={user?.id}
-          blogId={blogId}
-          updateComment={updateComment}
-        />
-      )}
-    </section>
+                ))
+            ) : (
+              <div>
+                <h4>Add first comment</h4>
+              </div>
+            )}
+          </div>
+        )}
+
+        {show && !commentModal && (
+          <QuillEditor  value={comment} onChange={setComment} />
+        )}
+
+        {show && !commentModal && (
+          <button className={style.button} onClick={handleComment}>
+            Add Your Comment
+          </button>
+        )}
+        {editBlogModal && (
+          <BlogModal
+            {...blogDetail}
+            blogId={blogId}
+            categoryId={categoryId}
+            onClose={setEditBlogModal}
+          />
+        )}
+        {commentModal && show && (
+          <EditCommentModal
+            {...blogDetail}
+            setEditComment={setEditComment}
+            editComment={editComment}
+            id={editCommentID}
+            onClose={setCommentModal}
+            userId={user?.id}
+            blogId={blogId}
+            updateComment={updateComment}
+          />
+        )}
+      </section>
+    </main>
   );
 };
 

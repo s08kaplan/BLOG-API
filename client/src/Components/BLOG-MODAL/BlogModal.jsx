@@ -30,8 +30,8 @@ const BlogModal = ({
     isPublish,
     userId: user?.id,
   });
-  // const [text, setText] = useState(content);
-  const quillRef = useRef("")
+  const [text, setText] = useState(content);
+  // const quillRef = useRef("")
 
   useEffect(() => {
     getData("categories");
@@ -50,7 +50,7 @@ const BlogModal = ({
 console.log(inputs);
   const handleSubmit =  (e) => {
     e.preventDefault();
-    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
+    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
     // console.log(quillRef.current.value);
     const postData = {
       ...inputs,
@@ -91,7 +91,7 @@ const handleClose = () => {
             </section>
             <section  className={style.quill}>
               <label htmlFor="content">Content</label>
-              <QuillEditor value={content} ref={quillRef} />
+              <QuillEditor  value={content} onChange={setText} />
             </section>
             <section className={style["input-group"]}>
               <label htmlFor="image">Image Url</label>

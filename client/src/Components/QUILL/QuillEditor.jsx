@@ -11,18 +11,18 @@ import { modules } from "../../Helpers/quillModules";
 import style from "./QuillStyle.module.scss";
 
 const QuillEditor = forwardRef(({ value, onChange }, ref) => {
-  const [internalValue, setInternalValue] = useState(value || "");
+  const [content, setContent] = useState(value || "");
 
   // Sync internal state with value prop when it changes
   useEffect(() => {
-    if (value !== undefined && value !== internalValue) {
-      setInternalValue(value);
+    if (value !== undefined && value !== content) {
+      setContent(value);
       console.log("value: ", value);
-console.log("internalValue: ", internalValue);
+console.log("content: ", content);
     }
   }, [value]);
 console.log("value: ", value);
-console.log("internalValue: ", internalValue);
+console.log("content: ", content);
   // Handle changes in the editor
   const handleChange = (content, delta, source, editor) => {
     if (editor) {
@@ -33,7 +33,7 @@ console.log("internalValue: ", internalValue);
       console.log("Editor does not exist or is not passed correctly");
     }
     const sanitizedContent = DOMPurify.sanitize(content);
-    setInternalValue(sanitizedContent);
+    setContent(sanitizedContent);
     if (onChange) {
       onChange(sanitizedContent);
     }
@@ -41,23 +41,30 @@ console.log("internalValue: ", internalValue);
 
   // Expose methods through ref
   useImperativeHandle(ref, () => ({
-    getValue: () => internalValue,
+    getValue: () => content,
     setValue: (newValue) => {
-      setInternalValue(DOMPurify.sanitize(newValue));
+      setContent(DOMPurify.sanitize(newValue));
       if (onChange) {
         onChange(DOMPurify.sanitize(newValue));
       }
     },
-    clear: () => setInternalValue(""),
+    clear: () => setContent(""),
   }));
 
   return (
     <section className={style.quill} data-test="quillEditor">
       <ReactQuill
-        value={internalValue}
+        value={content}
         onChange={handleChange}
         modules={modules}
         className={style.inner}
+        style={{ 
+          wordWrap: "break-word", 
+          overflowWrap: "break-word", 
+          wordBreak: "break-word", 
+          whiteSpace: "normal" ,
+          maxWidth:"100%",
+        }}
       />
     </section>
   );
