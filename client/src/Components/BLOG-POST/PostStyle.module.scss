@@ -1,16 +1,5 @@
 @import "../../../scss/abstract/mixins";
 
-// .post {
-//    width: 100%;
-//    // @include flex($fd:column,$jc:center,$ai:"center");
-//    @include flex($fd:column);
-//    flex-wrap: wrap;
-//    text-wrap: balance;
-//    margin: auto 0;
-//    color: $text-color-2 !important;
-
-// }
-
 .post {
   color: $text-color-2 !important;
   & p,
@@ -25,5 +14,11 @@
     overflow-wrap: break-word;
     min-height: 100px;
     box-sizing: border-box;
+  }
+  & img {
+   width: 100%;
+   aspect-ratio: 3/2;
+   object-fit: cover;
+   border-radius: .4rem;
   }
 }

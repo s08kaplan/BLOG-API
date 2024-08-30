@@ -18,7 +18,7 @@
 
  //* JSON for data interchange
  app.use(express.json())
- app.use(express.urlencoded({extended:true}))
+ app.use(express.urlencoded({ limit:"5omb",extended:true}))
  app.use(cors())
 
  // Call static uploadFile:
