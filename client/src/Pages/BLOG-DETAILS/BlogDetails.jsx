@@ -1,21 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { LiaHeart } from "react-icons/lia";
 import { FaTrashAlt, FaEye } from "react-icons/fa";
 import useAxios from "../../Custom-hooks/useAxios";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import { VscEdit } from "react-icons/vsc";
 import BlogModal from "../../Components/BLOG-MODAL/BlogModal";
-import style from "./BlogDetails.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import EditCommentModal from "../../Components/EDIT-COMMENT-MODAL/EditCommentModal";
-import axios from "axios";
 import QuillEditor from "../../Components/QUILL/QuillEditor";
-import { useMemo } from "react";
+import style from "./BlogDetails.module.scss";
 
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
@@ -139,6 +135,9 @@ const userCommentCheck = useMemo(() =>  blogDetail?.comments
 .map((comment) => (user?.id == comment?.userId ||
   user?.isAdmin ||
   user?.isStaff)), [blogDetail?.comments,user]) 
+
+  console.log(blogDetail?.comments
+    ?.filter((comment) => comment.isDeleted == false).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
                   
   // console.log(editCommentID);
   // console.log(editComment);
@@ -227,7 +226,7 @@ const userCommentCheck = useMemo(() =>  blogDetail?.comments
                           content={comment?.content}
                         />
                       ) : (
-                        <BlogPost content={comment?.content} />
+                       <BlogPost content={comment?.content} />
                       )}
                     </div>
                     {userCommentCheck && (
